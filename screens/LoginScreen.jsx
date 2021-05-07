@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
 import CLIENT_ID from "../config/auth";
@@ -9,12 +9,22 @@ export default function LoginScreen() {
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId: CLIENT_ID.expo,
     webClientId: CLIENT_ID.web,
+    scopes: ["profile", "email"],
   });
 
-  React.useEffect(() => {
-    if (response?.type === "success") {
-      const { authentication } = response;
-    }
+  useEffect(() => () => {
+    (async () => {
+      if (response?.type === "success") {
+        const { authentication } = response;
+        const { accessToken } = authentication;
+        const res = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+
+        const data = await res.json();
+      }
+    })();
   }, [response]);
 
   return (
