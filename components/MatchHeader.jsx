@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-export default function GameListScreen() {
+export default function MatchScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.location}>

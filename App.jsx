@@ -1,16 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LoginScreen from "./screens/LoginScreen";
-import GameListScreen from  "./screens/GameListScreen";
+import MatchScreen from  "./screens/MatchScreen";
+
+import TabNavigator from "./navigators/TabNavigator";
 
 const isAuth = true;
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {
-        isAuth ? <GameListScreen /> : <LoginScreen />
-      }
+      {/* {
+        isAuth ? <MatchScreen /> : <LoginScreen />
+      } */}
+      <TabNavigator />
     </View>
   );
 }
