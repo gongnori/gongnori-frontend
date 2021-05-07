@@ -8,7 +8,6 @@ import MatchScreen from "../screens/MatchScreen";
 import RankScreen from "../screens/RankScreen";
 import MessageScreen from "../screens/MessageScreen";
 import SettingScreen from "../screens/SettingScreen";
-import { Dimensions } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
