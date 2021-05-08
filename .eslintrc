@@ -47,6 +47,9 @@
     "import/newline-after-import": "off",
     "import/no-unresolved": "off",
     "no-use-before-define": "off",
-    "import/prefer-default-export": "warn"
+    "import/prefer-default-export": "warn",
+    "prefer-destructuring": "off",
+    "no-useless-return": "off",
+    "quote-props": "off"
   }
 }
