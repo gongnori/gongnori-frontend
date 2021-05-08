@@ -9,6 +9,8 @@ import RankScreen from "../screens/RankScreen";
 import MessageScreen from "../screens/MessageScreen";
 import SettingScreen from "../screens/SettingScreen";
 
+import * as color from "../constants/colors";
+
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
@@ -43,10 +45,10 @@ export default function TabNavigator() {
           },
         })}
         tabBarOptions={{
-          activeTintColor: "#886551",
-          inactiveTintColor: "#BEBEBE",
+          activeTintColor: color.SECONDARY_BROWN,
+          inactiveTintColor: color.PRIMARY_GRAY,
           style: {
-            backgroundColor: "#FFFFFF",
+            backgroundColor: color.PRIMARY_WHITE,
             height: 60,
           },
           labelStyle: {

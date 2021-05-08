@@ -1,16 +1,27 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_SERVER } from "@env";
 
 const authLogin = (userInfo) => async (dispatch) => {
-  const res = await fetch("http://192.168.0.6:8000/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userInfo }),
-  });
+  try {
+    const res = await fetch(`${API_SERVER}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userInfo }),
+    });
 
-  const authResult = await res.json();
-  const token = authResult.data;
+    const result = await res.json();
+    const { message, data, error } = result;
 
-  await AsyncStorage.setItem("token", token, () => console.log("token save"));
+    if (error) { throw new Error() }
+
+    const token = data;
+    await AsyncStorage.setItem("token", token);
+
+    dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: userInfo });
+  } catch (err) {
+    console.error(err.message);
+    dispatch({ type: "AUTH_LOGIN_FAIL" });
+  }
 };
 
 export { authLogin };

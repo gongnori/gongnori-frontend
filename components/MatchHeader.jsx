@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import * as color from "../constants/colors";
 
 export default function MatchScreen() {
   return (
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "stretch",
     height: "10%",
-    backgroundColor: "#886551",
+    backgroundColor: color.SECONDARY_BROWN,
   },
   location: {
     flex: 1,

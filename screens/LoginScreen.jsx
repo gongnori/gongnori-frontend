@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import CustomButton from "../components/CustomButton";
 import { authLogin } from "../actions/actions";
 import useAuthGoogle from "../hooks/useAuthGoogle";
+import * as color from "../constants/colors";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ export default function LoginScreen() {
   useEffect(() => {
     (async () => {
       const userInfo = await getGoogleUserInfo();
+
+      if (!userInfo) { return }
       dispatch(authLogin(userInfo));
     })();
   }, [getGoogleUserInfo]);
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#FAF2E0",
+    backgroundColor: color.PRIMARY_BROWN,
   },
   image: {
     height: "50%",

@@ -1,18 +1,23 @@
 const initialState = {
   name: "",
+  email: "",
   isLogin: false,
 };
 
-const authReducer = (state = initialState,  action) => {
+const authReducer = (state = initialState, action) => {
   const userInfo = action.payload;
 
   switch (action.type) {
-    case "AUTH_LOGIN":
+    case "AUTH_LOGIN_SUCCESS":
       return {
-        ...state,
         name: userInfo.name,
         email: userInfo.email,
         isLogin: true,
+      };
+    case "AUTH_LOGIN_FAIL":
+      return {
+        ...state,
+        isLogin: false,
       };
     default:
       return state;
