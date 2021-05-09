@@ -1,7 +1,7 @@
 const PRIMARY_BROWN = "#FAF2E0";
 const SECONDARY_BROWN = "#886551";
 const PRIMARY_GRAY = "#BEBEBE";
-const PRIMARY_WHITE = "FFFFFF";
+const PRIMARY_WHITE = "#FFFFFF";
 
 export {
   PRIMARY_BROWN,

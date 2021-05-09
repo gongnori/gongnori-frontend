@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, FlatList } from "react-native";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 
-const arr = [1, 2, 3, 4, 5, 6, 7 , 8];
+const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function GameListScreen() {
   return (
@@ -31,5 +31,10 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: "center",
+  },
+  dropdown_1: {
+    flex: 1,
+    top: 32,
+    left: 8,
   },
 });

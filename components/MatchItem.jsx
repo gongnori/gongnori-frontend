@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import * as color from "../constants/colors";
-
-const deviceHeight = Dimensions.get("screen").width;
+import * as device from "../constants/device";
 
 export default function MatchItem({item}) {
   return (
@@ -29,8 +28,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    height: 0.3 * deviceHeight,
-    marginBottom: 0.03 * deviceHeight,
+    height: 0.15 * device.HEIGHT,
+    marginBottom: 0.02 * device.HEIGHT,
     borderBottomWidth: 1,
     borderBottomColor: color.SECONDARY_BROWN,
   },
