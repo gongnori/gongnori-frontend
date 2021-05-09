@@ -4,8 +4,9 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
+import SideButton from "../components/SideButton";
 
-export default function MatchListScreen() {
+export default function MatchListScreen({ navigation }) {
   const matches = useSelector((state) => {
     return state.matchReducer.matches;
   }, (prev, next) => {
@@ -21,9 +22,13 @@ export default function MatchListScreen() {
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
           keyExtractor={(item) => item._id}
           data={matches}
-          renderItem={({item}) => <MatchItem item={item} />}
+          renderItem={({ item }) => <MatchItem item={item} />}
         />
       </View>
+      <SideButton
+        navigation={navigation}
+        route="MatchCreate"
+      />
     </View>
   );
 }
@@ -37,10 +42,5 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: "center",
-  },
-  dropdown_1: {
-    flex: 1,
-    top: 32,
-    left: 8,
   },
 });

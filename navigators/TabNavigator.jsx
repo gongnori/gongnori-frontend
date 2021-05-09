@@ -1,5 +1,4 @@
 import React from "react";
-// import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -15,7 +14,6 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
   return (
-    // <NavigationContainer>
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -61,6 +59,5 @@ export default function TabNavigator() {
       <Tab.Screen name="Message" component={MessageScreen} />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
-    // </NavigationContainer>
   );
 }
