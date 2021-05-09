@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import DropDown from "./DropDown";
 import DateController from "./DateController";
 import * as color from "../constants/colors";

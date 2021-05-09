@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const useDateController = () => {
   const initDate = new Date();
+  const [year, setYear] = useState(initDate.getFullYear());
   const [month, setMonth] = useState(initDate.getMonth() + 1);
   const [date, setDate] = useState(initDate.getDate());
   const [IsoTime, setIsoTime] = useState(initDate.toISOString());
@@ -13,11 +14,12 @@ const useDateController = () => {
     temp.setDate(temp.getDate() + diff);
 
     setIsoTime(temp.toISOString());
+    setYear(new Date(temp).getFullYear());
     setMonth(new Date(temp).getMonth() + 1);
     setDate(new Date(temp).getDate());
   };
 
-  return [month, date, changeDate];
+  return [year, month, date, changeDate];
 };
 
 export default useDateController;

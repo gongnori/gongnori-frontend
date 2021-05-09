@@ -24,4 +24,28 @@ const authLogin = (userInfo) => async (dispatch) => {
   }
 };
 
-export { authLogin };
+const getMatch = (year, month, date) => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    // ?locationyear=2021&month=5&date&12
+    const res = await fetch(`${API_SERVER}/match?year=${year}&month=${month}&date=${date}`, {
+      method: "GET",
+      headers: { "Authorization": token },
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+    const matches = data;
+
+    dispatch({
+      type: "LOAD_MATCH_SUCCESS",
+      payload: matches,
+    });
+  } catch (err) {
+    dispatch({ type: "LOAD_MATCH_FAIL" });
+  }
+};
+
+getMatch();
+
+export { authLogin, getMatch };

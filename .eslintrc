@@ -41,6 +41,8 @@
     "no-underscore-dangle": "off",
     "no-warning-comments": ["warn", { "terms": [""], "location": "anywhere" }],
     "global-require": "off",
+    "no-shadow": "off",
+    "no-useless-return": "off",
     "react/jsx-indent": ["warn", 2],
     "react/style-prop-object": "off",
     "react/prop-types": "warn",
@@ -49,7 +51,6 @@
     "no-use-before-define": "off",
     "import/prefer-default-export": "warn",
     "prefer-destructuring": "off",
-    "no-useless-return": "off",
     "quote-props": "off"
   }
 }

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { useDispatch } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
 import useDateController from "../hooks/useDateController";
+import { getMatch } from "../actions/actions";
 import * as color from "../constants/colors";
 
 const DATE_CONTROLLER_ICON_SIZE = 30;
@@ -10,7 +12,13 @@ const DATE_CONTROLLER_WIDTH = 150;
 const DATE_CONTROLLER_HEIGHT = 50;
 
 export default function DateController() {
-  const [month, date, handlePressButton] = useDateController();
+  const dispatch = useDispatch();
+
+  const [year, month, date, handlePressButton] = useDateController();
+
+  useEffect(() => {
+    dispatch(getMatch(year, month, date));
+  }, [year, month, date]);
 
   return (
     <View style={styles.container}>
