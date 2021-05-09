@@ -35,6 +35,9 @@ const getMatch = (year, month, date) => async (dispatch) => {
 
     const result = await res.json();
     const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
     const matches = data;
 
     dispatch({

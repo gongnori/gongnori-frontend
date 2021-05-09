@@ -1,11 +1,17 @@
+import produce from "immer";
 import React from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+export default function MatchListScreen() {
+  const matches = useSelector((state) => {
+    return state.matchReducer.matches;
+  }, (prev, next) => {
+    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
 
-export default function GameListScreen() {
   return (
     <View style={styles.container}>
       <MatchHeader />
@@ -13,8 +19,8 @@ export default function GameListScreen() {
         <FlatList
           style={{ width: "80%" }}
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
-          keyExtractor={(item) => item.toString()}
-          data={arr}
+          keyExtractor={(item) => item._id}
+          data={matches}
           renderItem={({item}) => <MatchItem item={item} />}
         />
       </View>

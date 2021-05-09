@@ -3,7 +3,17 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import * as color from "../constants/colors";
 import * as device from "../constants/device";
 
-export default function MatchItem({item}) {
+export default function MatchItem({ item }) {
+  const id = item._id;
+  const createdAt = item.created_at;
+  const matchType = item.match_type;
+  const playGround = item.play_ground;
+  const playTime = item.play_time;
+  const teams = item.teams;
+
+  const startTime = new Date(playTime.start).getHours();
+  const endTime = new Date(playTime.end).getHours();
+
   return (
     <View style={styles.container}>
       <View style={styles.emblemContainer}>
@@ -13,10 +23,10 @@ export default function MatchItem({item}) {
         />
       </View>
       <View style={styles.matchInfoContainer}>
-        <Text>풋살장</Text>
-        <Text>{item}</Text>
+        <Text>{playGround}</Text>
+        <Text>용인시 기흥구 보정동</Text>
         <Text>5월 21일</Text>
-        <Text>10:00 - 12:00</Text>
+        <Text>{`${startTime}:00 - ${endTime}:00`}</Text>
       </View>
     </View>
   );

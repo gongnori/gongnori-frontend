@@ -51,6 +51,7 @@
     "no-use-before-define": "off",
     "import/prefer-default-export": "warn",
     "prefer-destructuring": "off",
-    "quote-props": "off"
+    "quote-props": "off",
+    "arrow-body-style": "off"
   }
 }
