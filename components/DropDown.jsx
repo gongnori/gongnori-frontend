@@ -29,7 +29,7 @@ export default function DropDown({ value }) {
 
 const styles = StyleSheet.create({
   button: {
-    width: "80%",
+    width: "80%", // device 기준으로 바꿔보자...
     height: "80%",
     justifyContent: "center",
     alignItems: "center",
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     textAlignVertical: "center",
+    backgroundColor: "red",
+    width: "100%",
+    height: 30, // fontsize 두배
   },
   dropdown: {
     width: 100,

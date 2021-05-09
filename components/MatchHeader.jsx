@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import DropDown from "./DropDown";
+import DateController from "./DateController";
 import * as color from "../constants/colors";
 
 export default function MatchScreen() {
@@ -10,7 +11,7 @@ export default function MatchScreen() {
         <DropDown value="보정동" />
       </View>
       <View style={styles.date}>
-        <Text>달력</Text>
+        <DateController />
       </View>
       <View style={styles.sports}>
         <DropDown value="축구" />
