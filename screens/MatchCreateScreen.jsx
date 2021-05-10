@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 // import Geolocation from 'react-native-geolocation-service';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MapView, {Marker, Callout, PROVIDER_GOOGLE} from "react-native-maps";
+import produce from "immer";
 import DropDown from "../components/DropDown";
 import useMyLocation from "../hooks/useMyLocation";
 import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
+import PlaceMap from "../components/PlaceMap";
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
 const CURRENT_DATE = (new Date().getDate()).toString();
 
 export default function MatchCreateScreen() {
+  const playgrounds = useSelector((state) => {
+    return state.playgroundReducer.playgrounds;
+  }, (prev, next) => {
+    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
+
   const dispatch = useDispatch();
 
   const [match, setMatch] = useState({
@@ -25,9 +33,12 @@ export default function MatchCreateScreen() {
     end: "",
     playGround: "",
   });
-  const [location, geoCode] = useMyLocation();
+  const [myLocation, myGeoCode] = useMyLocation();
 
-  console.log(geoCode)
+  useEffect(() => {
+    dispatch(getPlayground("경기도", "용인시", "수지구"));
+  }, []);
+
   const handleSelectType = (index, value) => setMatch({ ...match, type: value });
   const handleSelectMonth = (index, value) => setMatch({ ...match, month: value });
   const handleSelectDate = (index, value) => setMatch({ ...match, date: value });
@@ -35,10 +46,6 @@ export default function MatchCreateScreen() {
   const handleSelectStart = (index, value) => setMatch({ ...match, start: value });
   const handleSelectEnd = (index, value) => setMatch({ ...match, end: value });
   const handleSelectGround = (index, value) => setMatch({ ...match, playGround: value });
-
-  useEffect(() => {
-    dispatch(getPlayground("경기도", "용인시", "수지구"));
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -106,41 +113,7 @@ export default function MatchCreateScreen() {
         <Text>경기장소</Text>
       </View>
       <View style={styles.map}>
-        {location && (
-          <MapView
-            style={{ flex: 1 }}
-            provider={PROVIDER_GOOGLE}
-            initialRegion={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          >
-            <Marker
-              coordinate={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-              }}
-              pinColor={"tomato"}
-            >
-              <Callout tootip>
-                <View>
-                  <Text>AAA</Text>
-                </View>
-              </Callout>
-            </Marker>
-            <Marker
-              coordinate={{
-                latitude: 37.32418,
-                longitude: 127.09565,
-              }}
-              pinColor={"tomato"}
-              title={"!!!"}
-              description={"!!!"}
-            />
-          </MapView>
-        )}
+        {myLocation && <PlaceMap origin={myLocation} places={playgrounds} />}
       </View>
     </View>
   );
@@ -170,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  statdium: {
+  playground: {
     flex: 1,
     justifyContent: "flex-start",
   },
