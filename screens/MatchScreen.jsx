@@ -18,7 +18,7 @@ export default function MatchListScreen({ navigation }) {
       <MatchHeader />
       <View style={styles.body}>
         <FlatList
-          style={{ width: "80%" }}
+          style={{ width: "90%" }}
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
           keyExtractor={(item) => item._id}
           data={matches}

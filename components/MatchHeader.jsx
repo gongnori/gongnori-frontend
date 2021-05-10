@@ -8,13 +8,25 @@ export default function MatchScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.location}>
-        <DropDown value="보정동" />
+        <DropDown
+          value="보정동"
+          options={["보정동", "성복동"]}
+          width={60}
+          height={"100%"}
+          fontSize={15}
+        />
       </View>
       <View style={styles.date}>
         <DateController />
       </View>
       <View style={styles.sports}>
-        <DropDown value="축구" />
+        <DropDown
+          value="축구"
+          options={["축구", "농구", "야구"]}
+          width={60}
+          height={"100%"}
+          fontSize={15}
+        />
       </View>
     </View>
   );

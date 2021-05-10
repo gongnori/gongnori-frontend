@@ -44,7 +44,7 @@
     "no-shadow": "off",
     "no-useless-return": "off",
     "react/jsx-indent": ["warn", 2],
-    "react/style-prop-object": "off",
+    "react/style-prop-object": "warn",
     "react/prop-types": "warn",
     "import/newline-after-import": "off",
     "import/no-unresolved": "off",
@@ -52,6 +52,7 @@
     "import/prefer-default-export": "warn",
     "prefer-destructuring": "off",
     "quote-props": "off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "react/jsx-curly-brace-presence": "off"
   }
 }

@@ -3,15 +3,35 @@ import { StyleSheet } from "react-native";
 import ModalDropdown from "react-native-modal-dropdown";
 import * as device from "../constants/device";
 
-export default function DropDown({ value }) {
+const TEXT_VERTICAL_MARGIN = 5;
+
+export default function DropDown({ value, options, width, height, fontSize }) {
+  const total = options.length;
+
   return (
     <ModalDropdown
       defaultValue={value}
-      options={["option 1", "option 2"]}
-      style={styles.button}
-      textStyle={styles.buttonText}
-      dropdownStyle={styles.dropdown}
-      dropdownTextStyle={styles.dropdownText}
+      options={[...options]}
+      style={{
+        ...styles.button,
+        width,
+        height,
+      }}
+      textStyle={{
+        ...styles.buttonText,
+        width,
+        height,
+        fontSize,
+      }}
+      dropdownStyle={{
+        width: 2 * width,
+        height: (total) * (4 * TEXT_VERTICAL_MARGIN + fontSize),
+      }}
+      dropdownTextStyle={{
+        ...styles.dropdownText,
+        height: 2 * TEXT_VERTICAL_MARGIN + fontSize,
+        fontSize,
+      }}
       adjustFrame={(style) => {
         if (device.OS === "Android") {
           style.top -= 20;
@@ -19,6 +39,7 @@ export default function DropDown({ value }) {
         if (device.OS === "iOS") {
           style.top += 10;
         }
+
         style.height += 0;
 
         return style;
@@ -29,29 +50,21 @@ export default function DropDown({ value }) {
 
 const styles = StyleSheet.create({
   button: {
-    width: "80%", // device 기준으로 바꿔보자...
-    height: "80%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "yellow",
   },
   buttonText: {
-    fontSize: 15,
     color: "black",
     textAlign: "center",
     textAlignVertical: "center",
-    backgroundColor: "red",
-    width: "100%",
-    height: 30, // fontsize 두배
-  },
-  dropdown: {
-    width: 100,
-    height: 100,
   },
   dropdownText: {
-    fontSize: 15,
     color: "black",
     textAlign: "center",
     textAlignVertical: "center",
+    marginBottom: TEXT_VERTICAL_MARGIN,
+    marginTop: TEXT_VERTICAL_MARGIN,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 });
