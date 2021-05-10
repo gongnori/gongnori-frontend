@@ -49,6 +49,29 @@ const getMatch = (year, month, date) => async (dispatch) => {
   }
 };
 
-getMatch();
+const getPlayground = (province, city, district) => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
 
-export { authLogin, getMatch };
+    const res = await fetch(`${API_SERVER}/playground?province=${province}&city=${city}&district=${district}`, {
+      method: "GET",
+      headers: { "Authorization": token },
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
+    const playgrounds = data;
+
+    dispatch({
+      type: "LOAD_PLAYGROUNDS_SUCCESS",
+      payload: playgrounds,
+    });
+  } catch (err) {
+    dispatch({ type: "LOAD_PLAYGROUNDS_FAIL" });
+  }
+};
+
+export { authLogin, getMatch, getPlayground };

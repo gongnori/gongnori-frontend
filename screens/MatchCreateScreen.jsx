@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 // import Geolocation from 'react-native-geolocation-service';
-import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
+import { useDispatch } from "react-redux";
+import MapView, {Marker, Callout, PROVIDER_GOOGLE} from "react-native-maps";
 import DropDown from "../components/DropDown";
 import useMyLocation from "../hooks/useMyLocation";
 import getDateFromMonth from "../utils/getDateFromMonth";
+import { getPlayground } from "../actions/actions";
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
 const CURRENT_DATE = (new Date().getDate()).toString();
 
 export default function MatchCreateScreen() {
+  const dispatch = useDispatch();
+
   const [match, setMatch] = useState({
     type: "",
     year: CURRENT_YEAR,
@@ -32,7 +36,9 @@ export default function MatchCreateScreen() {
   const handleSelectEnd = (index, value) => setMatch({ ...match, end: value });
   const handleSelectGround = (index, value) => setMatch({ ...match, playGround: value });
 
-
+  useEffect(() => {
+    dispatch(getPlayground("경기도", "용인시", "수지구"));
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -100,9 +106,9 @@ export default function MatchCreateScreen() {
         <Text>경기장소</Text>
       </View>
       <View style={styles.map}>
-        {location &&
-          (<MapView
-            style={{flex: 1}}
+        {location && (
+          <MapView
+            style={{ flex: 1 }}
             provider={PROVIDER_GOOGLE}
             initialRegion={{
               latitude: location.latitude,
@@ -110,8 +116,31 @@ export default function MatchCreateScreen() {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-          />)
-        }
+          >
+            <Marker
+              coordinate={{
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }}
+              pinColor={"tomato"}
+            >
+              <Callout tootip>
+                <View>
+                  <Text>AAA</Text>
+                </View>
+              </Callout>
+            </Marker>
+            <Marker
+              coordinate={{
+                latitude: 37.32418,
+                longitude: 127.09565,
+              }}
+              pinColor={"tomato"}
+              title={"!!!"}
+              description={"!!!"}
+            />
+          </MapView>
+        )}
       </View>
     </View>
   );

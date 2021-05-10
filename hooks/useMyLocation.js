@@ -3,7 +3,7 @@ import * as Location from "expo-location";
 
 const useMyLocation = () => {
   const [location, setLocation] = useState(null);
-  const [geoGeoCode, setGeoCode] = useState(null);
+  const [geoCode, setGeoCode] = useState(null);
 
   useEffect(() => {
     const getGeoCode= async (location) => {
