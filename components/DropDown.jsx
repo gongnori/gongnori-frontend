@@ -5,7 +5,14 @@ import * as device from "../constants/device";
 
 const TEXT_VERTICAL_MARGIN = 5;
 
-export default function DropDown({ value, options, width, height, fontSize }) {
+export default function DropDown({
+  value = "Drop Down",
+  options = ["option1, option2, option3"],
+  width = 50,
+  height = 50,
+  fontSize = 12,
+  onSelect = () => console.log("Declare Event Function")
+}) {
   const total = options.length;
 
   return (
@@ -25,7 +32,10 @@ export default function DropDown({ value, options, width, height, fontSize }) {
       }}
       dropdownStyle={{
         width: 2 * width,
-        height: (total) * (4 * TEXT_VERTICAL_MARGIN + fontSize),
+        height: Math.min(
+          5 * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize),
+          total * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize)
+        ),
       }}
       dropdownTextStyle={{
         ...styles.dropdownText,
@@ -44,6 +54,7 @@ export default function DropDown({ value, options, width, height, fontSize }) {
 
         return style;
       }}
+      onSelect={onSelect}
     />
   );
 }

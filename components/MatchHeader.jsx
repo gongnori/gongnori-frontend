@@ -12,7 +12,7 @@ export default function MatchScreen() {
           value="보정동"
           options={["보정동", "성복동"]}
           width={60}
-          height={"100%"}
+          height={30}
           fontSize={15}
         />
       </View>
@@ -24,7 +24,7 @@ export default function MatchScreen() {
           value="축구"
           options={["축구", "농구", "야구"]}
           width={60}
-          height={"100%"}
+          height={30}
           fontSize={15}
         />
       </View>
