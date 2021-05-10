@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
+// import Geolocation from 'react-native-geolocation-service';
+import MapView, {PROVIDER_GOOGLE} from "react-native-maps";
 import DropDown from "../components/DropDown";
+import useMyLocation from "../hooks/useMyLocation";
 import getDateFromMonth from "../utils/getDateFromMonth";
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
@@ -18,7 +21,9 @@ export default function MatchCreateScreen() {
     end: "",
     playGround: "",
   });
+  const [location, geoCode] = useMyLocation();
 
+  console.log(geoCode)
   const handleSelectType = (index, value) => setMatch({ ...match, type: value });
   const handleSelectMonth = (index, value) => setMatch({ ...match, month: value });
   const handleSelectDate = (index, value) => setMatch({ ...match, date: value });
@@ -26,6 +31,8 @@ export default function MatchCreateScreen() {
   const handleSelectStart = (index, value) => setMatch({ ...match, start: value });
   const handleSelectEnd = (index, value) => setMatch({ ...match, end: value });
   const handleSelectGround = (index, value) => setMatch({ ...match, playGround: value });
+
+
 
   return (
     <View style={styles.container}>
@@ -93,7 +100,18 @@ export default function MatchCreateScreen() {
         <Text>경기장소</Text>
       </View>
       <View style={styles.map}>
-        <Text>경기장소</Text>
+        {location &&
+          (<MapView
+            style={{flex: 1}}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+              latitude: location.latitude,
+              longitude: location.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          />)
+        }
       </View>
     </View>
   );
