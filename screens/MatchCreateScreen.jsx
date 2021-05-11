@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-// import Geolocation from 'react-native-geolocation-service';
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import MapView, {Marker, Callout, PROVIDER_GOOGLE} from "react-native-maps";
+import { API_SERVER } from "@env";
 import produce from "immer";
 import DropDown from "../components/DropDown";
 import useMyLocation from "../hooks/useMyLocation";
@@ -10,11 +9,13 @@ import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
 import PlaceMap from "../components/PlaceMap";
 
+import fetchServer from "../utils/fetchServer"
+
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
 const CURRENT_DATE = (new Date().getDate()).toString();
 
-export default function MatchCreateScreen() {
+export default function MatchCreateScreen({ navigation }) {
   const playgrounds = useSelector((state) => {
     return state.playgroundReducer.playgrounds;
   }, (prev, next) => {
@@ -24,14 +25,14 @@ export default function MatchCreateScreen() {
   const dispatch = useDispatch();
 
   const [match, setMatch] = useState({
-    type: "",
+    type: "5:5",
     year: CURRENT_YEAR,
-    month: "",
-    date: "",
-    meridiem: "",
-    start: "",
-    end: "",
-    playGround: "",
+    month: CURRENT_MONTH,
+    date: CURRENT_DATE,
+    meridiem: "AM",
+    start: "8",
+    end: "10",
+    playground: "",
   });
   const [myLocation, myGeoCode] = useMyLocation();
 
@@ -39,13 +40,43 @@ export default function MatchCreateScreen() {
     dispatch(getPlayground("경기도", "용인시", "수지구"));
   }, []);
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              height: 50,
+              width: 50,
+              right: 20,
+            }}
+            onPress={async () => {
+              const data = await fetchServer(
+                "POST",
+                `${API_SERVER}/match`,
+                match,
+              );
+              // navigation.navigate("TabNavigator");
+            }}
+          >
+            <Text style={{ fontSize: 15 }}>
+              완료
+            </Text>
+          </TouchableOpacity>
+        );
+      },
+    });
+  });
+
   const handleSelectType = (index, value) => setMatch({ ...match, type: value });
   const handleSelectMonth = (index, value) => setMatch({ ...match, month: value });
   const handleSelectDate = (index, value) => setMatch({ ...match, date: value });
   const handleSelectMeridiem = (index, value) => setMatch({ ...match, meridiem: value });
   const handleSelectStart = (index, value) => setMatch({ ...match, start: value });
   const handleSelectEnd = (index, value) => setMatch({ ...match, end: value });
-  const handleSelectGround = (index, value) => setMatch({ ...match, playGround: value });
+  const handlePressPlayground = (value) => setMatch({ ...match, playground: value });
 
   return (
     <View style={styles.container}>
@@ -113,7 +144,13 @@ export default function MatchCreateScreen() {
         <Text>경기장소</Text>
       </View>
       <View style={styles.map}>
-        {myLocation && <PlaceMap origin={myLocation} places={playgrounds} />}
+        {myLocation && (
+          <PlaceMap
+            origin={myLocation}
+            places={playgrounds}
+            onPlacePress={handlePressPlayground}
+          />
+        )}
       </View>
     </View>
   );

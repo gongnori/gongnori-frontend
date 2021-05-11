@@ -1,5 +1,6 @@
 import React from "react";
-import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
+import { Text, TouchableOpacity } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 import TabNavigator from "./TabNavigator";
 import MatchCreateScreen from "../screens/MatchCreateScreen";
 import * as color from "../constants/colors";

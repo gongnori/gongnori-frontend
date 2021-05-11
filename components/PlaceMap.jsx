@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
 
-export default function PlaceMap({ origin, places }) {
+export default function PlaceMap({ origin, places, onPlacePress }) {
   return (
     <MapView
       style={{ flex: 1 }}
@@ -24,6 +24,7 @@ export default function PlaceMap({ origin, places }) {
       {places.map((place) => {
         const { latitude, longitude } = place.location;
         const { city, district, town, detail } = place.address;
+        const { contact } = place;
 
         return (
           <Marker
@@ -32,11 +33,14 @@ export default function PlaceMap({ origin, places }) {
               latitude,
               longitude,
             }}
+            onPress={() => onPlacePress(city)}
+            onCalloutPress={() => onPlacePress(city)}
           >
             <Callout tootip>
               <View>
                 <Text>{place.name}</Text>
                 <Text>{city} {district} {town} {detail}</Text>
+                <Text>{contact}</Text>
               </View>
             </Callout>
           </Marker>
