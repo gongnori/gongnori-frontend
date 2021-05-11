@@ -3,7 +3,8 @@ import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useSelector } from "react-redux";
 import MyTeamHeader from "../components/MyTeamHeader";
-import MyTeamOverview from "../components/MyTeamOverview"
+import MyTeamOverview from "../components/MyTeamOverview";
+import MyTeamMember from "../components/MyTeamMember";
 import * as color from  "../constants/colors";
 
 export default function MatchListScreen({ navigation }) {
@@ -18,6 +19,7 @@ export default function MatchListScreen({ navigation }) {
       <MyTeamHeader />
       <View style={styles.body}>
         <MyTeamOverview />
+        <MyTeamMember />
       </View>
     </View>
   );
@@ -27,12 +29,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
+    alignItems: "center",
     backgroundColor: color.PRIMARY_GRAY,
   },
   body: {
     flex: 1,
     justifyContent: "flex-start",
+    alignItems: "center",
     backgroundColor: color.PRIMARY_GRAY,
-    paddingLeft: 20,
   },
 });

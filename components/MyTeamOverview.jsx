@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "yellow",
   },
   emblemContainer: {
     flex: 1,

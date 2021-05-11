@@ -10,6 +10,8 @@ import MessageScreen from "../screens/MessageScreen";
 import SettingScreen from "../screens/SettingScreen";
 
 import * as color from "../constants/colors";
+import * as font from "../constants/fonts";
+import * as size from "../constants/sizes";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,11 +51,12 @@ export default function TabNavigator() {
         inactiveTintColor: "#B0BEC5",
         style: {
           backgroundColor: color.PRIMARY_WHITE,
-          height: 60,
+          height: size.TAB_NAVIGATOR_HEIGTH,
         },
         labelStyle: {
-          fontSize: 12,
-          marginBottom: 5,
+          fontSize: size.TAB_NAVIGATOR_LABEL_FONT_SIZE,
+          marginBottom: size.TAB_NAVIGATOR_LABEL_MARGIN_BOTTOM,
+          fontFamily: font.NANUM_GOTHIC_CODING_700_BOLD,
         },
       }}
     >
