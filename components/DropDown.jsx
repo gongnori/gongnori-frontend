@@ -43,12 +43,12 @@ export default function DropDown({
         fontSize,
       }}
       adjustFrame={(style) => {
-        if (device.OS === "Android") {
-          style.top -= 20;
-        }
-        if (device.OS === "iOS") {
-          style.top += 10;
-        }
+        // if (device.OS === "Android") {
+        //   style.top -= 20;
+        // }
+        // if (device.OS === "iOS") {
+        //   style.top += 10;
+        // }
 
         style.height += 0;
 

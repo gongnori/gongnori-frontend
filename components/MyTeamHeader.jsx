@@ -1,31 +1,28 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import DropDown from "./DropDown";
-import DateController from "./DateController";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 
-export default function MatchHeader() {
+export default function MyTeamHeader() {
   return (
     <View style={styles.container}>
-      <View style={styles.location}>
+      <View style={styles.team}>
         <DropDown
-          value="보정동"
-          options={["보정동", "성복동"]}
-          width={size.MATCH_HEADER_DROPDOWN_WIDTH}
-          height={size.MATCH_HEADER_DROPDOWN_HEIGHT}
+          value="양민FC"
+          options={["양민FC", "수지FC"]}
+          width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
+          height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}
           fontSize={15}
         />
       </View>
-      <View style={styles.date}>
-        <DateController />
-      </View>
+      <View style={styles.blank} />
       <View style={styles.sports}>
         <DropDown
           value="축구"
           options={["축구", "농구", "야구"]}
-          width={size.MATCH_HEADER_DROPDOWN_WIDTH}
-          height={size.MATCH_HEADER_DROPDOWN_HEIGHT}
+          width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
+          height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}
           fontSize={15}
         />
       </View>
@@ -38,15 +35,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "stretch",
-    height: size.MATCH_HEADER_HEIGHT,
+    height: size.MY_TEAM_HEADER_HEIGHT,
     backgroundColor: color.PRIMARY_BLUE,
   },
-  location: {
+  team: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  date: {
+  blank: {
     flex: 3,
     justifyContent: "center",
     alignItems: "center",

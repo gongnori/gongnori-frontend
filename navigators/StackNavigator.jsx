@@ -28,7 +28,7 @@ export default function MatchNavigator() {
             backgroundColor: color.PRIMARY_BLUE,
             height: HEADER_HEIGHT,
           },
-          headerTintColor: color.SECONDARY_GRAY,
+          headerTintColor: color.PRIMARY_WHITE,
           hearderTintStyle: {
             fontSize: HEADER_FONT_SIZE,
           },

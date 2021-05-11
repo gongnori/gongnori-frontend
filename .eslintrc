@@ -43,6 +43,7 @@
     "global-require": "off",
     "no-shadow": "off",
     "no-useless-return": "off",
+    "camelcase": "warn",
     "react/jsx-indent": ["warn", 2],
     "react/style-prop-object": "warn",
     "react/prop-types": "warn",

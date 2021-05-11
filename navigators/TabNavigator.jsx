@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import HomeScreen from "../screens/HomeScreen";
 import MatchScreen from "../screens/MatchScreen";
 import RankScreen from "../screens/RankScreen";
+import MyTeamScreen from "../screens/MyTeamScreen";
 import MessageScreen from "../screens/MessageScreen";
 import SettingScreen from "../screens/SettingScreen";
 
@@ -28,6 +29,9 @@ export default function TabNavigator() {
             case "Rank":
               iconName = "trophy";
               break;
+            case "MyTeam":
+              iconName = "people";
+              break;
             case "Message":
               iconName = "chatbox-ellipses";
               break;
@@ -44,7 +48,7 @@ export default function TabNavigator() {
         activeTintColor: color.PRIMARY_BLUE,
         inactiveTintColor: "#B0BEC5",
         style: {
-          backgroundColor: color.SECONDARY_GRAY,
+          backgroundColor: color.PRIMARY_WHITE,
           height: 60,
         },
         labelStyle: {
@@ -56,6 +60,7 @@ export default function TabNavigator() {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Match" component={MatchScreen} />
       <Tab.Screen name="Rank" component={RankScreen} />
+      <Tab.Screen name="MyTeam" component={MyTeamScreen} />
       <Tab.Screen name="Message" component={MessageScreen} />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
