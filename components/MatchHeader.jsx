@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "stretch",
     height: "10%",
-    backgroundColor: color.SECONDARY_BROWN,
+    backgroundColor: color.PRIMARY_BLUE,
   },
   location: {
     flex: 1,

@@ -8,8 +8,8 @@ import useMyLocation from "../hooks/useMyLocation";
 import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
 import PlaceMap from "../components/PlaceMap";
-
-import fetchServer from "../utils/fetchServer"
+import fetchServer from "../utils/fetchServer";
+import * as color from  "../constants/colors"
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    backgroundColor: "#FAF2E0",
+    backgroundColor: color.PRIMARY_GRAY,
   },
   type: {
     flex: 1,

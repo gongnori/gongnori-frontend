@@ -41,10 +41,10 @@ export default function TabNavigator() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: color.SECONDARY_BROWN,
-        inactiveTintColor: color.PRIMARY_GRAY,
+        activeTintColor: color.PRIMARY_BLUE,
+        inactiveTintColor: "#B0BEC5",
         style: {
-          backgroundColor: color.PRIMARY_WHITE,
+          backgroundColor: color.SECONDARY_GRAY,
           height: 60,
         },
         labelStyle: {

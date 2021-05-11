@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 import SideButton from "../components/SideButton";
+import * as color from  "../constants/colors";
 
 export default function MatchListScreen({ navigation }) {
   const matches = useSelector((state) => {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    backgroundColor: "#FAF2E0",
+    backgroundColor: color.PRIMARY_GRAY,
   },
   body: {
     flex: 1,

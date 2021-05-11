@@ -25,10 +25,10 @@ export default function MatchNavigator() {
         options={{
           title: MATCH_CREATE_TITLE,
           headerStyle: {
-            backgroundColor: color.SECONDARY_BROWN,
+            backgroundColor: color.PRIMARY_BLUE,
             height: HEADER_HEIGHT,
           },
-          headerTintColor: color.PRIMARY_BROWN,
+          headerTintColor: color.SECONDARY_GRAY,
           hearderTintStyle: {
             fontSize: HEADER_FONT_SIZE,
           },

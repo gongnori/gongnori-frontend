@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
+import * as color from "../constants/colors";
 
 export default function CustomButton({ title, onPress }) {
   return (
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "6%",
     borderRadius: 10,
-    backgroundColor: "#886551",
+    backgroundColor: color.PRIMARY_BLUE,
   },
   title: {
     fontSize: 20,

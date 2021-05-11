@@ -4,15 +4,16 @@ import * as color from "../constants/colors";
 import * as device from "../constants/device";
 
 export default function MatchItem({ item }) {
+  console.log(item)
   const id = item._id;
   const createdAt = item.created_at;
   const matchType = item.match_type;
-  const playGround = item.play_ground;
-  const playTime = item.play_time;
+  const playground = item.playground;
+  const playtime = item.playtime;
   const teams = item.teams;
 
-  const startTime = new Date(playTime.start).getHours();
-  const endTime = new Date(playTime.end).getHours();
+  const startTime = new Date(playtime.start).getHours();
+  const endTime = new Date(playtime.end).getHours();
 
   return (
     <View style={styles.container}>
@@ -23,7 +24,7 @@ export default function MatchItem({ item }) {
         />
       </View>
       <View style={styles.matchInfoContainer}>
-        <Text>{playGround}</Text>
+        <Text>{playground}</Text>
         <Text>용인시 기흥구 보정동</Text>
         <Text>5월 21일</Text>
         <Text>{`${startTime}:00 - ${endTime}:00`}</Text>
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     height: 0.15 * device.HEIGHT,
     marginBottom: 0.02 * device.HEIGHT,
     borderBottomWidth: 1,
-    borderBottomColor: color.SECONDARY_BROWN,
+    borderBottomColor: color.PRIMARY_BLUE,
   },
   emblemContainer: {
     flex: 1,
