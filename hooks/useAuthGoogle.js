@@ -8,9 +8,11 @@ export default function useAuthGoogle() {
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId: CLIENT_ID.expo,
     webClientId: CLIENT_ID.web,
+    prompt: "select_account",
   });
 
   const signInGoogle = useCallback(() => {
+    console.log(request)
     if (!request) { return }
     promptAsync();
   }, [request]);
