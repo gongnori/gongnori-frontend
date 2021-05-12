@@ -78,7 +78,6 @@ const getPlayground = (province, city, district) => async (dispatch) => {
 
 const getMyTeam = (team) => async (dispatch) => {
   try {
-    console.log(team._id)
     const token = await AsyncStorage.getItem("token");
     const res = await fetch(`${API_SERVER}/team/my-team/${team._id}`, {
       method: "GET",
