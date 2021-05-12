@@ -9,7 +9,7 @@ export default function MyTeamOverview({ myTeam }) {
   const { members } = myTeam;
 
   return (
-    <View style={styles.member}>
+    <View style={styles.members}>
       <Text style={styles.title}>팀원</Text>
       <ScrollView
         style={styles.scroll}
@@ -18,7 +18,7 @@ export default function MyTeamOverview({ myTeam }) {
         {
           members.map((member) => {
             return (
-              <View style={styles.person}>
+              <View style={styles.member}>
                 <Text style={styles.name}>{member.name}</Text>
                 <View style={styles.detail}>
                   <Icon
@@ -42,9 +42,10 @@ export default function MyTeamOverview({ myTeam }) {
 }
 
 const styles = StyleSheet.create({
-  member: {
+  members: {
     justifyContent: "space-between",
     alignItems: "flex-start",
+    marginTop: 15,
     width: size.MY_TEAM_MEMBER_WIDTH,
     height: size.MY_TEAM_MEMBER_HEIGHT,
   },
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  person: {
+  member: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
