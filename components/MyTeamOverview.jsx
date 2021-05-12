@@ -1,9 +1,15 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
-import * as size from  "../constants/sizes";
-import * as font from  "../constants/fonts";
+import * as size from "../constants/sizes";
+import * as font from "../constants/fonts";
 
-export default function MyTeamOverview() {
+export default function MyTeamOverview({ myTeam }) {
+  const { name, location, repute, members } = myTeam;
+  const { city, district } = location;
+  const { ability, manner } = repute;
+
+  const memberNum = members.length;
+
   return (
     <View style={styles.overview}>
       <View style={styles.emblemContainer}>
@@ -14,12 +20,12 @@ export default function MyTeamOverview() {
       </View>
       <View style={styles.descripitonContainer}>
         <View style={styles.description}>
-          <Text style={styles.title}>팀이름</Text>
-          <Text style={styles.content}>양민FC</Text>
+          <Text style={styles.title}>{"팀이름"}</Text>
+          <Text style={styles.content}>{name}</Text>
         </View>
         <View style={styles.description}>
           <Text style={styles.title}>지역</Text>
-          <Text style={styles.content}>용인시 수지구</Text>
+          <Text style={styles.content}>{`${city} ${district}`}</Text>
         </View>
         <View style={styles.description}>
           <Text style={styles.title}>전적</Text>
@@ -27,11 +33,11 @@ export default function MyTeamOverview() {
         </View>
         <View style={styles.description}>
           <Text style={styles.title}>매너</Text>
-          <Text style={styles.content}>5/5</Text>
+          <Text style={styles.content}>{manner}</Text>
         </View>
         <View style={styles.description}>
           <Text style={styles.title}>팀원</Text>
-          <Text style={styles.content}>10명</Text>
+          <Text style={styles.content}>{`${memberNum} 명`}</Text>
         </View>
       </View>
     </View>

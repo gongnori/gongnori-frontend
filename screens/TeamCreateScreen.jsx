@@ -82,7 +82,7 @@ export default function MatchCreateScreen({ navigation }) {
         <Text style={styles.sportsText}>종목</Text>
         <DropDown
           value={team.sports}
-          options={["축구", "농구", "야구"]}
+          options={["football", "bascketball", "baseball"]}
           width={60}
           height={30}
           fontSize={15}

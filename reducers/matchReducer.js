@@ -3,13 +3,11 @@ const initialState = {
 };
 
 const matchReducer = (state = initialState, action) => {
-  const matches = action.payload;
-
   switch (action.type) {
     case "LOAD_MATCH_SUCCESS":
-      return { matches };
+      return { ...state, matches: action.payload };
     case "LOAD_MATCH_FAIL":
-      return { matches: [] };
+      return { ...state, matches: [] };
     default:
       return state;
   }

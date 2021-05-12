@@ -10,7 +10,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const fetchServer = async (method, url, reqBody) => {
   const token = await AsyncStorage.getItem("token");
-  console.log(JSON.stringify(reqBody),)
   let req;
 
   if (method === "GET") {

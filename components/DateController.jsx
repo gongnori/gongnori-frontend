@@ -11,14 +11,14 @@ const DATE_CONTROLLER_FONT_SIZE = 16;
 const DATE_CONTROLLER_WIDTH = 150;
 const DATE_CONTROLLER_HEIGHT = 50;
 
-export default function DateController() {
-  const dispatch = useDispatch();
+export default function DateController({ year, month, date, onPressButton }) {
+  // const dispatch = useDispatch();
 
-  const [year, month, date, handlePressButton] = useDateController();
+  // const [year, month, date, handlePressButton] = useDateController();
 
-  useEffect(() => {
-    dispatch(getMatch(year, month, date));
-  }, [year, month, date]);
+  // useEffect(() => {
+  //   dispatch(getMatch(year, month, date));
+  // }, [year, month, date]);
 
   return (
     <View style={styles.container}>
@@ -26,7 +26,7 @@ export default function DateController() {
         name="arrow-back-circle-outline"
         size={DATE_CONTROLLER_ICON_SIZE}
         color={color.PRIMARY_BROWN}
-        onPress={() => handlePressButton("back")}
+        onPress={() => onPressButton("back")}
       />
       <View style={styles.date}>
         <Text style={styles.text}>{`${month} 월`}</Text>
@@ -36,7 +36,7 @@ export default function DateController() {
         name="arrow-forward-circle-outline"
         size={DATE_CONTROLLER_ICON_SIZE}
         color={color.PRIMARY_BROWN}
-        onPress={() => handlePressButton("forward")}
+        onPress={() => onPressButton("forward")}
       />
     </View>
   );

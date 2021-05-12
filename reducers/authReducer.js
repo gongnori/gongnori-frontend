@@ -1,17 +1,19 @@
 const initialState = {
   name: "",
   email: "",
+  locations: [],
+  teams: [],
   isLogin: false,
 };
 
 const authReducer = (state = initialState, action) => {
-  const userInfo = action.payload;
-
   switch (action.type) {
     case "AUTH_LOGIN_SUCCESS":
       return {
-        name: userInfo.name,
-        email: userInfo.email,
+        name: action.payload.name,
+        email: action.payload.email,
+        locations: action.payload.locations,
+        teams: action.payload.teams,
         isLogin: true,
       };
     case "AUTH_LOGIN_FAIL":

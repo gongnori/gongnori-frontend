@@ -3,10 +3,12 @@ import { API_SERVER } from "@env";
 
 const authLogin = (userInfo) => async (dispatch) => {
   try {
+    const { name, email } = userInfo;
+
     const res = await fetch(`${API_SERVER}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userInfo }),
+      body: JSON.stringify({ name, email }),
     });
 
     const result = await res.json();
@@ -14,21 +16,21 @@ const authLogin = (userInfo) => async (dispatch) => {
 
     if (error) { throw new Error() }
 
-    const token = data;
+    const { token, locations, teams } = data;
     await AsyncStorage.setItem("token", token);
 
-    dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: userInfo });
+    dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: { name, email, locations, teams } });
   } catch (err) {
     console.error(err.message);
     dispatch({ type: "AUTH_LOGIN_FAIL" });
   }
 };
 
-const getMatch = (year, month, date) => async (dispatch) => {
+const getMatch = (location, sports, year, month, date) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
-    // ?locationyear=2021&month=5&date&12
-    const res = await fetch(`${API_SERVER}/match?year=${year}&month=${month}&date=${date}`, {
+    const { province, city, district } = location;
+    const res = await fetch(`${API_SERVER}/match?province=${province}&city=${city}&district=${district}&sports=${sports}&year=${year}&month=${month}&date=${date}`, {
       method: "GET",
       headers: { "Authorization": token },
     });
@@ -74,4 +76,29 @@ const getPlayground = (province, city, district) => async (dispatch) => {
   }
 };
 
-export { authLogin, getMatch, getPlayground };
+const getMyTeam = (team) => async (dispatch) => {
+  try {
+    console.log(team._id)
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(`${API_SERVER}/team/my-team/${team._id}`, {
+      method: "GET",
+      headers: { "Authorization": token },
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
+    const myTeam = data;
+
+    dispatch({
+      type: "LOAD_MY_TEAM_SUCCESS",
+      payload: myTeam,
+    });
+  } catch (err) {
+    dispatch({ type: "LOAD_MY_TEAM_FAIL" });
+  }
+};
+
+export { authLogin, getMatch, getPlayground, getMyTeam };

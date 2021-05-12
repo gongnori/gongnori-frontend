@@ -5,8 +5,8 @@ import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";
 
-export default function MyTeamOverview() {
-  const members = ["홍명보", "황선홍", "박지성", "김남일", "이영표", "이천수", "안정환"]
+export default function MyTeamOverview({ myTeam }) {
+  const { members } = myTeam;
 
   return (
     <View style={styles.member}>
@@ -19,7 +19,7 @@ export default function MyTeamOverview() {
           members.map((member) => {
             return (
               <View style={styles.person}>
-                <Text style={styles.name}>{member}</Text>
+                <Text style={styles.name}>{member.name}</Text>
                 <View style={styles.detail}>
                   <Icon
                     name="chatbubble-ellipses-outline"
