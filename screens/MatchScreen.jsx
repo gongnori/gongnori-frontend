@@ -5,13 +5,22 @@ import { useSelector } from "react-redux";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 import SideButton from "../components/SideButton";
-import * as color from  "../constants/colors";
+import * as color from "../constants/colors";
 
 export default function MatchListScreen({ navigation }) {
   const matches = useSelector((state) => {
     return state.matchReducer.matches;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
+
+  const sortedMatches = produce(matches, (draft) => {
+    draft.sort((a, b) => {
+      const milliSecA = new Date(a.playtime.start).getTime();
+      const milliSecB = new Date(b.playtime.start).getTime();
+
+      return milliSecA - milliSecB;
+    });
   });
 
   return (
@@ -22,7 +31,7 @@ export default function MatchListScreen({ navigation }) {
           style={{ width: "90%" }}
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
           keyExtractor={(item) => item._id}
-          data={matches}
+          data={sortedMatches}
           renderItem={({ item }) => <MatchItem item={item} />}
         />
       </View>

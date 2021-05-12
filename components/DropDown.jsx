@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import ModalDropdown from "react-native-modal-dropdown";
 import * as device from "../constants/device";
+import * as font from "../constants/fonts";
 
 const TEXT_VERTICAL_MARGIN = 5;
 
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     textAlignVertical: "center",
+    fontFamily: font.DO_HYEON_400_REGULAR,
   },
   dropdownText: {
     color: "black",
@@ -77,5 +79,6 @@ const styles = StyleSheet.create({
     marginTop: TEXT_VERTICAL_MARGIN,
     paddingTop: 0,
     paddingBottom: 0,
+    fontFamily: font.DO_HYEON_400_REGULAR,
   },
 });

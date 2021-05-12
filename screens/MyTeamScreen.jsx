@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 import MyTeamHeader from "../components/MyTeamHeader";
 import MyTeamOverview from "../components/MyTeamOverview";
 import MyTeamMember from "../components/MyTeamMember";
+import SideButton from "../components/SideButton";
 import * as color from  "../constants/colors";
 
-export default function MatchListScreen({ navigation }) {
+export default function MyTeamScreen({ navigation }) {
   // const matches = useSelector((state) => {
   //   return state.matchReducer.matches;
   // }, (prev, next) => {
@@ -21,6 +22,10 @@ export default function MatchListScreen({ navigation }) {
         <MyTeamOverview />
         <MyTeamMember />
       </View>
+      <SideButton
+        navigation={navigation}
+        route="TeamCreate"
+      />
     </View>
   );
 }

@@ -2,18 +2,20 @@ import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import * as color from "../constants/colors";
 import * as device from "../constants/device";
+import * as font from "../constants/fonts";
 
 export default function MatchItem({ item }) {
-  console.log(item)
   const id = item._id;
   const createdAt = item.created_at;
   const matchType = item.match_type;
   const playground = item.playground;
-  const playtime = item.playtime;
-  const teams = item.teams;
 
-  const startTime = new Date(playtime.start).getHours();
-  const endTime = new Date(playtime.end).getHours();
+  const { name } = item.teams[0];
+  const { province, city, district } = item.teams[0].location;
+  const { start, end } = item.playtime
+
+  const startTime = new Date(start).getHours();
+  const endTime = new Date(end).getHours();
 
   return (
     <View style={styles.container}>
@@ -22,12 +24,13 @@ export default function MatchItem({ item }) {
           style={styles.emblem}
           source={require("../assets/realmadrid_emblem.png")}
         />
+        <Text style={styles.teamName}>{name}</Text>
       </View>
       <View style={styles.matchInfoContainer}>
-        <Text>{playground}</Text>
-        <Text>용인시 기흥구 보정동</Text>
-        <Text>5월 21일</Text>
-        <Text>{`${startTime}:00 - ${endTime}:00`}</Text>
+        <Text style={styles.playgroundName}>{playground.name}</Text>
+        <Text style={styles.location}>{`${province} ${city} ${district}`}</Text>
+        <Text style={styles.playtime}>{`${startTime}:00 - ${endTime}:00`}</Text>
+        <Text style={styles.matchType}>{`${matchType}`}</Text>
       </View>
     </View>
   );
@@ -41,8 +44,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 0.15 * device.HEIGHT,
     marginBottom: 0.02 * device.HEIGHT,
+    borderRadius: 10,
+    // borderRightWidth: 1,
+    // borderRightColor: "gray",
     borderBottomWidth: 1,
     borderBottomColor: color.PRIMARY_BLUE,
+    backgroundColor: color.SECONDARY_WHITE,
   },
   emblemContainer: {
     flex: 1,
@@ -51,9 +58,17 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   emblem: {
-    width: "80%",
-    height: "80%",
+    flex: 8,
+    width: "60%",
+    height: "60%",
     resizeMode: "contain",
+  },
+  teamName: {
+    flex: 2,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 18,
+    fontFamily: font.DO_HYEON_400_REGULAR,
   },
   matchInfoContainer: {
     flex: 3,
@@ -61,5 +76,21 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     height: "100%",
     paddingLeft: 10,
+  },
+  playgroundName: {
+    fontSize: 16,
+    fontFamily: font.DO_HYEON_400_REGULAR,
+  },
+  location: {
+    fontSize: 12,
+    fontFamily: font.NANUM_GOTHIC_CODING_400_REGULAR,
+  },
+  playtime: {
+    fontSize: 14,
+    fontFamily: font.DO_HYEON_400_REGULAR,
+  },
+  matchType: {
+    fontSize: 14,
+    fontFamily: font.NANUM_GOTHIC_CODING_400_REGULAR,
   },
 });

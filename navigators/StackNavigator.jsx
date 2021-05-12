@@ -3,6 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabNavigator from "./TabNavigator";
 import MatchCreateScreen from "../screens/MatchCreateScreen";
+import TeamCreateScreen from "../screens/TeamCreateScreen";
 import * as color from "../constants/colors";
 
 const Stack = createStackNavigator();
@@ -10,6 +11,7 @@ const Stack = createStackNavigator();
 const HEADER_HEIGHT = 80;
 const HEADER_FONT_SIZE = 30;
 const MATCH_CREATE_TITLE = "경기 만들기";
+const TEAM_CREATE_TITLE = "팀 만들기";
 
 export default function MatchNavigator() {
   return (
@@ -24,6 +26,22 @@ export default function MatchNavigator() {
         component={MatchCreateScreen}
         options={{
           title: MATCH_CREATE_TITLE,
+          headerStyle: {
+            backgroundColor: color.PRIMARY_BLUE,
+            height: HEADER_HEIGHT,
+          },
+          headerTintColor: color.PRIMARY_WHITE,
+          hearderTintStyle: {
+            fontSize: HEADER_FONT_SIZE,
+          },
+          headerTitleAlign: "center",
+        }}
+      />
+      <Stack.Screen
+        name="TeamCreate"
+        component={TeamCreateScreen}
+        options={{
+          title: TEAM_CREATE_TITLE,
           headerStyle: {
             backgroundColor: color.PRIMARY_BLUE,
             height: HEADER_HEIGHT,
