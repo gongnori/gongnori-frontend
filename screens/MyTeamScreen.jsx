@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import produce from "immer";
 
 import MyTeamHeader from "../components/MyTeamHeader";
-import MyTeamOverview from "../components/MyTeamOverview";
-import MyTeamMember from "../components/MyTeamMember";
-import MyTeamMatch from "../components/MyTeamMatch";
+import TeamOverview from "../components/TeamOverview";
+import TeamMember from "../components/TeamMember";
+import TeamMatch from "../components/TeamMatch";
 import SideButton from "../components/SideButton";
 
 import * as color from "../constants/colors";
@@ -24,9 +24,9 @@ export default function MyTeamScreen({ navigation }) {
       <View style={styles.body}>
         {myTeam && (
           <>
-            <MyTeamOverview myTeam={myTeam} />
-            <MyTeamMember myTeam={myTeam} />
-            <MyTeamMatch myTeam={myTeam} />
+            <TeamOverview team={myTeam} />
+            <TeamMember team={myTeam} />
+            <TeamMatch team={myTeam} />
           </>
         )}
       </View>

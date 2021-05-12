@@ -6,6 +6,7 @@ import produce from "immer";
 import DropDown from "../components/DropDown";
 import CustomeTextInput from "../components/CustomTextInput";
 import useMyLocation from "../hooks/useMyLocation";
+import useHeaderRight from  "../hooks/useHeaderRight";
 import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
 import PlaceMap from "../components/PlaceMap";
@@ -37,35 +38,7 @@ export default function MatchCreateScreen({ navigation }) {
     dispatch(getPlayground("경기도", "용인시", "수지구"));
   }, []);
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => {
-        return (
-          <TouchableOpacity
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: 50,
-              width: 50,
-              right: 20,
-            }}
-            onPress={async () => {
-              const data = await fetchServer(
-                "POST",
-                `${API_SERVER}/team`,
-                team,
-              );
-              // navigation.navigate("TabNavigator");
-            }}
-          >
-            <Text style={{ fontSize: 15 }}>
-              완료
-            </Text>
-          </TouchableOpacity>
-        );
-      },
-    });
-  });
+  useHeaderRight(navigation, "team", team);
 
   const handleSelectSports = (index, value) => setTeam({ ...team, sports: value });
   const handleChangeTeamName = (value) => setTeam({ ...team, teamName: value });

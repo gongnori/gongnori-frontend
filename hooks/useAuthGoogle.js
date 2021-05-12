@@ -12,7 +12,6 @@ export default function useAuthGoogle() {
   });
 
   const signInGoogle = useCallback(() => {
-    console.log(request)
     if (!request) { return }
     promptAsync();
   }, [request]);

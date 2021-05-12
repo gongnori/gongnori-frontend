@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as color from "../constants/colors";
 import * as device from "../constants/device";
 import * as font from "../constants/fonts";
 
-export default function MatchItem({ item }) {
+export default function MatchItem({ item, navigation }) {
   const id = item._id;
   const createdAt = item.created_at;
   const matchType = item.match_type;
@@ -17,8 +17,16 @@ export default function MatchItem({ item }) {
   const startTime = new Date(start).getHours();
   const endTime = new Date(end).getHours();
 
+  const handlePressMatch = () => {
+    navigation.navigate("MatchJoin", { match: item });
+  }
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      style={styles.container}
+      onPress={handlePressMatch}
+    >
       <View style={styles.emblemContainer}>
         <Image
           style={styles.emblem}
@@ -32,7 +40,7 @@ export default function MatchItem({ item }) {
         <Text style={styles.playtime}>{`${startTime}:00 - ${endTime}:00`}</Text>
         <Text style={styles.matchType}>{`${matchType}`}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

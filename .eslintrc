@@ -54,6 +54,7 @@
     "prefer-destructuring": "off",
     "quote-props": "warn",
     "arrow-body-style": "off",
-    "react/jsx-curly-brace-presence": "off"
+    "react/jsx-curly-brace-presence": "off",
+    "react/jsx-filename-extension": "off"
   }
 }

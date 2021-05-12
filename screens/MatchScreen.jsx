@@ -32,7 +32,7 @@ export default function MatchListScreen({ navigation }) {
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
           keyExtractor={(item) => item._id}
           data={sortedMatches}
-          renderItem={({ item }) => <MatchItem item={item} />}
+          renderItem={({ item }) => <MatchItem item={item} navigation={navigation} />}
         />
       </View>
       <SideButton

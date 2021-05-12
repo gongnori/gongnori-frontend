@@ -5,8 +5,8 @@ import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";
 
-export default function MyTeamMach({ myTeam }) {
-  const { matches } = myTeam;
+export default function TeamMatch({ team }) {
+  const { matches } = team;
   const fixedMatches = matches.filter((match) => match.teams.length === 2);
 
   return (
@@ -26,7 +26,7 @@ export default function MyTeamMach({ myTeam }) {
             const startTime = new Date(playtime.start).getHours();
             const endTime = new Date(playtime.end).getHours();
 
-            // const opponent = teams.filter((team) =>  myTeam.name !== team.name)
+            // const opponent = teams.filter((team) =>  team.name !== team.name)
             return (
               <View style={styles.match}>
                 <Text style={styles.primary}>{`vs ${teams[0].name}`}</Text>

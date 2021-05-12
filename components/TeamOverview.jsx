@@ -3,8 +3,8 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import * as size from "../constants/sizes";
 import * as font from "../constants/fonts";
 
-export default function MyTeamOverview({ myTeam }) {
-  const { name, location, repute, members } = myTeam;
+export default function TeamOverview({ team }) {
+  const { name, location, repute, members } = team;
   const { city, district } = location;
   const { ability, manner } = repute;
 
@@ -18,6 +18,7 @@ export default function MyTeamOverview({ myTeam }) {
           source={require("../assets/realmadrid_emblem.png")}
         />
       </View>
+       {/* TitleContentColumn 만들기... */}
       <View style={styles.descripitonContainer}>
         <View style={styles.description}>
           <Text style={styles.title}>{"팀이름"}</Text>

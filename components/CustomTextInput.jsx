@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TextInput } from "react-native";
 import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
 
-export default function MatchCreateScreen({ title, value, placeholder, onChangeText }) {
+export default function CustomTextInput({ title, value, placeholder, onChangeText }) {
   return (
     <View style={styles.textInputContainer}>
       <Text style={styles.text}>{title}</Text>

@@ -5,8 +5,8 @@ import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";
 
-export default function MyTeamOverview({ myTeam }) {
-  const { members } = myTeam;
+export default function TeamMember({ team }) {
+  const { members } = team;
 
   return (
     <View style={styles.members}>

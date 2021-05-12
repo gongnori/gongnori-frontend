@@ -5,6 +5,7 @@ import { API_SERVER } from "@env";
 import produce from "immer";
 import DropDown from "../components/DropDown";
 import useMyLocation from "../hooks/useMyLocation";
+import useHeaderRight from  "../hooks/useHeaderRight";
 import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
 import PlaceMap from "../components/PlaceMap";
@@ -40,35 +41,7 @@ export default function MatchCreateScreen({ navigation }) {
     dispatch(getPlayground("경기도", "용인시", "수지구"));
   }, []);
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => {
-        return (
-          <TouchableOpacity
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: 50,
-              width: 50,
-              right: 20,
-            }}
-            onPress={async () => {
-              const data = await fetchServer(
-                "POST",
-                `${API_SERVER}/match`,
-                match,
-              );
-              // navigation.navigate("TabNavigator");
-            }}
-          >
-            <Text style={{ fontSize: 15 }}>
-              완료
-            </Text>
-          </TouchableOpacity>
-        );
-      },
-    });
-  });
+  useHeaderRight(navigation, "match", match);
 
   const handleSelectType = (index, value) => setMatch({ ...match, type: value });
   const handleSelectMonth = (index, value) => setMatch({ ...match, month: value });
