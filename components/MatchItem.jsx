@@ -9,7 +9,7 @@ export default function MatchItem({ item, navigation }) {
   const createdAt = item.created_at;
   const matchType = item.match_type;
   const playground = item.playground;
-
+console.log(item.teams[0])
   const { name } = item.teams[0];
   const { province, city, district } = item.teams[0].location;
   const { start, end } = item.playtime
@@ -30,7 +30,7 @@ export default function MatchItem({ item, navigation }) {
       <View style={styles.emblemContainer}>
         <Image
           style={styles.emblem}
-          source={require("../assets/realmadrid_emblem.png")}
+          source={{ uri: item.teams[0].emblem }}
         />
         <Text style={styles.teamName}>{name}</Text>
       </View>
