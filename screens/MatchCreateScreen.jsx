@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import produce from "immer";
 import DropDown from "../components/DropDown";
 import useMyLocation from "../hooks/useMyLocation";
-import useHeaderRight from  "../hooks/useHeaderRight";
+import useHeaderRight from "../hooks/useHeaderRight";
 import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
 import PlaceMap from "../components/PlaceMap";
-import * as color from  "../constants/colors"
-import * as font from  "../constants/fonts"
+import * as color from "../constants/colors";
+import * as font from "../constants/fonts";
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
@@ -18,6 +18,12 @@ const CURRENT_DATE = (new Date().getDate()).toString();
 export default function MatchCreateScreen({ navigation }) {
   const locations = useSelector((state) => {
     return state.authReducer.locations;
+  }, (prev, next) => {
+    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
+
+  const teams = useSelector((state) => {
+    return state.authReducer.teams;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
@@ -64,10 +70,12 @@ export default function MatchCreateScreen({ navigation }) {
   const handleSelectStart = (index, value) => setMatch({ ...match, start: value });
   const handleSelectEnd = (index, value) => setMatch({ ...match, end: value });
   const handleSelectLocation = (index, value) => setLocation(locations[index]);
+  const handleSelectTeam = (index, value) => setMatch({...match, team: teams[index]});
 
   const handlePressPlayground = (value) => setMatch({ ...match, playground: value });
 
   const locationOptions = locations.map((location) => `${location.city} ${location.district}`)
+  const teamOptions = teams.map((team) => team.name)
 
   useEffect(() => {
     if (!location) { return }
@@ -80,6 +88,18 @@ export default function MatchCreateScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.input}>
+        <View style={styles.titleDropdown}>
+          <Text style={styles.title}>나의 팀</Text>
+          <DropDown
+            value={"팀"}
+            options={teamOptions}
+            width={60}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectTeam}
+          />
+        </View>
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 방식</Text>
           <DropDown
@@ -166,16 +186,18 @@ export default function MatchCreateScreen({ navigation }) {
           />
         </View>
       </View>
-      {origin && (
-        <PlaceMap
-          key={forceRefreshKey}
-          width={"90%"}
-          height={"60%"}
-          origin={origin}
-          places={playgrounds}
-          onPlacePress={handlePressPlayground}
-        />
-      )}
+      <View style={styles.map}>
+        {origin && (
+          <PlaceMap
+            key={forceRefreshKey}
+            width={"100%"}
+            height={"100%"}
+            origin={origin}
+            places={playgrounds}
+            onPlacePress={handlePressPlayground}
+          />
+        )}
+      </View>
     </View>
   );
 }
@@ -211,5 +233,10 @@ const styles = StyleSheet.create({
     fontFamily: font.DO_HYEON_400_REGULAR,
     textAlign: "center",
     textAlignVertical: "center",
+  },
+  map: {
+    width: "90%",
+    height: "60%",
+    justifyContent: "space-around",
   },
 });

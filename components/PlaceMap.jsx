@@ -4,6 +4,7 @@ import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
 
 export default function PlaceMap({ width = 300, height = 300, origin, places = [], onPlacePress }) {
   const markers = places.map((place) => {
+    const { name, _id } = place;
     const { latitude, longitude } = place.location;
     const { province, city, district, town, detail } = place.address;
     const { contact } = place;
@@ -15,8 +16,10 @@ export default function PlaceMap({ width = 300, height = 300, origin, places = [
           latitude,
           longitude,
         }}
-        onPress={() => onPlacePress({ province, city, district, town, detail })}
-        onCalloutPress={() => onPlacePress({ province, city, district, town, detail })}
+        onPress={() => onPlacePress(place)}
+        onCalloutPress={() => onPlacePress(place)}
+        // onPress={() => onPlacePress({ province, city, district, town, detail })}
+        // onCalloutPress={() => onPlacePress({ province, city, district, town, detail })}
       >
         <Callout tootip>
           <View>
