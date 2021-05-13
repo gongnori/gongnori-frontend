@@ -18,8 +18,6 @@ export default function PlaceMap({ width = 300, height = 300, origin, places = [
         }}
         onPress={() => onPlacePress(place)}
         onCalloutPress={() => onPlacePress(place)}
-        // onPress={() => onPlacePress({ province, city, district, town, detail })}
-        // onCalloutPress={() => onPlacePress({ province, city, district, town, detail })}
       >
         <Callout tootip>
           <View>

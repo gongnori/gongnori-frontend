@@ -168,7 +168,7 @@ export default function MatchCreateScreen({ navigation }) {
           />
         </View>
         <View style={styles.titleDropdown}>
-          <Text style={styles.title}>경기장소</Text>
+          <Text style={styles.title}>경기 장소</Text>
           <DropDown
             value={"지역"}
             options={locationOptions}
@@ -177,12 +177,6 @@ export default function MatchCreateScreen({ navigation }) {
             fontSize={15}
             backgroundColor={color.SECONDARY_WHITE}
             onSelect={handleSelectLocation}
-            onRegionChange={region => {
-              setLocation({
-                latitude: origin.latitude,
-                longitude: origin.longitude,
-              });
-            }}
           />
         </View>
       </View>
@@ -220,10 +214,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    width: 60,
     marginRight: 10,
     fontSize: 16,
     fontFamily: font.DO_HYEON_400_REGULAR,
-    textAlign: "center",
+    textAlign: "left",
     textAlignVertical: "center",
   },
   separator: {

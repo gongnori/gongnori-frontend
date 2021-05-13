@@ -28,7 +28,7 @@ export default function TeamMatch({ team }) {
 
             // const opponent = teams.filter((team) =>  team.name !== team.name)
             return (
-              <View style={styles.match}>
+              <View key={match._id} style={styles.match}>
                 <Text style={styles.primary}>{`vs ${teams[0].name}`}</Text>
                 <View style={styles.cell}>
                   <Text style={styles.secondary}>{`${matchMonth}월 ${matchDate}일`}</Text>
