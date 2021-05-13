@@ -22,7 +22,6 @@ const useHeaderRight = (navigation, path, payload) => {
                 `${API_SERVER}/${path}`,
                 payload,
               );
-              // navigation.navigate("TabNavigator");
             }}
           >
             <Text style={{ fontSize: 16 }}>

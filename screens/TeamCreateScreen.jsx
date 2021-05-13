@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Touchable, Image } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { API_SERVER } from "@env";
 import produce from "immer";
-import * as ImagePicker from "expo-image-picker"
 import DropDown from "../components/DropDown";
 import CustomeTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
-import useMyLocation from "../hooks/useMyLocation";
 import useHeaderRight from  "../hooks/useHeaderRight";
-import getDateFromMonth from "../utils/getDateFromMonth";
+import usePickImage from "../hooks/usePickImage";
 import { getPlayground } from "../actions/actions";
 import * as color from  "../constants/colors";
 import * as font from "../constants/fonts";
-import * as device from "../constants/device";
-import fetchServer from "../utils/fetchServer"
-
-const CURRENT_YEAR = (new Date().getFullYear()).toString();
-const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
-const CURRENT_DATE = (new Date().getDate()).toString();
 
 export default function MatchCreateScreen({ navigation }) {
   const playgrounds = useSelector((state) => {
@@ -27,8 +18,6 @@ export default function MatchCreateScreen({ navigation }) {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
 
-  const [image, setImage] = useState(null);
-
   const dispatch = useDispatch();
 
   const [team, setTeam] = useState({
@@ -36,54 +25,17 @@ export default function MatchCreateScreen({ navigation }) {
     location: "",
     sports: "",
   });
-  const [myLocation, myGeoCode] = useMyLocation();
 
   useEffect(() => {
     dispatch(getPlayground("경기도", "용인시", "수지구"));
   }, []);
 
-  useHeaderRight(navigation, "team", team);
-
   const handleSelectSports = (index, value) => setTeam({ ...team, sports: value });
   const handleChangeTeamName = (value) => setTeam({ ...team, teamName: value });
 
-  useEffect(() => {
-    (async () => {
-      if (device.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
-      }
-    })();
-  }, []);
-
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    const uri = result.uri//.replace("file://", "");//ios처리하기
-    const fileName = uri.split("/").pop();
-    const match = /\.(\w+)$/.exec(fileName);
-    const type = match ? `image/${match[1]}` : "image";
-
-    const formData = new FormData();
-    formData.append("image", {
-      uri,
-      name: fileName,
-      type,
-    });
-
-    await fetchServer("POST", `${API_SERVER}/team`, formData, true);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
+  const [image, imageS3, pickImage] = usePickImage();
+  useHeaderRight(navigation, "team", { ...team, imageS3 });
+  console.log({ ...team, imageS3 })
 
   return (
     <View style={styles.container}>
@@ -122,7 +74,7 @@ export default function MatchCreateScreen({ navigation }) {
         <View style={styles.imageBox}>
           <Image
             style={styles.image}
-            source={{uri: image }}
+            source={{ uri: image }}
           />
         </View>
         <CustomButton
@@ -155,7 +107,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     textAlignVertical: "center",
     fontSize: 16,
-    fontFamily: font.BLACK_HANS_SANS_400_REGULAR,
   },
   emblem: {
     justifyContent: "center",
