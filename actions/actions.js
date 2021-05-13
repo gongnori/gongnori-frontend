@@ -100,4 +100,26 @@ const getMyTeam = (team) => async (dispatch) => {
   }
 };
 
-export { authLogin, getMatch, getPlayground, getMyTeam };
+const setInitialize = () => async (dispatch) => {
+  try {
+    const res = await fetch(`${API_SERVER}/application`, {
+      method: "GET",
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
+    const initialState = data;
+
+    dispatch({
+      type: "INITIALIZE_APP_SUCCESS",
+      payload: initialState,
+    });
+  } catch (err) {
+    dispatch({ type: "INITIALIZE_APP_FAIL" });
+  }
+};
+
+export { authLogin, getMatch, getPlayground, getMyTeam, setInitialize };

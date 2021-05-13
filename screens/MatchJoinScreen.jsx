@@ -28,7 +28,7 @@ export default function MatchJoinScreen({ navigation, route }) {
         <TitleContrntRow title={"경기장"} content={playground.name} />
         <TitleContrntRow title={"주소"} content={`${city} ${district} ${town} ${detail}`} />
       </View>
-      <PlaceMap origin={playground.location} />
+      <PlaceMap origin={playground.position} />
     </View>
   );
 }

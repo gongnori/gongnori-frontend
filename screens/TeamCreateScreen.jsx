@@ -35,7 +35,6 @@ export default function MatchCreateScreen({ navigation }) {
 
   const [image, imageS3, pickImage] = usePickImage();
   useHeaderRight(navigation, "team", { ...team, imageS3 });
-  console.log({ ...team, imageS3 })
 
   return (
     <View style={styles.container}>

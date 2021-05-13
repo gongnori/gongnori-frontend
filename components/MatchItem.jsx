@@ -9,9 +9,9 @@ export default function MatchItem({ item, navigation }) {
   const createdAt = item.created_at;
   const matchType = item.match_type;
   const playground = item.playground;
-console.log(item.teams[0])
+
   const { name } = item.teams[0];
-  const { province, city, district } = item.teams[0].location;
+  const { province, city, district } = item.playground.address;
   const { start, end } = item.playtime
 
   const startTime = new Date(start).getHours();

@@ -59,7 +59,7 @@ export default function MatchCreateScreen({ navigation }) {
       return;
     }
 
-    setOrigin(location.location);
+    setOrigin(location.position);
     setForceRefreshKey(100 * Math.random());
   }, [location, myLocation]);
 
