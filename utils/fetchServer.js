@@ -8,7 +8,7 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const fetchServer = async (method, url, reqBody) => {
+const fetchServer = async (method, url, reqBody, isMulter) => {
   const token = await AsyncStorage.getItem("token");
   let req;
 
@@ -18,11 +18,19 @@ const fetchServer = async (method, url, reqBody) => {
       headers: { "Authorization": token },
     };
   } else {
-    req = {
-      method,
-      headers: { "Authorization": token, "Content-Type": "application/json" },
-      body: JSON.stringify(reqBody),
-    };
+    if (isMulter) {
+      req = {
+        method,
+        headers: { "Authorization": token, "Content-Type": "multipart/form-data" },
+        body: reqBody,
+      };
+    } else {
+      req = {
+        method,
+        headers: { "Authorization": token, "Content-Type": "application/json" },
+        body: JSON.stringify(reqBody),
+      };
+    }
   }
 
   const res = await fetch(url, req);

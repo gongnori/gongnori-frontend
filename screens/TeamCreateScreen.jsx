@@ -14,6 +14,7 @@ import { getPlayground } from "../actions/actions";
 import * as color from  "../constants/colors";
 import * as font from "../constants/fonts";
 import * as device from "../constants/device";
+import fetchServer from "../utils/fetchServer"
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
@@ -58,12 +59,26 @@ export default function MatchCreateScreen({ navigation }) {
   }, []);
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.images,
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
     });
+
+    const uri = result.uri//.replace("file://", "");//ios처리하기
+    const fileName = uri.split("/").pop();
+    const match = /\.(\w+)$/.exec(fileName);
+    const type = match ? `image/${match[1]}` : "image";
+
+    const formData = new FormData();
+    formData.append("image", {
+      uri,
+      name: fileName,
+      type,
+    });
+
+    await fetchServer("POST", `${API_SERVER}/team`, formData, true);
 
     if (!result.cancelled) {
       setImage(result.uri);
