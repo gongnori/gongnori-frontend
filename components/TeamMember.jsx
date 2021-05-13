@@ -18,7 +18,7 @@ export default function TeamMember({ team }) {
         {
           members.map((member) => {
             return (
-              <View style={styles.member}>
+              <View key={members._id} style={styles.member}>
                 <Text style={styles.name}>{member.name}</Text>
                 <View style={styles.detail}>
                   <Icon

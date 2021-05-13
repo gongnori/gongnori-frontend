@@ -12,6 +12,7 @@ export default function DropDown({
   width = 50,
   height = 50,
   fontSize = 12,
+  backgroundColor,
   onSelect = () => console.log("Declare Event Function")
 }) {
   const total = options.length;
@@ -24,6 +25,7 @@ export default function DropDown({
         ...styles.button,
         width,
         height,
+        backgroundColor,
       }}
       textStyle={{
         ...styles.buttonText,
@@ -32,7 +34,7 @@ export default function DropDown({
         fontSize,
       }}
       dropdownStyle={{
-        width: 2 * width,
+        width: 1.0 * width,
         height: Math.min(
           5 * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize),
           total * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize)
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 5,
   },
   buttonText: {
     color: "black",

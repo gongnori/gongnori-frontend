@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
 
-export default function PlaceMap({ origin, places = [], onPlacePress }) {
-  const markers = [].map((place) => {
+export default function PlaceMap({ width = 300, height = 300, origin, places = [], onPlacePress }) {
+  const markers = places.map((place) => {
     const { latitude, longitude } = place.location;
-    const { city, district, town, detail } = place.address;
+    const { province, city, district, town, detail } = place.address;
     const { contact } = place;
 
     return (
@@ -15,13 +15,13 @@ export default function PlaceMap({ origin, places = [], onPlacePress }) {
           latitude,
           longitude,
         }}
-        onPress={() => onPlacePress(city)}
-        onCalloutPress={() => onPlacePress(city)}
+        onPress={() => onPlacePress({ province, city, district, town, detail })}
+        onCalloutPress={() => onPlacePress({ province, city, district, town, detail })}
       >
         <Callout tootip>
           <View>
             <Text>{place.name}</Text>
-            <Text>{city} {district} {town} {detail}</Text>
+            <Text>{`${city} ${district} ${town} ${detail}`}</Text>
             <Text>{contact}</Text>
           </View>
         </Callout>
@@ -31,7 +31,7 @@ export default function PlaceMap({ origin, places = [], onPlacePress }) {
 
   return (
     <MapView
-      style={styles.map}
+      style={{ width, height }}
       provider={PROVIDER_GOOGLE}
       initialRegion={{
         latitude: origin.latitude,
@@ -51,10 +51,3 @@ export default function PlaceMap({ origin, places = [], onPlacePress }) {
     </MapView>
   );
 }
-
-const styles = StyleSheet.create({
-  map: {
-    width: 300,
-    height: 300,
-  },
-});

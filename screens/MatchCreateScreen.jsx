@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { API_SERVER } from "@env";
 import produce from "immer";
 import DropDown from "../components/DropDown";
 import useMyLocation from "../hooks/useMyLocation";
@@ -9,19 +8,28 @@ import useHeaderRight from  "../hooks/useHeaderRight";
 import getDateFromMonth from "../utils/getDateFromMonth";
 import { getPlayground } from "../actions/actions";
 import PlaceMap from "../components/PlaceMap";
-import fetchServer from "../utils/fetchServer";
 import * as color from  "../constants/colors"
+import * as font from  "../constants/fonts"
 
 const CURRENT_YEAR = (new Date().getFullYear()).toString();
 const CURRENT_MONTH = (new Date().getMonth() + 1).toString();
 const CURRENT_DATE = (new Date().getDate()).toString();
 
 export default function MatchCreateScreen({ navigation }) {
+  const locations = useSelector((state) => {
+    return state.authReducer.locations;
+  }, (prev, next) => {
+    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
+
   const playgrounds = useSelector((state) => {
     return state.playgroundReducer.playgrounds;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
+
+  const [location, setLocation] = useState(null);
+  const [forceRefreshKey, setForceRefreshKey] = useState("");
 
   const dispatch = useDispatch();
 
@@ -36,12 +44,18 @@ export default function MatchCreateScreen({ navigation }) {
     playground: "",
   });
   const [myLocation, myGeoCode] = useMyLocation();
+  const [origin, setOrigin] = useState(null);
 
   useEffect(() => {
-    dispatch(getPlayground("경기도", "용인시", "수지구"));
-  }, []);
+    if (!location) {
+      setOrigin(myLocation);
+      setForceRefreshKey(100 * Math.random());
+      return;
+    }
 
-  useHeaderRight(navigation, "match", match);
+    setOrigin(location.location);
+    setForceRefreshKey(100 * Math.random());
+  }, [location, myLocation]);
 
   const handleSelectType = (index, value) => setMatch({ ...match, type: value });
   const handleSelectMonth = (index, value) => setMatch({ ...match, month: value });
@@ -49,82 +63,119 @@ export default function MatchCreateScreen({ navigation }) {
   const handleSelectMeridiem = (index, value) => setMatch({ ...match, meridiem: value });
   const handleSelectStart = (index, value) => setMatch({ ...match, start: value });
   const handleSelectEnd = (index, value) => setMatch({ ...match, end: value });
+  const handleSelectLocation = (index, value) => setLocation(locations[index]);
+
   const handlePressPlayground = (value) => setMatch({ ...match, playground: value });
+
+  const locationOptions = locations.map((location) => `${location.city} ${location.district}`)
+
+  useEffect(() => {
+    if (!location) { return }
+    const { province, city, district } = location;
+    dispatch(getPlayground(province, city, district));
+  }, [location]);
+
+  useHeaderRight(navigation, "match", match); // 입력 validation 넣기 및 입력하세요 모달 띄우기
 
   return (
     <View style={styles.container}>
-      <View style={styles.type}>
-        <Text>경기 방식</Text>
-        <DropDown
-          value={"5:5"}
-          options={["5:5", "6:6", "7:7"]}
-          width={60}
-          height={30}
-          fontSize={15}
-          onSelect={handleSelectType}
-        />
-      </View>
-      <View style={styles.date}>
-        <Text>경기 날짜</Text>
-        <DropDown
-          value={CURRENT_MONTH}
-          options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
-          width={60}
-          height={30}
-          fontSize={15}
-          onSelect={handleSelectMonth}
-        />
-        <Text>월</Text>
-        <DropDown
-          value={CURRENT_DATE}
-          options={getDateFromMonth(match.year, match.month)}
-          width={60}
-          height={30}
-          fontSize={15}
-          onSelect={handleSelectDate}
-        />
-        <Text>일</Text>
-      </View>
-      <View style={styles.time}>
-        <Text>경기 시간</Text>
-        <DropDown
-          value="AM"
-          options={["AM", "PM"]}
-          width={60}
-          height={30}
-          fontSize={15}
-          onSelect={handleSelectMeridiem}
-        />
-        <DropDown
-          value="12:00"
-          options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "1:00"]}
-          width={60}
-          height={30}
-          fontSize={15}
-          onSelect={handleSelectStart}
-        />
-        <Text>~</Text>
-        <DropDown
-          value="12:00"
-          options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "1:00"]}
-          width={60}
-          height={30}
-          fontSize={15}
-          onSelect={handleSelectEnd}
-        />
-      </View>
-      <View style={styles.stadium}>
-        <Text>경기장소</Text>
-      </View>
-      <View style={styles.map}>
-        {myLocation && (
-          <PlaceMap
-            origin={myLocation}
-            places={playgrounds}
-            onPlacePress={handlePressPlayground}
+      <View style={styles.input}>
+        <View style={styles.titleDropdown}>
+          <Text style={styles.title}>경기 방식</Text>
+          <DropDown
+            value={"5:5"}
+            options={["5:5", "6:6", "7:7"]}
+            width={60}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectType}
           />
-        )}
+        </View>
+        <View style={styles.titleDropdown}>
+          <Text style={styles.title}>경기 날짜</Text>
+          <DropDown
+            value={CURRENT_MONTH}
+            options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
+            width={40}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectMonth}
+          />
+          <Text style={styles.separator}>월</Text>
+          <DropDown
+            value={CURRENT_DATE}
+            options={getDateFromMonth(match.year, match.month)}
+            width={40}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectDate}
+          />
+          <Text style={styles.separator}>일</Text>
+        </View>
+        <View style={styles.titleDropdown}>
+          <Text style={styles.title}>경기 시간</Text>
+          <DropDown
+            value="AM"
+            options={["AM", "PM"]}
+            width={40}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectMeridiem}
+          />
+          <Text style={styles.separator} />
+          <DropDown
+            value="12:00"
+            options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00"]}
+            width={60}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectStart}
+          />
+          <Text style={styles.separator}>~</Text>
+          <DropDown
+            value="12:00"
+            options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "1:00"]}
+            width={60}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectEnd}
+          />
+        </View>
+        <View style={styles.titleDropdown}>
+          <Text style={styles.title}>경기장소</Text>
+          <DropDown
+            value={"지역"}
+            options={locationOptions}
+            width={120}
+            height={20}
+            fontSize={15}
+            backgroundColor={color.SECONDARY_WHITE}
+            onSelect={handleSelectLocation}
+            onRegionChange={region => {
+              setLocation({
+                latitude: origin.latitude,
+                longitude: origin.longitude,
+              });
+            }}
+          />
+        </View>
       </View>
+      {origin && (
+        <PlaceMap
+          key={forceRefreshKey}
+          width={"90%"}
+          height={"60%"}
+          origin={origin}
+          places={playgrounds}
+          onPlacePress={handlePressPlayground}
+        />
+      )}
     </View>
   );
 }
@@ -132,33 +183,33 @@ export default function MatchCreateScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
+    alignItems: "center",
     backgroundColor: color.PRIMARY_GRAY,
   },
-  type: {
-    flex: 1,
+  input: {
+    width: "90%",
+    height: "30%",
+    justifyContent: "space-around",
+  },
+  titleDropdown: {
     flexDirection: "row",
-    justifyContent: "flex-start",
+    height: "15%",
     alignItems: "center",
   },
-  date: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+  title: {
+    marginRight: 10,
+    fontSize: 16,
+    fontFamily: font.DO_HYEON_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
-  time: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  playground: {
-    flex: 1,
-    justifyContent: "flex-start",
-  },
-  map: {
-    flex: 5,
-    justifyContent: "flex-start",
+  separator: {
+    marginLeft: 10,
+    marginRight: 10,
+    fontSize: 16,
+    fontFamily: font.DO_HYEON_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 });
