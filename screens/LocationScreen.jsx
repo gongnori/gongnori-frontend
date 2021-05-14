@@ -18,7 +18,7 @@ export default function LocationScreen() {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
 
-  const email = useSelector((state) => state.authReducer.email);
+  const email = useSelector((state) => state.userReducer.email);
 
   const dispatch = useDispatch();
 

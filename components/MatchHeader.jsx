@@ -11,7 +11,7 @@ import * as size from "../constants/sizes";
 
 export default function MatchHeader() {
   const myLocations = useSelector((state) => {
-    return state.authReducer.locations;
+    return state.userReducer.locations;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });

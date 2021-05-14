@@ -5,10 +5,11 @@ const initialState = {
   email: "",
   locations: [],
   teams: [],
+  messages: [],
   isLogin: false,
 };
 
-const authReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGIN_SUCCESS":
       return {
@@ -19,7 +20,9 @@ const authReducer = (state = initialState, action) => {
         isLogin: true,
       };
     case "AUTH_LOGIN_FAIL":
-      return produce(state, (draft) => draft.isLogin = false);
+      return produce(state, (draft) => {
+        draft.isLogin = false;
+      });
     case "SAVE_MY_LOCATION_SUCCESS":
       return {
         ...state,
@@ -40,4 +43,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default userReducer;

@@ -20,7 +20,7 @@ export default function MatchCreateScreen({ navigation }) {
   });
 
   const locations = useSelector((state) => {
-    return state.authReducer.locations;
+    return state.userReducer.locations;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });

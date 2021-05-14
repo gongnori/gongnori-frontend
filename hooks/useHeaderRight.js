@@ -26,9 +26,7 @@ const useHeaderRight = (navigation, path, data, action) => {
                 `${API_SERVER}/${path}`,
                 data,
               );
-// console.log(result)
-console.log("!!!")
-console.log(action(result))
+
               if (action) {
                 dispatch(action(result));
               }

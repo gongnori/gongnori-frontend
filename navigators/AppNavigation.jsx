@@ -7,8 +7,8 @@ import LocationScreen from "../screens/LocationScreen"
 import { setInitialize } from "../actions/actions";
 
 export default function AppNavigation() {
-  const isLogin = useSelector((state) => state.authReducer.isLogin);
-  const hasLocation = useSelector((state) => !!state.authReducer.locations.length);
+  const isLogin = useSelector((state) => state.userReducer.isLogin);
+  const hasLocation = useSelector((state) => !!state.userReducer.locations.length);
 
   const dispatch = useDispatch();
 

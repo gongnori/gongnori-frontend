@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import TeamOverview from "../components/TeamOverview";
 import TitleContrntRow from "../components/TitleContentRow";
 import PlaceMap from "../components/PlaceMap"
-import useHeaderRight from  "../hooks/useHeaderRight";
+import useHeaderRight from "../hooks/useHeaderRight";
 
 import getDateFromIso from "../utils/getDateFromIso";
 

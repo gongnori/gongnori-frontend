@@ -9,10 +9,11 @@ import * as size from "../constants/sizes";
 
 export default function MyTeamHeader() {
   const myTeams = useSelector((state) => {
-    return state.authReducer.teams;
+    return state.userReducer.teams;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
+  console.log(myTeams)
 
   const [team, setTeam] = useState(myTeams[0]);
   const dispatch = useDispatch();

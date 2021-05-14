@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import appReducer from "./appReducer";
-import authReducer from "./authReducer";
+import userReducer from "./userReducer";
 import matchReducer from "./matchReducer";
 import playgroundReducer from "./playgroundReducer";
 import teamReducer from "./teamReducer";
@@ -8,7 +8,7 @@ import teamReducer from "./teamReducer";
 const reducer = combineReducers(
   {
     appReducer,
-    authReducer,
+    userReducer,
     matchReducer,
     playgroundReducer,
     teamReducer,
