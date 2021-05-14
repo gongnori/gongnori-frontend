@@ -4,9 +4,14 @@ import * as size from "../constants/sizes";
 import * as font from "../constants/fonts";
 
 export default function TeamOverview({ team }) {
-  const { name, location, repute, members } = team;
-  const { city, district } = location;
-  const { ability, manner } = repute;
+  const {
+    name,
+    members,
+    city,
+    district,
+    ability,
+    manner
+  } = team;
 
   const memberNum = members.length;
 

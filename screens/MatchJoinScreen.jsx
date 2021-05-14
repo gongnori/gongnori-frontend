@@ -10,13 +10,12 @@ import getDateFromIso from "../utils/getDateFromIso";
 import * as color from "../constants/colors";
 
 export default function MatchJoinScreen({ navigation, route }) {
-  const { playtime, match_type, playground, teams } = route.params.match
-  const host = teams[0];
+  const { playtime, type, playground, host } = route.params.match
   const [startYear, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
   const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
-  const { city, district, town, detail } = playground.address;
-
-  useHeaderRight(navigation, "team", null);
+  const { city, district, town, detail, latitude, longitude } = playground;
+  // match id이용
+  useHeaderRight(navigation, "message", null);
 
   return (
     <View style={styles.container}>
@@ -28,7 +27,7 @@ export default function MatchJoinScreen({ navigation, route }) {
         <TitleContrntRow title={"경기장"} content={playground.name} />
         <TitleContrntRow title={"주소"} content={`${city} ${district} ${town} ${detail}`} />
       </View>
-      <PlaceMap origin={playground.position} />
+      <PlaceMap origin={{ latitude, longitude }} />
     </View>
   );
 }

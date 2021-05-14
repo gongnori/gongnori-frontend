@@ -14,6 +14,7 @@ export default function MatchListScreen({ navigation }) {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
 
+
   const sortedMatches = produce(matches, (draft) => {
     draft.sort((a, b) => {
       const milliSecA = new Date(a.playtime.start).getTime();
@@ -30,7 +31,7 @@ export default function MatchListScreen({ navigation }) {
         <FlatList
           style={{ width: "90%" }}
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item) => item.id}
           data={sortedMatches}
           renderItem={({ item }) => <MatchItem item={item} navigation={navigation} />}
         />

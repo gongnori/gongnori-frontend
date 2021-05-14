@@ -3,8 +3,8 @@ import thunk from "redux-thunk";
 import { createLogger } from "redux-logger"
 import reducer from "../reducers/reducer"
 
-const middleware = [thunk, createLogger()];
-// const middleware = [thunk];
+// const middleware = [thunk, createLogger()];
+const middleware = [thunk];
 
 // if (process.env.NODE_ENV === 'development') {
 //     middleware.push(createLogger())

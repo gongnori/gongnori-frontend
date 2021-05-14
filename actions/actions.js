@@ -41,12 +41,13 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
     if (error) { throw new Error() }
 
     const matches = data;
-
+    console.log("???")
     dispatch({
       type: "LOAD_MATCH_SUCCESS",
       payload: matches,
     });
   } catch (err) {
+    console.log(err)
     dispatch({ type: "LOAD_MATCH_FAIL" });
   }
 };

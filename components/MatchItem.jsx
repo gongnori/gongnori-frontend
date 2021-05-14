@@ -5,21 +5,17 @@ import * as device from "../constants/device";
 import * as font from "../constants/fonts";
 
 export default function MatchItem({ item, navigation }) {
-  const id = item._id;
-  const createdAt = item.created_at;
-  const matchType = item.match_type;
-  const playground = item.playground;
-
-  const { name } = item.teams[0];
-  const { province, city, district } = item.playground.address;
-  const { start, end } = item.playtime
+  const { id, type, playground, host, playtime } = item
+  const { province, city, district } = playground;
+  const { start, end } = playtime;
+  const { name, emblem } = host;
 
   const startTime = new Date(start).getHours();
   const endTime = new Date(end).getHours();
 
   const handlePressMatch = () => {
     navigation.navigate("MatchJoin", { match: item });
-  }
+  };
 
   return (
     <TouchableOpacity
@@ -30,7 +26,7 @@ export default function MatchItem({ item, navigation }) {
       <View style={styles.emblemContainer}>
         <Image
           style={styles.emblem}
-          source={{ uri: item.teams[0].emblem }}
+          source={{ uri: emblem }}
         />
         <Text style={styles.teamName}>{name}</Text>
       </View>
@@ -38,7 +34,7 @@ export default function MatchItem({ item, navigation }) {
         <Text style={styles.playgroundName}>{playground.name}</Text>
         <Text style={styles.location}>{`${province} ${city} ${district}`}</Text>
         <Text style={styles.playtime}>{`${startTime}:00 - ${endTime}:00`}</Text>
-        <Text style={styles.matchType}>{`${matchType}`}</Text>
+        <Text style={styles.type}>{`${type}`}</Text>
       </View>
     </TouchableOpacity>
   );
