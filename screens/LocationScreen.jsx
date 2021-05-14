@@ -11,36 +11,36 @@ import * as size from "../constants/sizes";
 
 export default function LocationScreen() {
   const [myLocations, setMyLocations] = useState([]);
-  
+
   const locations = useSelector((state) => {
     return state.appReducer.locations;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
-  
+
   const email = useSelector((state) => state.authReducer.email);
-  
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   const locationOptions = locations.map((location) => {
     const { city, district } = location;
-    
+
     return `${city} ${district}`;
   });
-  
+
   const handleSelectLocation = (index) => {
     const isAlreadySelected = !!myLocations.find((location) => {
       return location["_id"] === locations[index]["_id"];
     });
-    
+
     if (isAlreadySelected) { return }
-    
-    setMyLocations(myLocations.unshift(locations[index]).slice(0, 2));
+
+    setMyLocations([...myLocations, locations[index]].slice(0, 2));
   };
-    console.log(myLocations)
+
   const handlePressButton = () => {
     dispatch(saveMyLocation(email, myLocations));
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     fontSize: size.PRIMARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+    fontFamily: font.SECONDARY_FONT,
   },
   dropDownContainer: {
     justifyContent: "center",

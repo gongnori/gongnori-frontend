@@ -8,7 +8,6 @@ export default function CustomButton({
   title = "Button",
   width = 100,
   height = 30,
-  backgroundColor = "#000000",
   color = "#ffffff",
   fontSize = 16,
   onPress
@@ -19,7 +18,7 @@ export default function CustomButton({
         ...styles.button,
         width,
         height,
-        backgroundColor,
+        // backgroundColor,
       }}
       onPress={onPress}
     >
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
+    backgroundColor: color.PRIMARY_BLUE,
     fontFamily: font.NOTO_SANS_KR_400_REGULAR,
   },
 });

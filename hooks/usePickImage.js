@@ -4,9 +4,9 @@ import { API_SERVER } from "@env";
 import fetchServer from "../utils/fetchServer";
 import * as device from "../constants/device";
 
-const usePickImage = () => {
-  const [image, setImage] = useState(null);
-  const [imageS3, setImageS3] = useState(null);
+const usePickImage = (defaultImage) => {
+  const [image, setImage] = useState(defaultImage);
+  const [imageS3, setImageS3] = useState(defaultImage);
 
   useEffect(() => {
     (async () => {

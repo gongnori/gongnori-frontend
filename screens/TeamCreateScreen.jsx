@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import produce from "immer";
@@ -7,51 +7,72 @@ import CustomeTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
 import useHeaderRight from  "../hooks/useHeaderRight";
 import usePickImage from "../hooks/usePickImage";
-import { getPlayground } from "../actions/actions";
+import { updateMyTeams } from "../actions/actions"
 import * as color from  "../constants/colors";
 import * as font from "../constants/fonts";
+import * as size from "../constants/sizes";
 
 export default function MatchCreateScreen({ navigation }) {
-  const playgrounds = useSelector((state) => {
-    return state.playgroundReducer.playgrounds;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
-
-  const dispatch = useDispatch();
-
   const [team, setTeam] = useState({
-    teamName: "",
+    name: "",
     location: "",
     sports: "",
   });
 
-  useEffect(() => {
-    dispatch(getPlayground("경기도", "용인시", "수지구"));
-  }, []);
+  const locations = useSelector((state) => {
+    return state.authReducer.locations;
+  }, (prev, next) => {
+    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
 
-  const handleSelectSports = (index, value) => setTeam({ ...team, sports: value });
-  const handleChangeTeamName = (value) => setTeam({ ...team, teamName: value });
+  const locationOptions = locations.map((location) => {
+    return `${location.city} ${location.district}`;
+  });
 
-  const [image, imageS3, pickImage] = usePickImage();
-  useHeaderRight(navigation, "team", { ...team, imageS3 });
+  const sports = useSelector((state) => {
+    return state.appReducer.sports;
+  }, (prev, next) => {
+    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
+  });
+
+  const sportsOptions = sports.map((item) => {
+    return item["korean_name"];
+  });
+
+  const dispatch = useDispatch();
+
+  const handleSelectSports = (index, value) => {
+    setTeam({ ...team, sports: sports[index] });
+  };
+
+  const handleSelectLocation = (index, value) => {
+    setTeam({ ...team, location: locations[index] });
+  };
+
+  const handleChangeName = (value) => {
+    setTeam({ ...team, name: value });
+  };
+
+  const [image, imageS3, pickImage] = usePickImage("https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png",);
+
+  useHeaderRight(navigation, "team", { ...team, imageS3 }, updateMyTeams);
 
   return (
     <View style={styles.container}>
       <CustomeTextInput
         title={"팀이름"}
-        value={team.teamName}
+        value={team.name}
         placeholder={"팀이름을 입력하세요."}
-        onChangeText={handleChangeTeamName}
+        onChangeText={handleChangeName}
       />
       <View style={styles.titleDropdown}>
         <Text style={styles.title}>종목</Text>
         <DropDown
-          value={"football"}
-          options={["football", "bascketball", "baseball"]}
-          width={150}
+          value={"종목을 선택하세요."}
+          options={sportsOptions}
+          width={200}
           height={30}
-          fontSize={15}
+          fontSize={size.QUATERNARY_FONT_SIZE}
           backgroundColor={color.SECONDARY_WHITE}
           onSelect={handleSelectSports}
         />
@@ -59,13 +80,13 @@ export default function MatchCreateScreen({ navigation }) {
       <View style={styles.titleDropdown}>
         <Text style={styles.title}>지역</Text>
         <DropDown
-          value={"football"}
-          options={["수지구", "기흥구", "처인구"]}
-          width={150}
+          value={"동네를 선택하세요."}
+          options={locationOptions}
+          width={200}
           height={30}
-          fontSize={15}
+          fontSize={size.QUATERNARY_FONT_SIZE}
           backgroundColor={color.SECONDARY_WHITE}
-          onSelect={handleSelectSports}
+          onSelect={handleSelectLocation}
         />
       </View>
       <View style={styles.emblem}>
@@ -79,8 +100,8 @@ export default function MatchCreateScreen({ navigation }) {
         <CustomButton
           title={"앨범에서 선택"}
           width={150}
-          height={50}
-          fontSize={16}
+          height={30}
+          fontSize={size.TERTIARY_FONT_SIZE}
           onPress={pickImage}
         />
       </View>
@@ -91,33 +112,40 @@ export default function MatchCreateScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: color.PRIMARY_GRAY,
   },
   titleDropdown: {
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "flex-start",
-    height: "15%",
-    // backgroundColor: color.PRIMARY_GRAY,
+    alignItems: "center",
+    height: 60,
+    width: 200,
+    marginBottom: 10,
   },
   title: {
+    height: 30,
     width: 50,
-    marginRight: 10,
+    marginBottom: 10,
+    textAlign: "center",
     textAlignVertical: "center",
-    fontSize: 16,
+    fontSize: size.TERTIARY_FONT_SIZE,
+    fontFamily: font.PRIMARY_FONT,
   },
   emblem: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    height: "30%",
+    height: 300,
+    marginTop: 10,
     width: "100%",
   },
   imageBox: {
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
-    width: "100%",
+    marginBottom: 10,
+    height: 150,
+    width: 150,
   },
   image: {
     height: "70%",

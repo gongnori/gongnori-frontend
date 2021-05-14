@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
 import { API_SERVER } from "@env";
 import fetchServer from "../utils/fetchServer";
 
-const useHeaderRight = (navigation, path, payload) => {
+const useHeaderRight = (navigation, path, data, action) => {
+  // dispatch로 바꿔버리기... (fetch도 dispatch thunk안에)
+  const dispatch = useDispatch();
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -17,11 +21,17 @@ const useHeaderRight = (navigation, path, payload) => {
               right: 20,
             }}
             onPress={async () => {
-              const data = await fetchServer(
+              const result = await fetchServer(
                 "POST",
                 `${API_SERVER}/${path}`,
-                payload,
+                data,
               );
+// console.log(result)
+console.log("!!!")
+console.log(action(result))
+              if (action) {
+                dispatch(action(result));
+              }
             }}
           >
             <Text style={{ fontSize: 16 }}>

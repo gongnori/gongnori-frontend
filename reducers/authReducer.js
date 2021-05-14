@@ -1,3 +1,5 @@
+import produce from "immer";
+
 const initialState = {
   name: "",
   email: "",
@@ -17,20 +19,22 @@ const authReducer = (state = initialState, action) => {
         isLogin: true,
       };
     case "AUTH_LOGIN_FAIL":
-      return {
-        ...state,
-        isLogin: false,
-      };
+      return produce(state, (draft) => draft.isLogin = false);
     case "SAVE_MY_LOCATION_SUCCESS":
       return {
         ...state,
-        locations: action.payload.locations,
+        locations: action.payload,
       };
     case "SAVE_MY_LOCATION_FAIL":
       return {
         ...state,
         locations: [],
       };
+    case "UPDATE_MY_TEAMS":
+      return produce(state, (draft) => {
+        console.log(action)
+        draft.teams.push(action.payload)
+      });
     default:
       return state;
   }

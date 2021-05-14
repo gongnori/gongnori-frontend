@@ -2,11 +2,17 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
+import * as size from "../constants/sizes";
 
-export default function CustomTextInput({ title, value, placeholder, onChangeText }) {
+export default function CustomTextInput({
+  title,
+  value,
+  placeholder,
+  onChangeText,
+}) {
   return (
     <View style={styles.textInputContainer}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <TextInput
         value={value}
         style={styles.textInput}
@@ -19,29 +25,26 @@ export default function CustomTextInput({ title, value, placeholder, onChangeTex
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    backgroundColor: color.PRIMARY_GRAY,
-  },
   textInputContainer: {
-    justifyContent: "space-evenly",
-    width: 150,
     height: 60,
+    width: 200,
   },
-  text: {
-    flex: 1,
-    textAlignVertical: "center",
-    fontSize: 16,
-    fontFamily: font.BLACK_HANS_SANS_400_REGULAR,
-  },
-  textInput: {
-    flex: 1,
-    borderRadius: 5,
-    backgroundColor: color.SECONDARY_WHITE,
+  title: {
+    height: "50%",
+    fontSize: size.TERTIARY_FONT_SIZE,
+    fontFamily: font.PRIMARY_FONT,
     textAlign: "center",
     textAlignVertical: "center",
-    fontSize: 14,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    includeFontPadding: false,
+  },
+  textInput: {
+    height: "50%",
+    borderRadius: 5,
+    backgroundColor: color.SECONDARY_WHITE,
+    fontSize: size.QUATERNARY_FONT_SIZE,
+    fontFamily: font.SECONDARY_FONT,
+    textAlign: "center",
+    textAlignVertical: "center",
+    includeFontPadding: false,
   },
 });

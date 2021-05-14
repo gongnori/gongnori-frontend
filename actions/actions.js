@@ -145,4 +145,17 @@ const setInitialize = () => async (dispatch) => {
   }
 };
 
-export { authLogin, getMatch, getPlayground, getMyTeam, setInitialize, saveMyLocation };
+const updateMyTeams = (payload) => ({
+  type: "UPDATE_MY_TEAMS",
+  payload,
+});
+
+export {
+  authLogin,
+  getMatch,
+  getPlayground,
+  getMyTeam,
+  setInitialize,
+  saveMyLocation,
+  updateMyTeams,
+};
