@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import * as color from "../constants/colors";
+import * as font from "../constants/fonts";
 
 export default function CustomButton({
   title = "Button",
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
+    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
   },
 });
 

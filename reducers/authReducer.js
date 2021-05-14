@@ -21,6 +21,16 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLogin: false,
       };
+    case "SAVE_MY_LOCATION_SUCCESS":
+      return {
+        ...state,
+        locations: action.payload.locations,
+      };
+    case "SAVE_MY_LOCATION_FAIL":
+      return {
+        ...state,
+        locations: [],
+      };
     default:
       return state;
   }

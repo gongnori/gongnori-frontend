@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./StackNavigator";
 import LoginScreen from "../screens/LoginScreen";
+import LocationScreen from "../screens/LocationScreen"
 import { setInitialize } from "../actions/actions";
 
 export default function AppNavigation() {
   const isLogin = useSelector((state) => state.authReducer.isLogin);
+  const hasLocation = useSelector((state) => !!state.authReducer.locations.length);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +21,7 @@ export default function AppNavigation() {
       {isLogin
         ? (
           <>
-            <StackNavigator />
+            {!hasLocation ? <LocationScreen /> : <StackNavigator />}
           </>
         )
         : <LoginScreen />

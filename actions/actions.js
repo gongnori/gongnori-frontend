@@ -100,6 +100,29 @@ const getMyTeam = (team) => async (dispatch) => {
   }
 };
 
+const saveMyLocation = (email, locations) => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(`${API_SERVER}/auth/location`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, locations }),
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
+    dispatch({
+      type: "SAVE_MY_LOCATION_SUCCESS",
+      payload: locations,
+    });
+  } catch (err) {
+    dispatch({ type: "SAVE_MY_LOCATION_FAIL" });
+  }
+};
+
 const setInitialize = () => async (dispatch) => {
   try {
     const res = await fetch(`${API_SERVER}/application`, {
@@ -122,4 +145,4 @@ const setInitialize = () => async (dispatch) => {
   }
 };
 
-export { authLogin, getMatch, getPlayground, getMyTeam, setInitialize };
+export { authLogin, getMatch, getPlayground, getMyTeam, setInitialize, saveMyLocation };
