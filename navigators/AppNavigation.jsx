@@ -8,7 +8,10 @@ import { setInitialize } from "../actions/actions";
 
 export default function AppNavigation() {
   const isLogin = useSelector((state) => state.userReducer.isLogin);
-  const hasLocation = useSelector((state) => !!state.userReducer.locations.length);
+  const hasLocation = useSelector((state) => {
+    console.log(state.userReducer)
+    return !!state.userReducer.locations.length
+  });
 
   const dispatch = useDispatch();
 

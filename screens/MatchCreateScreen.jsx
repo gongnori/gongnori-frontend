@@ -64,7 +64,8 @@ export default function MatchCreateScreen({ navigation }) {
       return;
     }
 
-    setOrigin(location.position);
+    const { latitude, longitude } = location;
+    setOrigin({ latitude, longitude });
     setForceRefreshKey(100 * Math.random());
   }, [location, myLocation]);
 

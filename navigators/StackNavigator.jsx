@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabNavigator from "./TabNavigator";
 import MatchCreateScreen from "../screens/MatchCreateScreen";

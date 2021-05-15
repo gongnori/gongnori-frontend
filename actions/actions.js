@@ -41,7 +41,7 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
     if (error) { throw new Error() }
 
     const matches = data;
-    console.log("???")
+
     dispatch({
       type: "LOAD_MATCH_SUCCESS",
       payload: matches,
@@ -80,7 +80,7 @@ const getPlayground = (province, city, district) => async (dispatch) => {
 const getMyTeam = (team) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch(`${API_SERVER}/team/my-team/${team._id}`, {
+    const res = await fetch(`${API_SERVER}/team/my-team/${team.id}`, {
       method: "GET",
       headers: { "Authorization": token },
     });
@@ -120,7 +120,7 @@ const saveMyLocation = (email, locations) => async (dispatch) => {
       payload: locations,
     });
   } catch (err) {
-    dispatch({ type: "SAVE_MY_LOCATION_FAIL" });
+    dispatch({ type: "UPDATE_MY_DATA_FAIL" });
   }
 };
 
@@ -146,10 +146,28 @@ const setInitialize = () => async (dispatch) => {
   }
 };
 
-const updateMyTeams = (payload) => ({
-  type: "UPDATE_MY_TEAMS",
-  payload,
-});
+const updateMyData = () => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(`${API_SERVER}/user/team`, {
+      method: "GET",
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+    console.log(result)
+
+    if (error) { throw new Error() }
+
+    dispatch({
+      type: "UPDATE_MY_DATA_SUCCESS",
+      payload: locations,
+    });
+  } catch (err) {
+    dispatch({ type: "UPDATE_MY_DATA_FAIL" });
+  }
+};
+
 
 export {
   authLogin,
@@ -158,5 +176,5 @@ export {
   getMyTeam,
   setInitialize,
   saveMyLocation,
-  updateMyTeams,
+  updateMyData,
 };

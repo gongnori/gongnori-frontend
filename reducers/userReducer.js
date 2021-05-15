@@ -12,32 +12,28 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGIN_SUCCESS":
-      return {
-        name: action.payload.name,
-        email: action.payload.email,
-        locations: action.payload.locations,
-        teams: action.payload.teams,
-        isLogin: true,
-      };
+      return produce(state, (draft) => {
+        draft.isLogin = true;
+        draft.name = action.payload.name;
+        draft.email = action.payload.email;
+        draft.locations = action.payload.locations;
+        draft.teams = action.payload.teams;
+      });
     case "AUTH_LOGIN_FAIL":
       return produce(state, (draft) => {
         draft.isLogin = false;
       });
     case "SAVE_MY_LOCATION_SUCCESS":
-      return {
-        ...state,
-        locations: action.payload,
-      };
-    case "SAVE_MY_LOCATION_FAIL":
-      return {
-        ...state,
-        locations: [],
-      };
-    case "UPDATE_MY_TEAMS":
       return produce(state, (draft) => {
-        console.log(action)
-        draft.teams.push(action.payload)
+        console.log(action.payload)
+        draft.locations = action.payload;
       });
+    case "UPDATE_MY_DATA_SUCCESS":
+      return produce(state, (draft) => {
+        draft.teams.push(action.payload);
+      });
+    case "UPDATE_MY_DATA_FAIL":
+      return state;
     default:
       return state;
   }

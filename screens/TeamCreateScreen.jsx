@@ -7,7 +7,7 @@ import CustomeTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
 import useHeaderRight from  "../hooks/useHeaderRight";
 import usePickImage from "../hooks/usePickImage";
-import { updateMyTeams } from "../actions/actions"
+import { updateMyData } from "../actions/actions"
 import * as color from  "../constants/colors";
 import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";
@@ -55,7 +55,7 @@ export default function MatchCreateScreen({ navigation }) {
 
   const [image, imageS3, pickImage] = usePickImage("https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png",);
 
-  useHeaderRight(navigation, "team", { ...team, imageS3 }, updateMyTeams);
+  useHeaderRight(navigation, "team", { ...team, imageS3 }, updateMyData);
 
   return (
     <View style={styles.container}>
