@@ -25,12 +25,12 @@ const userReducer = (state = initialState, action) => {
       });
     case "SAVE_MY_LOCATION_SUCCESS":
       return produce(state, (draft) => {
-        console.log(action.payload)
         draft.locations = action.payload;
       });
     case "UPDATE_MY_DATA_SUCCESS":
       return produce(state, (draft) => {
-        draft.teams.push(action.payload);
+        draft.teams = action.payload.teams;
+        draft.messages = action.payload.messages;
       });
     case "UPDATE_MY_DATA_FAIL":
       return state;

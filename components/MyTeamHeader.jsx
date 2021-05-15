@@ -13,7 +13,6 @@ export default function MyTeamHeader() {
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
-  console.log(myTeams)
 
   const [team, setTeam] = useState(myTeams[0]);
   const dispatch = useDispatch();

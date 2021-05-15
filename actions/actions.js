@@ -47,7 +47,6 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
       payload: matches,
     });
   } catch (err) {
-    console.log(err)
     dispatch({ type: "LOAD_MATCH_FAIL" });
   }
 };
@@ -148,26 +147,35 @@ const setInitialize = () => async (dispatch) => {
 
 const updateMyData = () => async (dispatch) => {
   try {
+    console.log("updateMydata")
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch(`${API_SERVER}/user/team`, {
+    const teamRes = await fetch(`${API_SERVER}/team/my`, {
       method: "GET",
+      headers: { "Authorization": token },
     });
 
-    const result = await res.json();
-    const { message, data, error } = result;
-    console.log(result)
+    const messageRes = await fetch(`${API_SERVER}/message/my`, {
+      method: "GET",
+      headers: { "Authorization": token },
+    });
 
-    if (error) { throw new Error() }
+    const myTeam = await teamRes.json();
+    const teams = myTeam.data;
+
+    const myMessage = await messageRes.json();
+    const messages = myMessage.data;
+
+    if (myTeam.error) { throw new Error() }
+    if (myMessage.error) { throw new Error() }
 
     dispatch({
       type: "UPDATE_MY_DATA_SUCCESS",
-      payload: locations,
+      payload: { teams, messages },
     });
   } catch (err) {
     dispatch({ type: "UPDATE_MY_DATA_FAIL" });
   }
 };
-
 
 export {
   authLogin,

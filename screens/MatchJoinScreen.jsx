@@ -15,7 +15,7 @@ export default function MatchJoinScreen({ navigation, route }) {
   const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
   const { city, district, town, detail, latitude, longitude } = playground;
   // match id이용
-  useHeaderRight(navigation, "message", null);
+  useHeaderRight(navigation, "message", route.params.match);
 
   return (
     <View style={styles.container}>

@@ -2,6 +2,8 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as color from "../constants/colors";
 import * as device from "../constants/device";
+import * as size from  "../constants/sizes";
+
 import * as font from "../constants/fonts";
 
 export default function MatchItem({ item, navigation }) {
@@ -45,9 +47,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
-    height: 0.15 * device.HEIGHT,
-    marginBottom: 0.02 * device.HEIGHT,
+    width: 0.8 * size.DEVICE_WIDTH,
+    height: 0.15 * size.DEVICE_HEIGHT,
+    marginBottom: 0.02 * size.DEVICE_HEIGHT,
     borderRadius: 10,
     // borderRightWidth: 1,
     // borderRightColor: "gray",

@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { API_SERVER } from "@env";
+import { updateMyData } from "../actions/actions";
 import fetchServer from "../utils/fetchServer";
 
-const useHeaderRight = (navigation, path, data, action) => {
-  // dispatch로 바꿔버리기... (fetch도 dispatch thunk안에)
+const useHeaderRight = (navigation, path, data) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,9 +27,11 @@ const useHeaderRight = (navigation, path, data, action) => {
                 data,
               );
 
-              if (action) {
-                dispatch(action(result));
-              }
+              console.log("useHeaderRight")
+              dispatch(updateMyData());
+              // if (action) {
+              //   dispatch(action(result));
+              // }
             }}
           >
             <Text style={{ fontSize: 16 }}>
