@@ -147,7 +147,6 @@ const setInitialize = () => async (dispatch) => {
 
 const updateMyData = () => async (dispatch) => {
   try {
-    console.log("updateMydata")
     const token = await AsyncStorage.getItem("token");
     const teamRes = await fetch(`${API_SERVER}/team/my`, {
       method: "GET",

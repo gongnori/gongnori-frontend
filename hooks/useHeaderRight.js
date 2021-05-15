@@ -27,11 +27,7 @@ const useHeaderRight = (navigation, path, data) => {
                 data,
               );
 
-              console.log("useHeaderRight")
               dispatch(updateMyData());
-              // if (action) {
-              //   dispatch(action(result));
-              // }
             }}
           >
             <Text style={{ fontSize: 16 }}>

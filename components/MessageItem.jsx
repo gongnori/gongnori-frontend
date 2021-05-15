@@ -36,7 +36,6 @@ export default function MessageItem({ item, navigation }) {
     </TouchableOpacity>
   );
 }
-console.log(size.DEVICE_HEIGHT)
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",

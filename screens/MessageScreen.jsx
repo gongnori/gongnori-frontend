@@ -13,6 +13,10 @@ import * as color from "../constants/colors";
 import * as size from  "../constants/sizes"
 
 export default function MessageScreen({ navigation }) {
+  useEffect(() => {
+    console.log("Message");
+  }, [])
+
   const messages = useSelector((state) => {
     return state.userReducer.messages;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));

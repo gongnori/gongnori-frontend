@@ -1,5 +1,5 @@
 import produce from "immer";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import MatchHeader from "../components/MatchHeader";
@@ -8,6 +8,10 @@ import SideButton from "../components/SideButton";
 import * as color from "../constants/colors";
 
 export default function MatchListScreen({ navigation }) {
+  useEffect(() => {
+    console.log("Match");
+  }, [])
+
   const matches = useSelector((state) => {
     return state.matchReducer.matches;
   }, (prev, next) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import produce from "immer";
@@ -10,6 +10,10 @@ import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";
 
 export default function LocationScreen() {
+  useEffect(() => {
+    console.log("Home");
+  }, [])
+
   const [myLocations, setMyLocations] = useState([]);
 
   const locations = useSelector((state) => {

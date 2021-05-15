@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useSelector } from "react-redux";
 import produce from "immer";
@@ -12,6 +12,10 @@ import SideButton from "../components/SideButton";
 import * as color from "../constants/colors";
 
 export default function MyTeamScreen({ navigation }) {
+  useEffect(() => {
+    console.log("MyTeam");
+  }, [])
+
   const myTeam = useSelector((state) => {
     return state.teamReducer.myTeam;
   }, (prev, next) => {

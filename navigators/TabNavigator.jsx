@@ -45,6 +45,7 @@ export default function TabNavigator() {
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
+        unmountOnBlur: true,
       })}
       tabBarOptions={{
         activeTintColor: color.PRIMARY_BLUE,
@@ -64,7 +65,11 @@ export default function TabNavigator() {
       <Tab.Screen name="Match" component={MatchScreen} />
       <Tab.Screen name="Rank" component={RankScreen} />
       <Tab.Screen name="MyTeam" component={MyTeamScreen} />
-      <Tab.Screen name="Message" component={MessageScreen} />
+      <Tab.Screen
+        name="Message"
+        component={MessageScreen}
+        // options={{ unmountOnBlur: true }}
+      />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
   );
