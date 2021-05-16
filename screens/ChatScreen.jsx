@@ -1,25 +1,23 @@
 import produce from "immer";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, Text, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { API_SERVER } from "@env";
 import socketio from "socket.io-client";
 import _ from "lodash";
-import CustomButton from "../components/CustomButton"
+import CustomButton from "../components/CustomButton";
+import ChatItem from "../components/ChatItem";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 
 const socket = socketio(API_SERVER);
 
-function ChatItem({ item }) {
-  return (<Text>{item.content}</Text>)
-}
-
 export default function ChatScreen({ navigation, route }) {
   const userName = useSelector((state) => state.userReducer.name);
   const [content, setContent] = useState("");
-  const [conversation, setConverSation] = useState("");
+  const [conversation, setConverSation] = useState([]);
   const { message } = route.params;
+  console.log(message)
 
   useEffect(() => {
     socket.emit("join-chat-room", message.id);
@@ -35,15 +33,23 @@ export default function ChatScreen({ navigation, route }) {
   const handleChangeText = (value) => setContent(value);
 
 
-console.log(conversation)
+  const getItemLayout = useCallback((data, index) => ({
+    length: 100,
+    offset: 100 * index,
+    index,
+  }), []);
+
   return (
     <View style={styles.container}>
       <FlatList
-          style={styles.chatting}
-          contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
-          keyExtractor={(item) => item.id}
-          data={conversation}
-          renderItem={({ item }) => <ChatItem item={item} navigation={navigation} />}
+        style={styles.chatting}
+        contentContainerStyle={{ justifyContent: "flex-end" }}
+        keyExtractor={(item) => item["_id"]}
+        data={conversation}
+        getItemLayout={getItemLayout}
+        initialScrollIndex={conversation.length - 1}
+        renderItem={({ item }) => <ChatItem item={item} navigation={navigation} />}
+        // inverted={true}
       />
       <View style={styles.textInputBar}>
         <TextInput
@@ -90,6 +96,13 @@ const styles = StyleSheet.create({
     width: 0.15 * size.DEVICE_WIDTH,
     height: 0.05 * size.DEVICE_HEIGHT,
     marginRight: 10,
+    backgroundColor: color.SECONDARY_BLUE,
+  },
+  content: {
+    width: 0.15 * size.DEVICE_WIDTH,
+    height: 0.05 * size.DEVICE_HEIGHT,
+    margin: 10,
+    alignSelf: "flex-end",
     backgroundColor: color.SECONDARY_BLUE,
   },
   // sendBtnText: {
