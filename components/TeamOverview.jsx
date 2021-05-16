@@ -10,7 +10,8 @@ export default function TeamOverview({ team }) {
     city,
     district,
     ability,
-    manner
+    manner,
+    emblem
   } = team;
 
   const memberNum = members.length;
@@ -20,7 +21,7 @@ export default function TeamOverview({ team }) {
       <View style={styles.emblemContainer}>
         <Image
           style={styles.emblem}
-          source={require("../assets/realmadrid_emblem.png")}
+          source={{ uri: emblem }}
         />
       </View>
        {/* TitleContentColumn 만들기... */}
