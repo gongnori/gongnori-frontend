@@ -1,6 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
 
+const setCurrenTeam = (payload) => ({
+  type: "SET_CURRENT_TEAM",
+  payload,
+});
+
 const authLogin = (userInfo) => async (dispatch) => {
   try {
     const { name, email } = userInfo;
@@ -53,20 +58,20 @@ const saveMyLocation = (email, locations) => async (dispatch) => {
 const updateMyData = () => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
-    const teamRes = await fetch(`${API_SERVER}/team/my`, {
+    const _teams = await fetch(`${API_SERVER}/team/my`, {
       method: "GET",
       headers: { "Authorization": token },
     });
 
-    const messageRes = await fetch(`${API_SERVER}/message/my`, {
+    const _messages = await fetch(`${API_SERVER}/message/my`, {
       method: "GET",
       headers: { "Authorization": token },
     });
 
-    const myTeam = await teamRes.json();
+    const myTeam = await _teams.json();
     const teams = myTeam.data;
 
-    const myMessage = await messageRes.json();
+    const myMessage = await _messages.json();
     const messages = myMessage.data;
 
     if (myTeam.error) { throw new Error() }
@@ -85,4 +90,5 @@ export {
   authLogin,
   saveMyLocation,
   updateMyData,
+  setCurrenTeam,
 };

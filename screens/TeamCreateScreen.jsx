@@ -49,7 +49,7 @@ export default function MatchCreateScreen({ navigation }) {
     }));
   };
 
-  const handleChangeName = (index, value) => {
+  const handleChangeName = (value) => {
     setTeam(produce(team, (draft) => {
       draft.name = value;
     }));

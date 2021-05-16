@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import produce from "immer";
+import _ from "lodash";
 import DropDown from "./DropDown";
-import { getMyTeam } from "../actions/appActionCreators";
+import { setCurrenTeam } from "../actions/userActionCreators";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 
 export default function MyTeamHeader() {
   const myTeams = useSelector((state) => {
     return state.userReducer.teams;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const [team, setTeam] = useState(myTeams[0]);
+  const currentTeam = useSelector((state) => {
+    return state.userReducer.currentTeam;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
   const dispatch = useDispatch();
 
   const teamOptions = myTeams.map((team) => team.name);
 
-  const handleSelectTeam = (index) => setTeam(myTeams[index]);
-
-  useEffect(() => {
-    dispatch(getMyTeam(team));
-  }, [team]);
+  const handleSelectTeam = (index) => {
+    dispatch(setCurrenTeam(myTeams[index]));
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.team}>
         <DropDown
-          value={teamOptions[0]}
+          value={currentTeam.name}
           options={teamOptions}
           width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
           height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}
@@ -39,13 +38,13 @@ export default function MyTeamHeader() {
       </View>
       <View style={styles.blank} />
       <View style={styles.sports}>
-        <DropDown
+        {/* <DropDown
           value="football"
-          options={["football", "basketball", "baseball"]}
+          options={sportsOptions}
           width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
           height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}
           fontSize={15}
-        />
+        /> */}
       </View>
     </View>
   );

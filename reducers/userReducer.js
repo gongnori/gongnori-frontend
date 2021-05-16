@@ -47,6 +47,10 @@ const userReducer = (state = initialState, action) => {
       });
     case "UPDATE_MY_DATA_FAIL":
       return state;
+    case "SET_CURRENT_TEAM":
+      return produce(state, (draft) => {
+        draft.currentTeam = action.payload;
+      });
     default:
       return state;
   }

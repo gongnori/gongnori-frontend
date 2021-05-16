@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useSelector } from "react-redux";
-import produce from "immer";
+import _ from "lodash";
 
 import MyTeamHeader from "../components/MyTeamHeader";
 import TeamOverview from "../components/TeamOverview";
@@ -14,23 +14,21 @@ import * as color from "../constants/colors";
 export default function MyTeamScreen({ navigation }) {
   useEffect(() => {
     console.log("MyTeam");
-  }, [])
+  }, []);
 
-  const myTeam = useSelector((state) => {
-    return state.appReducer.myTeam;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
+  const currentTeam = useSelector((state) => {
+    return state.userReducer.currentTeam;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   return (
     <View style={styles.container}>
       <MyTeamHeader />
       <View style={styles.body}>
-        {myTeam && (
+        {currentTeam && (
           <>
-            <TeamOverview team={myTeam} />
-            <TeamMember team={myTeam} />
-            <TeamMatch team={myTeam} />
+            <TeamOverview team={currentTeam} />
+            <TeamMember team={currentTeam} />
+            <TeamMatch team={currentTeam} />
           </>
         )}
       </View>
