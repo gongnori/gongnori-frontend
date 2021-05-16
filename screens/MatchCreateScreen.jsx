@@ -59,7 +59,7 @@ export default function MatchCreateScreen({ navigation }) {
   const teamOptions = teams.map((team) => team.name);
   const sportsOptions = sports.map((item) => item.koreanName);
 
-  useHeaderRight(navigation, "match", match); // 입력 validation 넣기 및 입력하세요 모달 띄우기
+  useHeaderRight(navigation, "만들기", "POST", "match", match); // 입력 validation 넣기 및 입력하세요 모달 띄우기
 // console.log(match)
   useEffect(() => {
     if (!location) {

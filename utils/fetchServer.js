@@ -26,6 +26,7 @@ const fetchServer = async (method, url, reqBody, isMulter) => {
         body: reqBody,
       };
     } else {
+      console.log(reqBody)
       req = {
         method,
         headers: { "Authorization": token, "Content-Type": "application/json" },
@@ -37,7 +38,6 @@ const fetchServer = async (method, url, reqBody, isMulter) => {
   const res = await fetch(url, req);
   const _res = await res.json();
   const { message, data, error } = _res;
-  console.log(message);
 
   if (error) { throw new Error() }
 

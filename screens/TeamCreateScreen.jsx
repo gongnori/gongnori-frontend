@@ -57,7 +57,7 @@ export default function MatchCreateScreen({ navigation }) {
 
   const [image, imageS3, pickImage] = usePickImage("https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png",);
 
-  useHeaderRight(navigation, "team", { ...team, imageS3 });
+  useHeaderRight(navigation, "만들기", "POST", "team", { ...team, imageS3 });
 
   return (
     <DismissKeyboard>

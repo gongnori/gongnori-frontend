@@ -16,7 +16,7 @@ export default function AppNavigation() {
 
   useEffect(() => {
     dispatch(setInitialize());
-  });
+  }, []);
 
   return (
     <NavigationContainer>

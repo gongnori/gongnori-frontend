@@ -5,12 +5,11 @@ import { API_SERVER } from "@env";
 import { updateMyData } from "../actions/userActionCreators";
 import fetchServer from "../utils/fetchServer";
 
-const useHeaderRight = (navigation, path, data) => {
+const useHeaderRight = (navigation, title, method, path, data) => {
   const dispatch = useDispatch();
-
   const handlePressHeaderRight = async () => {
     const res = await fetchServer(
-      "POST",
+      method,
       `${API_SERVER}/${path}`,
       data,
     );
@@ -33,13 +32,13 @@ const useHeaderRight = (navigation, path, data) => {
             onPress={handlePressHeaderRight}
           >
             <Text style={{ fontSize: 16 }}>
-              완료
+              {title}
             </Text>
           </TouchableOpacity>
         );
       },
     });
-  });
+  }, []);
 };
 
 export default useHeaderRight;

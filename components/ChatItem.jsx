@@ -7,12 +7,11 @@ import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
 
 export default function ChatItem({ item }) {
-  console.log(item)
   const userName = useSelector((state) => state.userReducer.name);
 
   const isMyMessage = userName === item.name;
   const layout = isMyMessage ? "flex-end" : "flex-start";
-  const color = isMyMessage ? "FFE082" : colors.SECONDARY_WHITE;
+  const color = isMyMessage ? "#FFE082" : colors.SECONDARY_WHITE;
 
   const [year, month, date, hour, minute] = getDateFromIso(item.date);
 

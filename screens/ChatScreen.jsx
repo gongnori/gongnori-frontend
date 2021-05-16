@@ -7,6 +7,7 @@ import socketio from "socket.io-client";
 import _ from "lodash";
 import CustomButton from "../components/CustomButton";
 import ChatItem from "../components/ChatItem";
+import useHeaderRight from "../hooks/useHeaderRight";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 
@@ -17,27 +18,36 @@ export default function ChatScreen({ navigation, route }) {
   const [content, setContent] = useState("");
   const [conversation, setConverSation] = useState([]);
   const { message } = route.params;
-  console.log(message)
+  const currentTeam = useSelector((state) => {
+    return state.userReducer.currentTeam;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   useEffect(() => {
     socket.emit("join-chat-room", message.id);
     socket.on("send-message", (data) => setConverSation(data));
     socket.on("load-message", (data) => setConverSation(data));
+
+    return () => {
+      socket.emit("leave-chat-room", message.id);
+      socket.off("send-message");
+      socket.off("load-message");
+    };
   }, []);
 
   const handlePressSendBtn = _.throttle(() => {
     socket.emit("send-message", { name: userName, content });
-    setContent("")
+    setContent("");
   }, 100);
 
   const handleChangeText = (value) => setContent(value);
-
 
   const getItemLayout = useCallback((data, index) => ({
     length: 100,
     offset: 100 * index,
     index,
   }), []);
+console.log(message)
+  useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
 
   return (
     <View style={styles.container}>

@@ -82,7 +82,7 @@ const updateMyData = () => async (dispatch) => {
       payload: { teams, messages },
     });
   } catch (err) {
-    dispatch({ type: "SAVE_MY_LOCATION_FAIL" });
+    dispatch({ type: "UPDATE_MY_DATA_FAIL" });
   }
 };
 

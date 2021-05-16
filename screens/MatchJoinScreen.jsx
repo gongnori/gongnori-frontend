@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 import TeamOverview from "../components/TeamOverview";
 import TitleContrntRow from "../components/TitleContentRow";
 import PlaceMap from "../components/PlaceMap"
@@ -10,12 +12,25 @@ import getDateFromIso from "../utils/getDateFromIso";
 import * as color from "../constants/colors";
 
 export default function MatchJoinScreen({ navigation, route }) {
+  const currentTeam = useSelector((state) => {
+    return state.userReducer.currentTeam;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
   const { playtime, type, playground, host } = route.params.match
   const [startYear, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
   const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
   const { city, district, town, detail, latitude, longitude } = playground;
   // match id이용
-  useHeaderRight(navigation, "message", route.params.match);
+  useHeaderRight(
+    navigation,
+    "신청하기",
+    "POST",
+    "message",
+    {
+      match: route.params.match,
+      team: currentTeam,
+    }
+  );
 
   return (
     <View style={styles.container}>
