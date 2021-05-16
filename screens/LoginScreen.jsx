@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import CustomButton from "../components/CustomButton";
-import { authLogin } from "../actions/actions";
+import { authLogin } from "../actions/userActionCreators";
 import useAuthGoogle from "../hooks/useAuthGoogle";
 import * as color from "../constants/colors";
 

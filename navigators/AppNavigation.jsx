@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./StackNavigator";
 import LoginScreen from "../screens/LoginScreen";
-import LocationScreen from "../screens/LocationScreen"
-import { setInitialize } from "../actions/actions";
+import LocationScreen from "../screens/LocationScreen";
+import { setInitialize } from "../actions/appActionCreators";
 
 export default function AppNavigation() {
   const isLogin = useSelector((state) => state.userReducer.isLogin);

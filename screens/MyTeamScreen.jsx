@@ -17,7 +17,7 @@ export default function MyTeamScreen({ navigation }) {
   }, [])
 
   const myTeam = useSelector((state) => {
-    return state.teamReducer.myTeam;
+    return state.appReducer.myTeam;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });

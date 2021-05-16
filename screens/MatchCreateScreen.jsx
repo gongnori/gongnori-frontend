@@ -26,7 +26,7 @@ export default function MatchCreateScreen({ navigation }) {
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const playgrounds = useSelector((state) => {
-    return state.playgroundReducer.playgrounds;
+    return state.appReducer.playgrounds;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const [location, setLocation] = useState(null);

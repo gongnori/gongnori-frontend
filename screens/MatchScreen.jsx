@@ -13,7 +13,7 @@ export default function MatchListScreen({ navigation }) {
   }, [])
 
   const matches = useSelector((state) => {
-    return state.matchReducer.matches;
+    return state.appReducer.matches;
   }, (prev, next) => {
     return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
   });
