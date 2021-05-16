@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Image, Keyboard, TouchableWithoutFeedbackBase } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import produce from "immer";
+import _ from "lodash";
 import DropDown from "../components/DropDown";
 import CustomeTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
@@ -22,9 +23,7 @@ export default function MatchCreateScreen({ navigation }) {
 
   const locations = useSelector((state) => {
     return state.userReducer.locations;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const locationOptions = locations.map((location) => {
     return `${location.city} ${location.district}`;
@@ -32,26 +31,28 @@ export default function MatchCreateScreen({ navigation }) {
 
   const sports = useSelector((state) => {
     return state.appReducer.sports;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const sportsOptions = sports.map((item) => {
-    return item["korean_name"];
-  });
+  const sportsOptions = sports.map((item) => item.koreanName);
 
   const dispatch = useDispatch();
 
   const handleSelectSports = (index, value) => {
-    setTeam({ ...team, sports: sports[index] });
+    setTeam(produce(team, (draft) => {
+      draft.sports = sports[index];
+    }));
   };
 
   const handleSelectLocation = (index, value) => {
-    setTeam({ ...team, location: locations[index] });
+    setTeam(produce(team, (draft) => {
+      draft.location = locations[index];
+    }));
   };
 
-  const handleChangeName = (value) => {
-    setTeam({ ...team, name: value });
+  const handleChangeName = (index, value) => {
+    setTeam(produce(team, (draft) => {
+      draft.name = value;
+    }));
   };
 
   const [image, imageS3, pickImage] = usePickImage("https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png",);

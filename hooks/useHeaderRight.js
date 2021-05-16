@@ -8,6 +8,16 @@ import fetchServer from "../utils/fetchServer";
 const useHeaderRight = (navigation, path, data) => {
   const dispatch = useDispatch();
 
+  const handlePressHeaderRight = async () => {
+    const res = await fetchServer(
+      "POST",
+      `${API_SERVER}/${path}`,
+      data,
+    );
+
+    dispatch(updateMyData());
+  };
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -20,15 +30,7 @@ const useHeaderRight = (navigation, path, data) => {
               width: 50,
               right: 20,
             }}
-            onPress={async () => {
-              const result = await fetchServer(
-                "POST",
-                `${API_SERVER}/${path}`,
-                data,
-              );
-
-              dispatch(updateMyData());
-            }}
+            onPress={handlePressHeaderRight}
           >
             <Text style={{ fontSize: 16 }}>
               완료
