@@ -2,23 +2,17 @@ import produce from "immer";
 import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { useSelector } from "react-redux";
+import _ from "lodash";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 import SideButton from "../components/SideButton";
 import * as color from "../constants/colors";
 
 export default function MatchListScreen({ navigation }) {
-  useEffect(() => {
-    console.log("Match");
-  }, [])
-
   const matches = useSelector((state) => {
     return state.appReducer.matches;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
-
-
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+console.log(matches)
   const sortedMatches = produce(matches, (draft) => {
     draft.sort((a, b) => {
       const milliSecA = new Date(a.playtime.start).getTime();

@@ -16,10 +16,11 @@ const authLogin = (userInfo) => async (dispatch) => {
 
     if (error) { throw new Error() }
 
-    const { token, locations, teams } = data;
+    const { token, locations, teams, sports } = data;
+    console.log(data)
     await AsyncStorage.setItem("token", token);
 
-    dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: { name, email, locations, teams } });
+    dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: { name, email, locations, teams, sports } });
   } catch (err) {
     console.error(err.message);
     dispatch({ type: "AUTH_LOGIN_FAIL" });

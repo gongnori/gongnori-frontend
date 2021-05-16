@@ -13,6 +13,10 @@ import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
 
 export default function MatchCreateScreen({ navigation }) {
+  const currentLocation = useSelector((state) => {
+    return state.userReducer.currentLocation;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
   const locations = useSelector((state) => {
     return state.userReducer.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -29,7 +33,7 @@ export default function MatchCreateScreen({ navigation }) {
     return state.appReducer.playgrounds;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState(currentLocation);
   const [forceRefreshKey, setForceRefreshKey] = useState("");
 
   const dispatch = useDispatch();
@@ -46,16 +50,17 @@ export default function MatchCreateScreen({ navigation }) {
     handleSelectTeam,
     handlePressPlayground,
   ] = useMatchState(sports, teams);
+
   const [myLocation] = useMyLocation();
   const [origin, setOrigin] = useState(null);
 
   const handleSelectLocation = (index) => setLocation(locations[index]);
   const locationOptions = locations.map((location) => `${location.city} ${location.district}`)
   const teamOptions = teams.map((team) => team.name);
-  const sportsOptions = sports.map((item) => item["korean_name"]);
+  const sportsOptions = sports.map((item) => item.koreanName);
 
   useHeaderRight(navigation, "match", match); // 입력 validation 넣기 및 입력하세요 모달 띄우기
-
+// console.log(match)
   useEffect(() => {
     if (!location) {
       setOrigin(myLocation);
@@ -68,12 +73,6 @@ export default function MatchCreateScreen({ navigation }) {
     setOrigin({ latitude, longitude });
     setForceRefreshKey(100 * Math.random());
   }, [location, myLocation]);
-
-  useEffect(() => {
-    if (!location) { return }
-    const { province, city, district } = location;
-    dispatch(getPlayground(province, city, district));
-  }, [location]);
 
   return (
     <View style={styles.container}>
@@ -106,7 +105,7 @@ export default function MatchCreateScreen({ navigation }) {
           <Text style={styles.title}>경기 방식</Text>
           <DropDown
             value={"경기방식"}
-            options={match?.sports?.["match_types"]}
+            options={match?.sports?.matchTypes}
             width={60}
             height={20}
             fontSize={15}
@@ -189,6 +188,7 @@ export default function MatchCreateScreen({ navigation }) {
             width={"100%"}
             height={"100%"}
             origin={origin}
+            location={location}
             places={playgrounds}
             onPlacePress={handlePressPlayground}
           />

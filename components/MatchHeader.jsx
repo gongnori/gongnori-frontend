@@ -10,6 +10,7 @@ import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 
 export default function MatchHeader() {
+  console.log("header")
   const myLocations = useSelector((state) => {
     return state.userReducer.locations;
   }, (prev, next) => {

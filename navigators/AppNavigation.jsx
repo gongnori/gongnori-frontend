@@ -20,13 +20,14 @@ export default function AppNavigation() {
 
   return (
     <NavigationContainer>
-      {isLogin
-        ? (
-          <>
-            {!hasLocation ? <LocationScreen /> : <StackNavigator />}
-          </>
-        )
-        : <LoginScreen />
+      {
+        isLogin
+          ? (
+            <>
+              {!hasLocation ? <LocationScreen /> : <StackNavigator />}
+            </>
+          )
+          : <LoginScreen />
       }
     </NavigationContainer>
   );

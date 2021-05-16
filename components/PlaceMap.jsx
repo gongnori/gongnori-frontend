@@ -2,16 +2,31 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
 
-export default function PlaceMap({ width = 300, height = 300, origin, places = [], onPlacePress }) {
-  const markers = places.map((place) => {
-    const { name, _id } = place;
-    const { latitude, longitude } = place.position;
-    const { province, city, district, town, detail } = place.address;
+export default function PlaceMap({
+  width = 300,
+  height = 300,
+  origin,
+  location = [],
+  places = [],
+  onPlacePress
+}) {
+  const filterdPlaces = places.filter(place => {
+    return (
+      place.province === location.province
+      && place.city === location.city
+      && place.district === location.district
+    )
+  })
+
+  const markers = filterdPlaces.map((place) => {
+    const { name, id } = place;
+    const { latitude, longitude } = place;
+    const { province, city, district, town, detail } = place;
     const { contact } = place;
 
     return (
       <Marker
-        key={place._id}
+        key={id}
         coordinate={{
           latitude,
           longitude,
@@ -21,7 +36,7 @@ export default function PlaceMap({ width = 300, height = 300, origin, places = [
       >
         <Callout tootip>
           <View>
-            <Text>{place.name}</Text>
+            <Text>{name}</Text>
             <Text>{`${city} ${district} ${town} ${detail}`}</Text>
             <Text>{contact}</Text>
           </View>

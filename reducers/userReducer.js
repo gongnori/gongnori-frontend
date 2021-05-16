@@ -22,11 +22,11 @@ const userReducer = (state = initialState, action) => {
         draft.email = action.payload.email;
         draft.locations = action.payload.locations;
         draft.teams = action.payload.teams;
-        draft.messages = action.payload.messages;
-        draft.currentLocation = action.payload.currentLocation; // locations[0]
-        draft.currentTeam = action.payload.currentTeam;
-        draft.currentMessage = action.payload.currentMessage;
-        draft.currentSports = action.payload.currentSports;
+        // draft.messages = action.payload.messages;
+        draft.currentLocation = action.payload.locations[0]; // db에 current 저장해야할듯, setting scrrent -> save
+        draft.currentTeam = action.payload.teams[0];
+        // draft.currentMessage = action.payload.messages[0];
+        draft.currentSports = action.payload.sports[0];
       });
     case "AUTH_LOGIN_FAIL":
       return produce(state, (draft) => {
