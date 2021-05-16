@@ -18,24 +18,23 @@ export default function TeamMatch({ team }) {
       >
         {
           matches.map((match) => { // matches -> fixedMathes로 바꿀것.
-            const { playtime, teams, playground } = match;
-            const { city, district } = playground.address;
+            const { playgroundName, city, district, start, end, teams } = match;
 
-            const matchMonth = new Date(playtime.start).getMonth() + 1;
-            const matchDate = new Date(playtime.start).getDate();
-            const startTime = new Date(playtime.start).getHours();
-            const endTime = new Date(playtime.end).getHours();
+            const matchMonth = new Date(start).getMonth() + 1;
+            const matchDate = new Date(start).getDate();
+            const startTime = new Date(start).getHours();
+            const endTime = new Date(end).getHours();
 
             // const opponent = teams.filter((team) =>  team.name !== team.name)
             return (
               <View key={match._id} style={styles.match}>
-                <Text style={styles.primary}>{`vs ${teams[0].name}`}</Text>
+                <Text style={styles.primary}>{`vs ${teams[0]}`}</Text>
                 <View style={styles.cell}>
                   <Text style={styles.secondary}>{`${matchMonth}월 ${matchDate}일`}</Text>
                   <Text style={styles.tertiary}>{`${startTime}:00 - ${endTime}:00`}</Text>
                 </View>
                 <View style={styles.cell}>
-                  <Text numberOfLines={1} ellipsizeMode="tail" style={styles.secondary}>{playground.name}</Text>
+                  <Text numberOfLines={1} ellipsizeMode="tail" style={styles.secondary}>{playgroundName}</Text>
                   <Text style={styles.tertiary}>{`${city} ${district}`}</Text>
                 </View>
               </View>

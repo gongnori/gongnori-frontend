@@ -61,7 +61,7 @@ const useMatchState = () => {
 
   const handleSelectTeam = (index) => {
     setMatch(produce(match, (draft) => {
-      draft.teams = [teams[index]];
+      draft.team = teams[index];
     }));
   };
 

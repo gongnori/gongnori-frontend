@@ -28,7 +28,7 @@ export default function MyTeamHeader() {
     <View style={styles.container}>
       <View style={styles.team}>
         <DropDown
-          value={currentTeam.name}
+          value={currentTeam?.name ?? "팀"}
           options={teamOptions}
           width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
           height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}

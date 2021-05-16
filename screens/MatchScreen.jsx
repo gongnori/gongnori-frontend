@@ -12,7 +12,7 @@ export default function MatchListScreen({ navigation }) {
   const matches = useSelector((state) => {
     return state.appReducer.matches;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-console.log(matches)
+
   const sortedMatches = produce(matches, (draft) => {
     draft.sort((a, b) => {
       const milliSecA = new Date(a.playtime.start).getTime();
