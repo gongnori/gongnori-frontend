@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import produce from "immer";
 import DropDown from "./DropDown";
-import { getMyTeam } from "../actions/actions";
+import { getMyTeam } from "../actions/appActionCreators";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 

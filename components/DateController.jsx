@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { useDispatch } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
 import useDateController from "../hooks/useDateController";
-import { getMatch } from "../actions/actions";
+import { getMatch } from "../actions/appActionCreators";
 import * as color from "../constants/colors";
 
 const DATE_CONTROLLER_ICON_SIZE = 30;

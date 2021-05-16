@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { API_SERVER } from "@env";
-import { updateMyData } from "../actions/actions";
+import { updateMyData } from "../actions/userActionCreators";
 import fetchServer from "../utils/fetchServer";
 
 const useHeaderRight = (navigation, path, data) => {

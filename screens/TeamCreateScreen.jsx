@@ -8,7 +8,7 @@ import CustomButton from "../components/CustomButton";
 import DismissKeyboard from "../components/DismissKeyborad";
 import useHeaderRight from  "../hooks/useHeaderRight";
 import usePickImage from "../hooks/usePickImage";
-import { updateMyData } from "../actions/actions"
+import { updateMyData } from "../actions/userActionCreators"
 import * as color from  "../constants/colors";
 import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";

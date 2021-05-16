@@ -7,7 +7,7 @@ import useMyLocation from "../hooks/useMyLocation";
 import useHeaderRight from "../hooks/useHeaderRight";
 import useMatchState from "../hooks/useMatchState";
 import getDateFromMonth from "../utils/getDateFromMonth";
-import { getPlayground } from "../actions/actions";
+import { getPlayground } from "../actions/appActionCreators";
 import PlaceMap from "../components/PlaceMap";
 import * as color from "../constants/colors";
 import * as font from "../constants/fonts";

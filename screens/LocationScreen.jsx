@@ -2,25 +2,20 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import produce from "immer";
+import _ from "lodash";
 import CustomButton from "../components/CustomButton";
 import DropDown from "../components/DropDown";
-import { saveMyLocation } from "../actions/actions";
-import * as color from "../constants/colors";
-import * as font from "../constants/fonts";
-import * as size from "../constants/sizes";
+import { saveMyLocation } from "../actions/userActionCreators";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 export default function LocationScreen() {
-  useEffect(() => {
-    console.log("Home");
-  }, [])
-
   const [myLocations, setMyLocations] = useState([]);
 
   const locations = useSelector((state) => {
     return state.appReducer.locations;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const email = useSelector((state) => state.userReducer.email);
 
@@ -33,18 +28,19 @@ export default function LocationScreen() {
   });
 
   const handleSelectLocation = (index) => {
-    const isAlreadySelected = !!myLocations.find((location) => {
-      return location["_id"] === locations[index]["_id"];
+    const isAlreadySelected = myLocations.some((location) => {
+      return location.id === locations[index].id;
     });
 
     if (isAlreadySelected) { return }
 
-    setMyLocations([...myLocations, locations[index]].slice(0, 2));
+    setMyLocations(produce(myLocations, (draft) => {
+      draft.unshift(locations[index]);
+      draft.splice(2);
+    }));
   };
 
-  const handlePressButton = () => {
-    dispatch(saveMyLocation(email, myLocations));
-  };
+  const handlePressButton = () => dispatch(saveMyLocation(email, myLocations));
 
   return (
     <View style={styles.container}>
@@ -58,7 +54,7 @@ export default function LocationScreen() {
           width={200}
           height={40}
           fontSize={15}
-          backgroundColor={color.SECONDARY_WHITE}
+          backgroundColor={colors.SECONDARY_WHITE}
           onSelect={handleSelectLocation}
         />
       </View>
@@ -69,7 +65,7 @@ export default function LocationScreen() {
           width={200}
           height={40}
           fontSize={15}
-          backgroundColor={color.SECONDARY_WHITE}
+          backgroundColor={colors.SECONDARY_WHITE}
           onSelect={handleSelectLocation}
         />
       </View>
@@ -78,8 +74,8 @@ export default function LocationScreen() {
           title={"등록하기"}
           width={200}
           height={40}
-          backgroundColor={color.PRIMARY_BLUE}
-          fontSize={size.SECONDARY_FONT_SIZE}
+          backgroundColor={colors.PRIMARY_BLUE}
+          fontSize={sizes.SECONDARY_FONT_SIZE}
           onPress={handlePressButton}
         />
       </View>
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: color.PRIMARY_GRAY,
+    backgroundColor: colors.PRIMARY_GRAY,
   },
   title: {
     width: 200,
@@ -99,8 +95,8 @@ const styles = StyleSheet.create({
     marginTop: 100,
     textAlign: "center",
     textAlignVertical: "center",
-    fontSize: size.PRIMARY_FONT_SIZE,
-    fontFamily: font.SECONDARY_FONT,
+    fontSize: sizes.PRIMARY_FONT_SIZE,
+    fontFamily: fonts.SECONDARY_FONT,
   },
   dropDownContainer: {
     justifyContent: "center",
@@ -109,5 +105,5 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: "center",
     height: 100,
-  }
+  },
 });

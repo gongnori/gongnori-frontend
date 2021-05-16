@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
+import { setInitializeError } from  "../actions/errorActionCreators";
+import * as actionTypes from "../actions/actionTypes";
 
 const getMatch = (location, sports, year, month, date) => async (dispatch) => {
   try {
@@ -89,11 +91,12 @@ const setInitialize = () => async (dispatch) => {
     const initialState = data;
 
     dispatch({
-      type: "INITIALIZE_APP_SUCCESS",
+      type: actionTypes.INITIALIZE_APP_SUCCESS,
       payload: initialState,
     });
   } catch (err) {
-    dispatch({ type: "INITIALIZE_APP_FAIL" });
+    dispatch({ type: actionTypes.INITIALIZE_APP_FAIL });
+    dispatch(setInitializeError());
   }
 };
 

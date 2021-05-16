@@ -12,7 +12,7 @@ const appReducer = (state = initialState, action) => {
     case "INITIALIZE_APP_SUCCESS":
       return action.payload;
     case "INITIALIZE_APP_FAIL":
-      return { playgrounds: [] };
+      return state;
     case "LOAD_MATCH_SUCCESS":
       return { ...state, matches: action.payload };
     case "LOAD_MATCH_FAIL":

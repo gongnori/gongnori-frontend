@@ -7,7 +7,7 @@ import _ from "lodash"
 import MatchHeader from "../components/MatchHeader";
 import MessageItem from "../components/MessageItem";
 import SideButton from "../components/SideButton";
-import { updateMyData } from "../actions/actions";
+import { updateMyData } from "../actions/userActionCreators";
 import fetchServer from "../utils/fetchServer";
 import * as color from "../constants/colors";
 import * as size from  "../constants/sizes"
