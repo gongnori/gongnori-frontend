@@ -27,8 +27,6 @@ export default function MessageScreen({ navigation }) {
     dispatch(updateMyData());
   }, []);
 
-  console.log(messages);
-
   return (
     <View style={styles.container}>
       {/* MatchHear -> Header로 리팩토링 */}
@@ -42,10 +40,6 @@ export default function MessageScreen({ navigation }) {
           renderItem={({ item }) => <MessageItem item={item} navigation={navigation} />}
         />
       </View>
-      {/* <SideButton
-        navigation={navigation}
-        route={"MatchCreate"}
-      /> */}
     </View>
   );
 }

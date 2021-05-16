@@ -14,15 +14,15 @@ export default function MessageItem({ item, navigation }) {
   // const startTime = new Date(start).getHours();
   // const endTime = new Date(end).getHours();
 
-  const handlePressMatch = () => {
-    navigation.navigate("MatchJoin", { match: item });
+  const handlePressMessage = () => {
+    navigation.navigate("Chat", { message: item });
   };
 
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       style={styles.container}
-      onPress={handlePressMatch}
+      onPress={handlePressMessage}
     >
       <View style={styles.team}>
         <Text style={styles.title}>신청팀</Text>

@@ -4,6 +4,7 @@ import TabNavigator from "./TabNavigator";
 import MatchCreateScreen from "../screens/MatchCreateScreen";
 import MatchJoinScreen from "../screens/MatchJoinScreen";
 import TeamCreateScreen from "../screens/TeamCreateScreen";
+import ChatScreen from "../screens/ChatScreen";
 import * as color from "../constants/colors";
 
 const Stack = createStackNavigator();
@@ -13,6 +14,7 @@ const HEADER_FONT_SIZE = 30;
 const MATCH_CREATE_TITLE = "경기 만들기";
 const MATCH_JOIN_TITLE = "경기 신청하기";
 const TEAM_CREATE_TITLE = "팀 만들기";
+const CHAT_TITLE = "채팅";
 
 const headerOption = {
   headerStyle: {
@@ -48,6 +50,11 @@ export default function MatchNavigator() {
         name="TeamCreate"
         component={TeamCreateScreen}
         options={{ ...headerOption, title: TEAM_CREATE_TITLE }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ ...headerOption, title: CHAT_TITLE }}
       />
     </Stack.Navigator>
   );

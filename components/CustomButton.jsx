@@ -3,26 +3,30 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import * as color from "../constants/colors";
 import * as font from "../constants/fonts";
+import * as size from "../constants/sizes";
 
 export default function CustomButton({
   title = "Button",
-  width = 100,
-  height = 30,
-  color = "#ffffff",
-  fontSize = 16,
-  onPress
+  onPress,
+  buttonStyle = {},
+  textStyle = {},
 }) {
   return (
     <TouchableOpacity
       style={{
         ...styles.button,
-        width,
-        height,
-        // backgroundColor,
+        ...buttonStyle,
       }}
       onPress={onPress}
     >
-      <Text style={{ color, fontSize }}>{ title }</Text>
+      <Text
+        style={{
+          ...styles.text,
+          ...textStyle,
+        }}
+      >
+        { title }
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -33,8 +37,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 10,
     backgroundColor: color.PRIMARY_BLUE,
-    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
   },
+  text: {
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: size.TERTIARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    color: color.SECONDARY_WHITE,
+    includeFontPadding: false,
+  }
 });
 
 CustomButton.propTypes = {
