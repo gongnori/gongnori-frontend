@@ -1,5 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { StyleSheet, View, FlatList, StatusBar } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { DoHyeon_400Regular } from "@expo-google-fonts/do-hyeon";

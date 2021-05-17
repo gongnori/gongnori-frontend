@@ -26,7 +26,6 @@ const fetchServer = async (method, url, reqBody, isMulter) => {
         body: reqBody,
       };
     } else {
-      console.log(reqBody)
       req = {
         method,
         headers: { "Authorization": token, "Content-Type": "application/json" },

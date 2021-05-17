@@ -1,18 +1,19 @@
 import produce from "immer";
 import React, { useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, StatusBar } from "react-native";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 import SideButton from "../components/SideButton";
-import * as color from "../constants/colors";
+import * as colors from "../constants/colors";
+import * as sizes from "../constants/sizes";
+import * as device from "../constants/device";
 
 export default function MatchListScreen({ navigation }) {
   const matches = useSelector((state) => {
     return state.appReducer.matches;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
   const sortedMatches = produce(matches, (draft) => {
     draft.sort((a, b) => {
       const milliSecA = new Date(a.playtime.start).getTime();
@@ -22,6 +23,7 @@ export default function MatchListScreen({ navigation }) {
     });
   });
 
+  console.log(StatusBar.currentHeight)
   return (
     <View style={styles.container}>
       <MatchHeader />
@@ -46,7 +48,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    backgroundColor: color.PRIMARY_GRAY,
+    marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
+    backgroundColor: colors.PRIMARY_GRAY,
   },
   body: {
     flex: 1,

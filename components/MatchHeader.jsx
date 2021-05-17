@@ -27,19 +27,17 @@ export default function MatchHeader() {
     return state.userReducer.currentSports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  // const [location, setLocation] = useState(myLocations[0]);
-  // const [sports, setSports] = useState("football");
   const [year, month, date, handlePressButton] = useDateController();
 
   const dispatch = useDispatch();
-// console.log(currentSports)
-// console.log(currentSports);
+
   const locationOptions = myLocations.map((location) => location.district);
   const sportsOptions = sports.map((item) => item.koreanName);
 
   const handleSelectLocation = (index) => {
     dispatch(setCurrentLocation(myLocations[index]));
-  }
+  };
+
   const handleSelectSports = (index) => {
     dispatch(setCurrentSports(sports[index]));
   };
@@ -52,11 +50,9 @@ export default function MatchHeader() {
     <View style={styles.container}>
       <View style={styles.location}>
         <DropDown
-          value={locationOptions[0]}
+          value={currentLocation.district}
           options={locationOptions}
-          width={size.MATCH_HEADER_DROPDOWN_WIDTH}
-          height={size.MATCH_HEADER_DROPDOWN_HEIGHT}
-          fontSize={16}
+          style={styles.dropDown}
           onSelect={handleSelectLocation}
         />
       </View>
@@ -70,11 +66,9 @@ export default function MatchHeader() {
       </View>
       <View style={styles.sports}>
         <DropDown
-          value="football"
+          value={currentSports.koreanName}
           options={sportsOptions}
-          width={size.MATCH_HEADER_DROPDOWN_WIDTH}
-          height={size.MATCH_HEADER_DROPDOWN_HEIGHT}
-          fontSize={16}
+          style={styles.dropDown}
           onSelect={handleSelectSports}
         />
       </View>
@@ -87,7 +81,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "stretch",
-    height: size.MATCH_HEADER_HEIGHT,
+    height: 0.1 * size.DEVICE_HEIGHT,
     backgroundColor: color.PRIMARY_BLUE,
   },
   location: {
@@ -104,5 +98,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  dropDown: {
+    width: 0.15 * size.DEVICE_WIDTH,
+    height: 0.05 * size.DEVICE_HEIGHT,
+    fontSize: size.TERTIARY_FONT_SIZE,
   },
 });

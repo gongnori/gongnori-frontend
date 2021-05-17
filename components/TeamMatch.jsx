@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import * as color from "../constants/colors";
-import * as font from "../constants/fonts";
-import * as size from "../constants/sizes";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 export default function TeamMatch({ team }) {
   const { matches } = team;
@@ -49,21 +49,22 @@ export default function TeamMatch({ team }) {
 const styles = StyleSheet.create({
   matches: {
     alignItems: "flex-start",
-    width: size.MY_TEAM_MATCH_WIDTH,
-    height: size.MY_TEAM_MATCH_HEIGHT,
+    width: sizes.MY_TEAM_MATCH_WIDTH,
+    height: sizes.MY_TEAM_MATCH_HEIGHT,
     marginTop: 15,
   },
   title: {
-    textAlign: "left",
-    textAlignVertical: "center",
     marginBottom: 10,
     marginLeft: 10,
-    fontSize: 16, //size.MY_TEAM_OVERVIEW_TITLE_FONT_SIZE,
-    fontFamily: font.BLACK_HANS_SANS_400_REGULAR,
+    fontSize: sizes.TERTIARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
+    textAlign: "left",
+    textAlignVertical: "center",
+    includeFontPadding: false,
   },
   scroll: {
     width: "100%",
-    backgroundColor: color.SECONDARY_WHITE,
+    backgroundColor: colors.SECONDARY_WHITE,
     borderRadius: 10,
   },
   match: {
@@ -71,9 +72,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "90%",
-    height: 40,
+    height: 0.05 * sizes.DEVICE_HEIGHT,
     borderBottomWidth: 0.5,
-    borderBottomColor: color.PRIMARY_BLUE,
+    borderBottomColor: colors.PRIMARY_BLUE,
   },
   cell: {
     flex: 1,
@@ -86,19 +87,22 @@ const styles = StyleSheet.create({
     height: "100%",
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: 16,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
   },
   secondary: {
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: 14,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
+    includeFontPadding: false,
   },
   tertiary: {
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: 12,
-    fontFamily: font.NANUM_GOTHIC_CODING_400_REGULAR,
+    fontSize: sizes.QUINARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
+    includeFontPadding: false,
   },
 });

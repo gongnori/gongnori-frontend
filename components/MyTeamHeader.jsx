@@ -30,9 +30,7 @@ export default function MyTeamHeader() {
         <DropDown
           value={currentTeam?.name ?? "팀"}
           options={teamOptions}
-          width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
-          height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}
-          fontSize={15}
+          style={styles.dropDown}
           onSelect={handleSelectTeam}
         />
       </View>
@@ -72,5 +70,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  dropDown: {
+    width: 0.15 * size.DEVICE_WIDTH,
+    height: 0.05 * size.DEVICE_HEIGHT,
+    fontSize: size.TERTIARY_FONT_SIZE,
   },
 });

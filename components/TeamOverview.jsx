@@ -24,7 +24,6 @@ export default function TeamOverview({ team }) {
           source={{ uri: emblem }}
         />
       </View>
-       {/* TitleContentColumn 만들기... */}
       <View style={styles.descripitonContainer}>
         <View style={styles.description}>
           <Text style={styles.title}>{"팀이름"}</Text>
@@ -53,14 +52,15 @@ export default function TeamOverview({ team }) {
 
 const styles = StyleSheet.create({
   overview: {
-    height: size.MY_TEAM_OVERVIEW_HEIGHT,
-    width: size.MY_TEAM_OVERVIEW_WIDTH,
+    height: 0.2 * size.DEVICE_HEIGHT,
+    width: size.DEVICE_WIDTH,
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "flex-start",
+    alignItems: "center",
+    alignSelf: "flex-start",
   },
   emblemContainer: {
-    flex: 1,
+    width: 0.3 * size.DEVICE_WIDTH,
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   descripitonContainer: {
-    flex: 3,
+    width: 0.6 * size.DEVICE_WIDTH,
     justifyContent: "space-evenly",
     alignItems: "flex-start",
     height: "100%",
@@ -85,15 +85,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: size.MY_TEAM_OVERVIEW_TITLE_FONT_SIZE,
-    fontFamily: font.BLACK_HANS_SANS_400_REGULAR,
+    fontSize: size.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
   },
   content: {
     flex: 3,
     flexDirection: "row",
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: font.MY_TEAM_OVERVIEW_CONTENT_FONT_SIZE,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    fontSize: font.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_300_LIGHT,
+    includeFontPadding: false,
   },
 });

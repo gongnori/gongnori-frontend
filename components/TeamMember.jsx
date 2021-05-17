@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import * as color from "../constants/colors";
-import * as font from "../constants/fonts";
-import * as size from "../constants/sizes";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 export default function TeamMember({ team }) {
   const { members } = team;
@@ -21,14 +21,14 @@ export default function TeamMember({ team }) {
               <View key={member._id} style={styles.member}>
                 <Text style={styles.name}>{member.name}</Text>
                 <View style={styles.detail}>
-                  <Icon
+                  {/* <Icon
                     name="chatbubble-ellipses-outline"
-                    size={14}
+                    size={sizes.QUATERNARY_FONT_SIZE}
                     style={styles.icon}
-                  />
+                  /> */}
                   <Icon
                     name="person-remove"
-                    size={14}
+                    size={sizes.QUATERNARY_FONT_SIZE}
                     style={styles.icon}
                   />
                 </View>
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
   members: {
     justifyContent: "space-between",
     alignItems: "flex-start",
+    width: sizes.MY_TEAM_MEMBER_WIDTH,
+    height: sizes.MY_TEAM_MEMBER_HEIGHT,
     marginTop: 15,
-    width: size.MY_TEAM_MEMBER_WIDTH,
-    height: size.MY_TEAM_MEMBER_HEIGHT,
   },
 
   title: {
@@ -55,13 +55,14 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     marginBottom: 10,
     marginLeft: 10,
-    fontSize: 16, //size.MY_TEAM_OVERVIEW_TITLE_FONT_SIZE,
-    fontFamily: font.BLACK_HANS_SANS_400_REGULAR,
+    fontSize: sizes.TERTIARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
   },
 
   scroll: {
     width: "100%",
-    backgroundColor: color.SECONDARY_WHITE,
+    backgroundColor: colors.SECONDARY_WHITE,
     borderRadius: 10,
   },
 
@@ -72,15 +73,16 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 30,
     borderBottomWidth: 0.5,
-    borderBottomColor: color.PRIMARY_BLUE,
+    borderBottomColor: colors.PRIMARY_BLUE,
   },
 
   name: {
     flex: 1,
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: 14,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
+    includeFontPadding: false,
   },
   detail: {
     flex: 5,

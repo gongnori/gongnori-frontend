@@ -46,7 +46,7 @@ export default function ChatScreen({ navigation, route }) {
     offset: 100 * index,
     index,
   }), []);
-console.log(message)
+
   useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
 
   return (
@@ -59,7 +59,6 @@ console.log(message)
         getItemLayout={getItemLayout}
         initialScrollIndex={conversation.length - 1}
         renderItem={({ item }) => <ChatItem item={item} navigation={navigation} />}
-        // inverted={true}
       />
       <View style={styles.textInputBar}>
         <TextInput

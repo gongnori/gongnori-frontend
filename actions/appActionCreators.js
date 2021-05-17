@@ -4,8 +4,6 @@ import { setInitializeError } from  "../actions/errorActionCreators";
 import * as actionTypes from "../actions/actionTypes";
 
 const getMatch = (location, sports, year, month, date) => async (dispatch) => {
-  // console.log(location, sports, year, month, date)
-  console.log(location)
   try {
     const token = await AsyncStorage.getItem("token");
     const { province, city, district } = location;
