@@ -71,7 +71,7 @@ export default function MatchCreateScreen({ navigation }) {
     team: { id: currentTeam.id, name: currentTeam.id },
     location: { id: currentLocation.id },
   };
-// console.log(_match)
+
   useHeaderRight(navigation, "만들기", "POST", "match", _match); // 입력 validation 넣기 및 입력하세요 모달 띄우기
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function MatchCreateScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.input}>
+      <View style={styles.inputContainer}>
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 방식</Text>
           <DropDown
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.PRIMARY_GRAY,
   },
-  input: {
+  inputContainer: {
     justifyContent: "space-around",
     width: 0.9 * sizes.DEVICE_WIDTH,
     height: 0.3 * sizes.DEVICE_HEIGHT,
@@ -185,9 +185,11 @@ const styles = StyleSheet.create({
     height: 0.1 * sizes.DEVICE_HEIGHT,
   },
   title: {
-    width: 0.2 * sizes.DEVICE_WIDTH,
+    // width: 0.2 * sizes.DEVICE_WIDTH,
     height: 0.05 * sizes.DEVICE_HEIGHT,
-    marginLeft: 10,
+    // marginLeft: 15,
+    // marginRight: 15,
+    marginHorizontal: 15,
     fontSize: sizes.TERTIARY_FONT_SIZE,
     fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
     textAlign: "left",
@@ -211,6 +213,7 @@ const styles = StyleSheet.create({
   dropDown: {
     width: 0.15 * sizes.DEVICE_WIDTH,
     height: 0.04 * sizes.DEVICE_HEIGHT,
+    borderRadius: 5,
     fontSize: sizes.QUATERNARY_FONT_SIZE,
     backgroundColor: colors.SECONDARY_WHITE,
   },

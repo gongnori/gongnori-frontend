@@ -17,7 +17,8 @@ export default function DropDown({
   onSelect = () => console.log("Declare Event Function")
 }) {
   const total = options.length;
-  const { width, height, fontSize, backgroundColor } = style;
+  const { width, height, borderRadius, backgroundColor, fontSize } = style;
+
   return (
     <ModalDropdown
       defaultValue={value}
@@ -26,6 +27,7 @@ export default function DropDown({
         ...styles.button,
         width,
         height,
+        borderRadius,
         backgroundColor,
       }}
       textStyle={{
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5,
   },
   buttonText: {
     color: "black",
