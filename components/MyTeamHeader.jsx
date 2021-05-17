@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import DropDown from "./DropDown";
-import { setCurrenTeam } from "../actions/userActionCreators";
+import { setCurrentTeam } from "../actions/userActionCreators";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
 
@@ -21,7 +21,7 @@ export default function MyTeamHeader() {
   const teamOptions = myTeams.map((team) => team.name);
 
   const handleSelectTeam = (index) => {
-    dispatch(setCurrenTeam(myTeams[index]));
+    dispatch(setCurrentTeam(myTeams[index]));
   };
 
   return (

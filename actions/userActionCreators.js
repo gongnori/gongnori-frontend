@@ -1,8 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
 
-const setCurrenTeam = (payload) => ({
+const setCurrentTeam = (payload) => ({
   type: "SET_CURRENT_TEAM",
+  payload,
+});
+
+const setCurrentLocation = (payload) => ({
+  type: "SET_CURRENT_LOCATION",
+  payload,
+});
+
+const setCurrentSports = (payload) => ({
+  type: "SET_CURRENT_SPORTS",
   payload,
 });
 
@@ -90,5 +100,7 @@ export {
   authLogin,
   saveMyLocation,
   updateMyData,
-  setCurrenTeam,
+  setCurrentTeam,
+  setCurrentLocation,
+  setCurrentSports,
 };

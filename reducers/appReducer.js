@@ -21,7 +21,9 @@ const appReducer = (state = initialState, action) => {
     case "INITIALIZE_APP_FAIL":
       return state;
     case "LOAD_MATCH_SUCCESS":
-      return { ...state, matches: action.payload };
+      return produce(state, (draft) => {
+        draft.matches = action.payload;
+      });
     case "LOAD_MATCH_FAIL":
       return { ...state, matches: [] };
     case "LOAD_PLAYGROUNDS_SUCCESS":

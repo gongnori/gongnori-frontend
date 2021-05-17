@@ -51,6 +51,14 @@ const userReducer = (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.currentTeam = action.payload;
       });
+    case "SET_CURRENT_LOCATION":
+        return produce(state, (draft) => {
+          draft.currentLocation = action.payload;
+        });
+    case "SET_CURRENT_SPORTS":
+      return produce(state, (draft) => {
+        draft.currentSports = action.payload;
+      });
     default:
       return state;
   }

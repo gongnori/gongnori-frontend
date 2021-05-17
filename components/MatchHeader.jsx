@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import produce from "immer";
+import _ from "lodash";
 import DropDown from "./DropDown";
 import DateController from "./DateController";
 import useDateController from "../hooks/useDateController";
+import { setCurrentSports, setCurrentLocation } from "../actions/userActionCreators";
 import { getMatch } from "../actions/appActionCreators";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
@@ -12,23 +13,40 @@ import * as size from "../constants/sizes";
 export default function MatchHeader() {
   const myLocations = useSelector((state) => {
     return state.userReducer.locations;
-  }, (prev, next) => {
-    return produce(prev, (draft) => draft) === produce(next, (draft) => draft);
-  });
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const [location, setLocation] = useState(myLocations[0]);
-  const [sports, setSports] = useState("football");
+  const sports = useSelector((state) => {
+    return state.appReducer.sports;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
+  const currentLocation = useSelector((state) => {
+    return state.userReducer.currentLocation;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
+  const currentSports = useSelector((state) => {
+    return state.userReducer.currentSports;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
+  // const [location, setLocation] = useState(myLocations[0]);
+  // const [sports, setSports] = useState("football");
   const [year, month, date, handlePressButton] = useDateController();
 
   const dispatch = useDispatch();
-
+// console.log(currentSports)
+// console.log(currentSports);
   const locationOptions = myLocations.map((location) => location.district);
-  const handleSelectLocation = (index) => setLocation(myLocations[index]);
-  const handleSelectSports = (index, value) => setSports(value);
+  const sportsOptions = sports.map((item) => item.koreanName);
+
+  const handleSelectLocation = (index) => {
+    dispatch(setCurrentLocation(myLocations[index]));
+  }
+  const handleSelectSports = (index) => {
+    dispatch(setCurrentSports(sports[index]));
+  };
 
   useEffect(() => {
-    dispatch(getMatch(location, sports, year, month, date));
-  }, [sports, location, year, month, date]);
+    dispatch(getMatch(currentLocation, currentSports.sports, year, month, date));
+  }, [currentLocation, currentSports, year, month, date]);
 
   return (
     <View style={styles.container}>
@@ -53,11 +71,11 @@ export default function MatchHeader() {
       <View style={styles.sports}>
         <DropDown
           value="football"
-          options={["football", "basketball", "baseball"]}
+          options={sportsOptions}
           width={size.MATCH_HEADER_DROPDOWN_WIDTH}
           height={size.MATCH_HEADER_DROPDOWN_HEIGHT}
           fontSize={16}
-          onPressButton={handleSelectSports}
+          onSelect={handleSelectSports}
         />
       </View>
     </View>
