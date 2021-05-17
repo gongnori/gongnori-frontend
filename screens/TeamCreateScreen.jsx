@@ -21,6 +21,14 @@ export default function MatchCreateScreen({ navigation }) {
     sports: "",
   });
 
+  const currentLocation = useSelector((state) => {
+    return state.userReducer.currentLocation;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
+  const currentSports = useSelector((state) => {
+    return state.userReducer.currentSports;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
   const locations = useSelector((state) => {
     return state.userReducer.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));

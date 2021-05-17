@@ -38,7 +38,7 @@ const useHeaderRight = (navigation, title, method, path, data) => {
         );
       },
     });
-  }, []);
+  });
 };
 
 export default useHeaderRight;

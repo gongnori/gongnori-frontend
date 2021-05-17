@@ -1,21 +1,15 @@
 
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import produce from "immer";
-import _ from "lodash"
+
 const useMatchState = () => {
-  const sports = useSelector((state) => {
-    return state.appReducer.sports;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const teams = useSelector((state) => {
-    return state.userReducer.teams;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const [matchSports , setMathSports] = useState(sports);
-
-  const [match, setMatch] = useState({});
+  const [match, setMatch] = useState({
+    month: (new Date().getMonth() + 1).toString(),
+    date: new Date().getDate().toString(),
+    start: "8",
+    end: "10",
+    meridiem: "AM",
+  });
 
   const handleSelectType = (index, value) => {
     setMatch(produce(match, (draft) => {
@@ -53,18 +47,6 @@ const useMatchState = () => {
     }));
   };
 
-  const handleSelectSports = (index) => {
-    setMatch(produce(match, (draft) => {
-      draft.sports = sports[index];
-    }));
-  };
-
-  const handleSelectTeam = (index) => {
-    setMatch(produce(match, (draft) => {
-      draft.team = teams[index];
-    }));
-  };
-
   const handlePressPlayground = (value) => {
     setMatch(produce(match, (draft) => {
       draft.playground = value;
@@ -79,9 +61,7 @@ const useMatchState = () => {
     handleSelectMeridiem,
     handleSelectStart,
     handleSelectEnd,
-    handleSelectSports,
-    handleSelectTeam,
-    handlePressPlayground
+    handlePressPlayground,
   ];
 };
 

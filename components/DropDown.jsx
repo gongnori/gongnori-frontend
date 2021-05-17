@@ -9,14 +9,15 @@ const TEXT_VERTICAL_MARGIN = 5;
 export default function DropDown({
   value = "Drop Down",
   options = ["option1, option2, option3"],
-  width = 100,
-  height = 30,
-  fontSize = 12,
-  backgroundColor,
+  // width = 100,
+  // height = 30,
+  // fontSize = 12,
+  // backgroundColor,
+  style = {},
   onSelect = () => console.log("Declare Event Function")
 }) {
   const total = options.length;
-
+  const { width, height, fontSize, backgroundColor } = style;
   return (
     <ModalDropdown
       defaultValue={value}
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     textAlignVertical: "center",
-    fontFamily: font.SECONDARY_FONT,
+    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
     includeFontPadding: false,
   },
   dropdownText: {
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: TEXT_VERTICAL_MARGIN,
     paddingTop: 0,
     paddingBottom: 0,
-    fontFamily: font.SECONDARY_FONT,
+    fontFamily: font.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
   },
 });
