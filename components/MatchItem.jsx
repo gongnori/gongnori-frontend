@@ -1,13 +1,13 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import * as color from "../constants/colors";
-import * as device from "../constants/device";
-import * as size from  "../constants/sizes";
+import PropTypes from "prop-types";
 
+import * as colors from "../constants/colors";
+import * as sizes from "../constants/sizes";
 import * as font from "../constants/fonts";
 
 export default function MatchItem({ item, navigation }) {
-  const { id, type, playground, host, playtime } = item
+  const { type, playground, host, playtime } = item;
   const { province, city, district } = playground;
   const { start, end } = playtime;
   const { name, emblem } = host;
@@ -42,20 +42,29 @@ export default function MatchItem({ item, navigation }) {
   );
 }
 
+MatchItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    width: 0.8 * size.DEVICE_WIDTH,
-    height: 0.15 * size.DEVICE_HEIGHT,
-    marginBottom: 0.02 * size.DEVICE_HEIGHT,
-    borderRadius: 10,
-    // borderRightWidth: 1,
-    // borderRightColor: "gray",
-    borderBottomWidth: 1,
-    borderBottomColor: color.PRIMARY_BLUE,
-    backgroundColor: color.SECONDARY_WHITE,
+    width: 0.8 * sizes.DEVICE_WIDTH,
+    height: 0.15 * sizes.DEVICE_HEIGHT,
+    margin: 10,
+    borderRadius: 5,
+    backgroundColor: colors.SECONDARY_WHITE,
+    elevation: 5,
+    shadowColor: colors.PRIMARY_SHADOW,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowOffset: {
+      height: -1,
+      width: 0,
+    },
   },
   emblemContainer: {
     flex: 1,
@@ -64,17 +73,18 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   emblem: {
-    flex: 8,
+    flex: 7,
     width: "60%",
     height: "60%",
     resizeMode: "contain",
   },
   teamName: {
-    flex: 2,
+    flex: 3,
     textAlign: "center",
     textAlignVertical: "center",
-    fontSize: 18,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_700_BOLD,
+    includeFontPadding: false,
   },
   matchInfoContainer: {
     flex: 3,
@@ -84,19 +94,32 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   playgroundName: {
-    fontSize: 16,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
   },
   location: {
-    fontSize: 12,
-    fontFamily: font.NANUM_GOTHIC_CODING_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+    includeFontPadding: false,
   },
   playtime: {
-    fontSize: 14,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
   },
   matchType: {
-    fontSize: 14,
-    fontFamily: font.NANUM_GOTHIC_CODING_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+    includeFontPadding: false,
   },
 });
+

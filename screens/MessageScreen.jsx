@@ -18,7 +18,9 @@ export default function MessageScreen({ navigation }) {
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    console.log("!!!")
+  })
   useEffect(() => {
     dispatch(updateMyData());
   }, []);

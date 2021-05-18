@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import _ from "lodash";
+
 import DropDown from "../components/DropDown";
+import PlaceMap from "../components/PlaceMap";
+
 import useMyLocation from "../hooks/useMyLocation";
 import useHeaderRight from "../hooks/useHeaderRight";
 import useMatchState from "../hooks/useMatchState";
+
 import getDateFromMonth from "../utils/getDateFromMonth";
-import { getPlayground } from "../actions/appActionCreators";
-import PlaceMap from "../components/PlaceMap";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 export default function MatchCreateScreen({ navigation, route }) {
-  const { rank } = route.params
-
-  const currentLocation = useSelector((state) => {
-    return state.userReducer.currentLocation;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const locations = useSelector((state) => {
-    return state.userReducer.locations;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+  const { rank } = route.params;
 
   const teams = useSelector((state) => {
     return state.userReducer.teams;
@@ -44,10 +40,12 @@ export default function MatchCreateScreen({ navigation, route }) {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
+  const currentLocation = useSelector((state) => {
+    return state.userReducer.currentLocation;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
   const [location, setLocation] = useState(currentLocation);
   const [forceRefreshKey, setForceRefreshKey] = useState("");
-
-  const dispatch = useDispatch();
 
   const [
     match,
@@ -57,8 +55,6 @@ export default function MatchCreateScreen({ navigation, route }) {
     handleSelectMeridiem,
     handleSelectStart,
     handleSelectEnd,
-    // handleSelectSports,
-    // handleSelectTeam,
     handlePressPlayground,
   ] = useMatchState(sports, teams);
 
@@ -98,7 +94,7 @@ export default function MatchCreateScreen({ navigation, route }) {
           <DropDown
             value={"경기방식"}
             options={sportsOptions}
-            style={styles.dropDown}
+            style={{...styles.dropDown, width: 100}}
             onSelect={handleSelectType}
           />
         </View>
@@ -143,12 +139,13 @@ export default function MatchCreateScreen({ navigation, route }) {
           />
         </View>
       </View>
-      <View style={styles.map}>
+      {/* <View style={styles.map}> */}
+      <View>
         {origin && (
           <PlaceMap
             key={forceRefreshKey}
-            width={"100%"}
-            height={"100%"}
+            width={0.8 * sizes.DEVICE_WIDTH}
+            height={0.8 * sizes.DEVICE_WIDTH}
             origin={origin}
             location={location}
             places={playgrounds}
@@ -169,7 +166,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     justifyContent: "space-around",
-    width: 0.9 * sizes.DEVICE_WIDTH,
+    width: 0.8 * sizes.DEVICE_WIDTH,
     height: 0.3 * sizes.DEVICE_HEIGHT,
     borderRadius: 5,
     backgroundColor: colors.PRIMARY_YELLOW,
@@ -208,16 +205,21 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     includeFontPadding: false,
   },
-  map: {
-    justifyContent: "space-around",
-    width: 0.9 * sizes.DEVICE_WIDTH,
-    height: 0.5 * sizes.DEVICE_HEIGHT,
-  },
+  // map: {
+  //   justifyContent: "space-around",
+  //   width: 0.9 * sizes.DEVICE_WIDTH,
+  //   height: 0.5 * sizes.DEVICE_HEIGHT,
+  // },
   dropDown: {
-    width: 0.15 * sizes.DEVICE_WIDTH,
+    width: 0.13 * sizes.DEVICE_WIDTH,
     height: 0.04 * sizes.DEVICE_HEIGHT,
     borderRadius: 5,
     fontSize: sizes.QUATERNARY_FONT_SIZE,
     backgroundColor: colors.SECONDARY_WHITE,
   },
 });
+
+MatchCreateScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
+};

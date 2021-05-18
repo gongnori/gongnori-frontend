@@ -3,18 +3,20 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList, StatusBar } from "react-native";
 import { useSelector } from "react-redux";
 import _ from "lodash";
+
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 import SideButton from "../components/SideButton";
 import SpinnerLoading from "../components/SpinnerLoading";
+
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 import * as device from "../constants/device";
 
 export default function MatchListScreen({ navigation }) {
-  const isMatchScreenLoading = useSelector((state) => {
-    return state.loadingReducer.isMatchScreenLoading;
-})
+  const isLoadingScreen = useSelector((state) => {
+    return state.loadingReducer.isLoadingScreen;
+  });
 
   const matches = useSelector((state) => {
     return state.appReducer.matches;
@@ -31,7 +33,7 @@ export default function MatchListScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <SpinnerLoading
-        visible={isMatchScreenLoading}
+        visible={isLoadingScreen}
         content={"Match Loading..."}
       />
       <MatchHeader />

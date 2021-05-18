@@ -1,27 +1,31 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import MapView, { Marker, Callout, PROVIDER_GOOGLE } from "react-native-maps";
+import { StyleSheet, Text, View } from "react-native";
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import PropTypes from "prop-types";
+
+import * as sizes from "../constants/sizes";
+import * as fonts from "../constants/fonts";
 
 export default function PlaceMap({
-  width = 300,
-  height = 300,
+  width,
+  height,
   origin,
-  location = [],
+  location = {},
   places = [],
-  onPlacePress
+  onPlacePress,
 }) {
   const filterdPlaces = places.filter(place => {
     return (
       place.province === location.province
       && place.city === location.city
       && place.district === location.district
-    )
-  })
+    );
+  });
 
   const markers = filterdPlaces.map((place) => {
     const { name, id } = place;
     const { latitude, longitude } = place;
-    const { province, city, district, town, detail } = place;
+    const { city, district, town, detail } = place;
     const { contact } = place;
 
     return (
@@ -36,9 +40,9 @@ export default function PlaceMap({
       >
         <Callout tootip>
           <View>
-            <Text>{name}</Text>
-            <Text>{`${city} ${district} ${town} ${detail}`}</Text>
-            <Text>{contact}</Text>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.address}>{`${city} ${district} ${town} ${detail}`}</Text>
+            <Text style={styles.contact}>{contact}</Text>
           </View>
         </Callout>
       </Marker>
@@ -67,3 +71,36 @@ export default function PlaceMap({
     </MapView>
   );
 }
+
+PlaceMap.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  origin: PropTypes.object.isRequired,
+  location: PropTypes.object,
+  places: PropTypes.array,
+  onPlacePress: PropTypes.func,
+};
+
+const styles = StyleSheet.create({
+  name: {
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
+    textAlign: "center",
+    textAlignVertical: "center",
+    includeFontPadding: false,
+  },
+  address: {
+    fontSize: sizes.QUINARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
+    textAlign: "center",
+    textAlignVertical: "center",
+    includeFontPadding: false,
+  },
+  contact: {
+    fontSize: sizes.QUINARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
+    textAlign: "center",
+    textAlignVertical: "center",
+    includeFontPadding: false,
+  },
+});

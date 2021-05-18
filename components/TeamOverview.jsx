@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
-import * as size from "../constants/sizes";
+import { Image, StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
 import * as font from "../constants/fonts";
+import * as size from "../constants/sizes";
 
 export default function TeamOverview({ team }) {
   const {
@@ -9,9 +10,8 @@ export default function TeamOverview({ team }) {
     members,
     city,
     district,
-    ability,
     manner,
-    emblem
+    emblem,
   } = team;
 
   const memberNum = members.length;
@@ -34,10 +34,6 @@ export default function TeamOverview({ team }) {
           <Text style={styles.content}>{`${city} ${district}`}</Text>
         </View>
         <View style={styles.description}>
-          <Text style={styles.title}>전적</Text>
-          <Text style={styles.content}>10승5패</Text>
-        </View>
-        <View style={styles.description}>
           <Text style={styles.title}>매너</Text>
           <Text style={styles.content}>{manner}</Text>
         </View>
@@ -52,15 +48,13 @@ export default function TeamOverview({ team }) {
 
 const styles = StyleSheet.create({
   overview: {
-    height: 0.2 * size.DEVICE_HEIGHT,
-    width: size.DEVICE_WIDTH,
+    height: 0.15 * size.DEVICE_HEIGHT,
+    width: 0.8 * size.DEVICE_WIDTH,
     flexDirection: "row",
-    justifyContent: "flex-start",
     alignItems: "center",
-    alignSelf: "flex-start",
   },
   emblemContainer: {
-    width: 0.3 * size.DEVICE_WIDTH,
+    width: 0.2 * size.DEVICE_WIDTH,
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
@@ -99,3 +93,7 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
 });
+
+TeamOverview.propTypes = {
+  team: PropTypes.object.isRequired,
+};

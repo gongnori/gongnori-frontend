@@ -1,12 +1,12 @@
-const viewMatchScreenLoading = () => ({
-  type: "VIEW_MATCH_SCREEN_LOADING",
+const viewLoadingScreen = () => ({
+  type: "VIEW_LOADING_SCREEN",
 });
 
-const hideMatchScreenLoading = () => ({
-  type: "HIDE_MATCH_SCREEN_LOADING",
+const hideLoadingScreen = () => ({
+  type: "HIDE_LOADING_SCREEN",
 });
 
 export {
-  viewMatchScreenLoading,
-  hideMatchScreenLoading,
+  viewLoadingScreen,
+  hideLoadingScreen,
 };

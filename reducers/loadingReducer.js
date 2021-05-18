@@ -1,19 +1,19 @@
 import produce from "immer";
 
 const initialState = {
-  isMatchScreenLoading: false,
+  isLoadingScreen: false,
 };
 
 const loadingReducer = (state = initialState, action) => {
   console.log(action.type)
   switch (action.type) {
-    case "VIEW_MATCH_SCREEN_LOADING":
+    case "VIEW_LOADING_SCREEN":
       return produce(state, ((draft) => {
-        draft.isMatchScreenLoading = true;
+        draft.isLoadingScreen = true;
       }));
-    case "HIDE_MATCH_SCREEN_LOADING":
+    case "HIDE_LOADING_SCREEN":
       return produce(state, ((draft) => {
-        draft.isMatchScreenLoading = false;
+        draft.isLoadingScreen = false;
       }));
     default:
       return state;

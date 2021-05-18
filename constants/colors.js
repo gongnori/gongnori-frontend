@@ -5,6 +5,7 @@ const PRIMARY_WHITE = "#F6F6F6";
 const SECONDARY_WHITE = "#FFFFFF";
 const PRIMARY_YELLOW = "#FDF3A7";
 const PRIMARY_MODAL = "rgba(0, 0, 0, 0.2)";
+const PRIMARY_SHADOW = "rgb(50, 50, 50)"
 
 export {
   PRIMARY_BLUE,
@@ -14,4 +15,5 @@ export {
   SECONDARY_WHITE,
   PRIMARY_YELLOW,
   PRIMARY_MODAL,
+  PRIMARY_SHADOW,
 };

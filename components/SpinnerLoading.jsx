@@ -7,6 +7,7 @@ import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 export default function SpinnerLoading({ visible, content }) {
+  console.log(content)
   return (
     <Spinner
       visible={visible}
@@ -15,6 +16,7 @@ export default function SpinnerLoading({ visible, content }) {
       overlayColor={colors.PRIMARY_MODAL}
       size={"large"}
       animation={"fade"}
+      cancelable={true}
     />
   );
 }

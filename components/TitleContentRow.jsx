@@ -1,27 +1,34 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import * as font from "../constants/fonts";
+import PropTypes from "prop-types";
+import * as sizes from "../constants/sizes";
+import * as fonts from "../constants/fonts";
 
 export default function TitleContentRow({ title, content }) {
   return (
     <View style={styles.container}>
       <Text
+        style={styles.title}
         numberOfLines={1}
         ellipsizeMode="tail"
-        style={styles.title}
       >
         {title}
       </Text>
       <Text
+        style={styles.content}
         numberOfLines={1}
         ellipsizeMode="tail"
-        style={styles.content}
       >
         {content}
       </Text>
     </View>
   );
 }
+
+TitleContentRow.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -33,15 +40,17 @@ const styles = StyleSheet.create({
     height: "100%",
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: 14,
-    fontFamily: font.DO_HYEON_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
   },
   content: {
     flex: 3,
     height: "100%",
     textAlign: "left",
     textAlignVertical: "center",
-    fontSize: 12,
-    fontFamily: font.NANUM_GOTHIC_CODING_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
+    includeFontPadding: false,
   },
 });
