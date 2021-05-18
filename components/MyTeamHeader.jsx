@@ -6,8 +6,8 @@ import _ from "lodash";
 import DropDown from "./DropDown";
 
 import { setCurrentTeam } from "../actions/userActionCreators";
-import * as color from "../constants/colors";
-import * as size from "../constants/sizes";
+import * as colors from "../constants/colors";
+import * as sizes from "../constants/sizes";
 
 export default function MyTeamHeader() {
   const myTeams = useSelector((state) => {
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "stretch",
-    height: size.MY_TEAM_HEADER_HEIGHT,
-    backgroundColor: color.SECONDARY_BLUE,
+    height: sizes.HEADER_HEIGHT,
+    backgroundColor: colors.SECONDARY_BLUE,
   },
   team: {
     flex: 1,
@@ -60,8 +60,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dropDown: {
-    width: 0.15 * size.DEVICE_WIDTH,
-    height: 0.05 * size.DEVICE_HEIGHT,
-    fontSize: size.TERTIARY_FONT_SIZE,
+    width: 0.15 * sizes.DEVICE_WIDTH,
+    height: 0.05 * sizes.DEVICE_HEIGHT,
+    color: colors.SECONDARY_WHITE,
+    fontSize: sizes.TERTIARY_FONT_SIZE,
   },
 });

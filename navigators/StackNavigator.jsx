@@ -5,28 +5,26 @@ import MatchCreateScreen from "../screens/MatchCreateScreen";
 import MatchJoinScreen from "../screens/MatchJoinScreen";
 import TeamCreateScreen from "../screens/TeamCreateScreen";
 import ChatScreen from "../screens/ChatScreen";
-import * as color from "../constants/colors";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 const Stack = createStackNavigator();
 
-const HEADER_HEIGHT = 80;
-const HEADER_FONT_SIZE = 30;
-const MATCH_CREATE_TITLE = "경기 만들기";
-const MATCH_JOIN_TITLE = "경기 신청하기";
-const TEAM_CREATE_TITLE = "팀 만들기";
-const CHAT_TITLE = "채팅";
-
 const headerOption = {
   headerStyle: {
-    backgroundColor: color.SECONDARY_BLUE,
-    height: HEADER_HEIGHT,
+    backgroundColor: colors.SECONDARY_BLUE,
+    height: sizes.HEADER_HEIGHT,
   },
-  headerTintColor: color.PRIMARY_WHITE,
+  headerTintColor: colors.PRIMARY_WHITE,
   hearderTintStyle: {
-    fontSize: HEADER_FONT_SIZE,
+    fontSize: sizes.HEADER_FONT_SIZE,
   },
   headerTitleAlign: "center",
-}
+};
+
+//fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+//fontSize: sizes.SECONDARY_FONT_SIZE,
 
 export default function MatchNavigator() {
   return (
@@ -39,22 +37,22 @@ export default function MatchNavigator() {
       <Stack.Screen
         name="MatchJoin"
         component={MatchJoinScreen}
-        options={{ ...headerOption, title: MATCH_JOIN_TITLE }}
+        options={{ ...headerOption, title: "경기 신청하기" }}
       />
       <Stack.Screen
         name="MatchCreate"
         component={MatchCreateScreen}
-        options={{ ...headerOption, title: MATCH_CREATE_TITLE }}
+        options={{ ...headerOption, title: "경기 만들기" }}
       />
       <Stack.Screen
         name="TeamCreate"
         component={TeamCreateScreen}
-        options={{ ...headerOption, title: TEAM_CREATE_TITLE }}
+        options={{ ...headerOption, title: "팀 만들기" }}
       />
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
-        options={{ ...headerOption, title: CHAT_TITLE }}
+        options={{ ...headerOption, title: "채팅" }}
       />
     </Stack.Navigator>
   );

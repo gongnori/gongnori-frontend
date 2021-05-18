@@ -1,6 +1,7 @@
 import produce from "immer";
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { StyleSheet, View, Text, TextInput, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TextInput, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { API_SERVER } from "@env";
 import socketio from "socket.io-client";
@@ -52,7 +53,7 @@ export default function ChatScreen({ navigation, route }) {
   useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList //scroll view로 바꾸어야할듯,...
         ref={flatListRef}
         style={styles.chatting}
@@ -75,7 +76,7 @@ export default function ChatScreen({ navigation, route }) {
           onPress={handlePressSendBtn}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

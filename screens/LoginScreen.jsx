@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import CustomButton from "../components/CustomButton";
 import { authLogin } from "../actions/userActionCreators";
@@ -20,13 +21,13 @@ export default function LoginScreen() {
   }, [getGoogleUserInfo]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image style={styles.image} source={require("../assets/soccerBall.jpeg")} />
       <CustomButton
         title="Google로 시작하기"
         onPress={signInGoogle}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

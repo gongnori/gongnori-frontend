@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
@@ -24,7 +25,7 @@ export default function MyTeamScreen({ navigation }) {
   const handleModal = () => setIsModal(!isModal);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <MyTeamHeader />
       <View style={styles.body}>
         {currentTeam && (
@@ -44,7 +45,7 @@ export default function MyTeamScreen({ navigation }) {
         visible={isModal}
         setIsModal={handleModal}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

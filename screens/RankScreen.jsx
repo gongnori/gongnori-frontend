@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, FlatList, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import _ from "lodash";
-import RankHeader from "../components/RankHeader";
+import NormalHeader from "../components/NormalHeader";
 import RankItem from "../components/RankItem";
 // import RankMatchButton from "../components/RankMatchButton";
 import SideButton from "../components/SideButton";
@@ -19,8 +20,8 @@ export default function RankScreen({ navigation }) {
   const sortedTeams = _teams.sort((a, b) => b.rank - a.rank);
 
   return (
-    <View style={styles.container}>
-      <RankHeader />
+    <SafeAreaView style={styles.container}>
+      <NormalHeader />
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>랭킹</Text>
       </View>
@@ -37,7 +38,7 @@ export default function RankScreen({ navigation }) {
         rank={true}
       />
       {/* <RankMatchButton /> */}
-    </View>
+    </SafeAreaView>
   );
 }
 

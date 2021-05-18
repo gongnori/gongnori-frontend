@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -68,57 +69,59 @@ export default function MatchCreateScreen({ navigation }) {
   useHeaderRight(navigation, "만들기", "POST", "team", { ...team, imageS3 });
 
   return (
-    <DismissKeyboard>
-      <View style={styles.container}>
-        <SpinnerLoading
-          visible={isHeaderRightLoading}
-          content={"Team Creating"}
-        />
-        <View style={styles.emblem}>
-          <View style={styles.imageBox}>
-            <Image
-              style={styles.image}
-              source={{ uri: image }}
-            />
-          </View>
-          <CustomButton
-            title={"앨범에서 선택"}
-            style={styles.button}
-            onPress={pickImage}
+    <SafeAreaView>
+      <DismissKeyboard>
+        <View style={styles.container}>
+          <SpinnerLoading
+            visible={isHeaderRightLoading}
+            content={"Team Creating"}
           />
+          <View style={styles.emblem}>
+            <View style={styles.imageBox}>
+              <Image
+                style={styles.image}
+                source={{ uri: image }}
+              />
+            </View>
+            <CustomButton
+              title={"앨범에서 선택"}
+              style={styles.button}
+              onPress={pickImage}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <View style={styles.input}>
+              <Text style={styles.title}>{"팀명"}</Text>
+              <TextInput
+                value={team.name}
+                style={styles.field}
+                placeholder={"팀 이름을 입력하세요."}
+                autoCompleteType="off"
+                onChangeText={handleChangeName}
+              />
+            </View>
+            <View style={styles.input}>
+              <Text style={styles.title}>종목</Text>
+              <DropDown
+                value={"종목을 선택하세요."}
+                options={sportsOptions}
+                style={styles.field}
+                onSelect={handleSelectSports}
+              />
+            </View>
+            <View style={styles.input}>
+              <Text style={styles.title}>지역</Text>
+              <DropDown
+                value={"동네를 선택하세요."}
+                options={locationOptions}
+                style={styles.field}
+                onSelect={handleSelectLocation}
+              />
+            </View>
+          </View>
         </View>
-        <View style={styles.inputContainer}>
-          <View style={styles.input}>
-            <Text style={styles.title}>{"팀명"}</Text>
-            <TextInput
-              value={team.name}
-              style={styles.field}
-              placeholder={"팀 이름을 입력하세요."}
-              autoCompleteType="off"
-              onChangeText={handleChangeName}
-            />
-          </View>
-          <View style={styles.input}>
-            <Text style={styles.title}>종목</Text>
-            <DropDown
-              value={"종목을 선택하세요."}
-              options={sportsOptions}
-              style={styles.field}
-              onSelect={handleSelectSports}
-            />
-          </View>
-          <View style={styles.input}>
-            <Text style={styles.title}>지역</Text>
-            <DropDown
-              value={"동네를 선택하세요."}
-              options={locationOptions}
-              style={styles.field}
-              onSelect={handleSelectLocation}
-            />
-          </View>
-        </View>
-      </View>
-    </DismissKeyboard>
+      </DismissKeyboard>
+    </SafeAreaView>
   );
 }
 

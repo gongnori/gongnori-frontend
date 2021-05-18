@@ -1,41 +1,30 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { useDispatch } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
-import useDateController from "../hooks/useDateController";
-import { getMatch } from "../actions/appActionCreators";
-import * as color from "../constants/colors";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
-const DATE_CONTROLLER_ICON_SIZE = 30;
-const DATE_CONTROLLER_FONT_SIZE = 16;
 const DATE_CONTROLLER_WIDTH = 150;
 const DATE_CONTROLLER_HEIGHT = 50;
 
 export default function DateController({ year, month, date, onPressButton }) {
-  // const dispatch = useDispatch();
-
-  // const [year, month, date, handlePressButton] = useDateController();
-
-  // useEffect(() => {
-  //   dispatch(getMatch(year, month, date));
-  // }, [year, month, date]);
-
   return (
     <View style={styles.container}>
       <Icon
         name="arrow-back-circle-outline"
-        size={DATE_CONTROLLER_ICON_SIZE}
-        color={color.PRIMARY_BROWN}
+        size={sizes.PRIMARY_FONT_SIZE}
+        color={colors.SECONDARY_WHITE}
         onPress={() => onPressButton("back")}
       />
       <View style={styles.date}>
-        <Text style={styles.text}>{`${month} 월`}</Text>
-        <Text style={styles.text}>{`${date} 일`}</Text>
+        <Text style={styles.text}>{`${month}월 `}</Text>
+        <Text style={styles.text}>{`${date}일`}</Text>
       </View>
       <Icon
         name="arrow-forward-circle-outline"
-        size={DATE_CONTROLLER_ICON_SIZE}
-        color={color.PRIMARY_BROWN}
+        size={sizes.PRIMARY_FONT_SIZE}
+        color={colors.SECONDARY_WHITE}
         onPress={() => onPressButton("forward")}
       />
     </View>
@@ -59,6 +48,11 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: DATE_CONTROLLER_FONT_SIZE,
+    textAlign: "left",
+    textAlignVertical: "center",
+    color: colors.SECONDARY_WHITE,
+    fontSize: sizes.SECONDARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
+    includeFontPadding: false,
   },
 });

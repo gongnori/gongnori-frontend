@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import produce from "immer";
 import _ from "lodash";
 import CustomButton from "../components/CustomButton";
@@ -43,7 +45,7 @@ export default function LocationScreen() {
   const handlePressButton = () => dispatch(saveMyLocation(email, myLocations));
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
         동네를 두개를 골라주세요
       </Text>
@@ -79,7 +81,7 @@ export default function LocationScreen() {
           onPress={handlePressButton}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

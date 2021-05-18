@@ -43,7 +43,7 @@
     "global-require": "off",
     "no-shadow": "off",
     "no-useless-return": "off",
-    "camelcase": "warn",
+    "camelcase": "off",
     "no-lonely-if": "off",
     "no-param-reassign": "off",
     "react/jsx-indent": ["warn", 2],

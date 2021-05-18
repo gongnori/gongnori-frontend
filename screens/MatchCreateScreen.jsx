@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
@@ -87,7 +88,7 @@ export default function MatchCreateScreen({ navigation, route }) {
   }, [location, myLocation]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 방식</Text>
@@ -139,7 +140,6 @@ export default function MatchCreateScreen({ navigation, route }) {
           />
         </View>
       </View>
-      {/* <View style={styles.map}> */}
       <View>
         {origin && (
           <PlaceMap
@@ -153,7 +153,7 @@ export default function MatchCreateScreen({ navigation, route }) {
           />
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: colors.SECONDARY_GRAY,
+    // marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
   },
   inputContainer: {
     justifyContent: "space-around",

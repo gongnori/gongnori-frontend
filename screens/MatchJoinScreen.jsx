@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
@@ -41,7 +43,9 @@ export default function MatchJoinScreen({ navigation, route }) {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView
+    // forceInset={{ top: 'never', horizontal: 'never', bottom: 'never' }}
+    style={styles.container}>
       <SpinnerLoading
         visible={isHeaderRightLoading}
         content={"Message Sending"}
@@ -59,7 +63,7 @@ export default function MatchJoinScreen({ navigation, route }) {
         width={0.8 * sizes.DEVICE_WIDTH}
         height={0.8 * sizes.DEVICE_WIDTH}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

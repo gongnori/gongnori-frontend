@@ -7,8 +7,9 @@ import DateController from "./DateController";
 import useDateController from "../hooks/useDateController";
 import { setCurrentSports, setCurrentLocation } from "../actions/userActionCreators";
 import { getMatch } from "../actions/appActionCreators";
-import * as color from "../constants/colors";
-import * as size from "../constants/sizes";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 export default function MatchHeader() {
   const myLocations = useSelector((state) => {
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "stretch",
-    height: 0.1 * size.DEVICE_HEIGHT,
-    backgroundColor: color.SECONDARY_BLUE,
+    height: sizes.HEADER_HEIGHT,
+    backgroundColor: colors.SECONDARY_BLUE,
   },
   location: {
     flex: 1,
@@ -100,8 +101,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dropDown: {
-    width: 0.15 * size.DEVICE_WIDTH,
-    height: 0.05 * size.DEVICE_HEIGHT,
-    fontSize: size.TERTIARY_FONT_SIZE,
+    width: 0.15 * sizes.DEVICE_WIDTH,
+    height: 0.05 * sizes.DEVICE_HEIGHT,
+    color: colors.SECONDARY_WHITE,
+    fontSize: sizes.SECONDARY_FONT_SIZE,
   },
 });

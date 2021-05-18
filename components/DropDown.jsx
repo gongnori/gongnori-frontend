@@ -2,22 +2,18 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import ModalDropdown from "react-native-modal-dropdown";
 import * as device from "../constants/device";
-import * as font from "../constants/fonts";
+import * as fonts from "../constants/fonts";
 
 const TEXT_VERTICAL_MARGIN = 5;
 
 export default function DropDown({
-  value = "Drop Down",
-  options = ["option1, option2, option3"],
-  // width = 100,
-  // height = 30,
-  // fontSize = 12,
-  // backgroundColor,
+  value,
+  options = [],
   style = {},
   onSelect = () => console.log("Declare Event Function")
 }) {
   const total = options.length;
-  const { width, height, borderRadius, backgroundColor, fontSize } = style;
+  const { width, height, borderRadius, backgroundColor, color, fontSize } = style;
 
   return (
     <ModalDropdown
@@ -35,6 +31,7 @@ export default function DropDown({
         width,
         height,
         fontSize,
+        color,
       }}
       dropdownStyle={{
         width: 1.0 * width,
@@ -71,10 +68,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "black",
     textAlign: "center",
     textAlignVertical: "center",
-    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
     includeFontPadding: false,
   },
   dropdownText: {
@@ -85,7 +81,7 @@ const styles = StyleSheet.create({
     marginTop: TEXT_VERTICAL_MARGIN,
     paddingTop: 0,
     paddingBottom: 0,
-    fontFamily: font.NOTO_SANS_KR_300_LIGHT,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
   },
 });

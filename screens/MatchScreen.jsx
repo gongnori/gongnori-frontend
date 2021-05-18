@@ -1,7 +1,9 @@
 import produce from "immer";
 import React, { useEffect } from "react";
-import { StyleSheet, View, FlatList, StatusBar } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
+
 import _ from "lodash";
 
 import MatchHeader from "../components/MatchHeader";
@@ -31,7 +33,7 @@ export default function MatchListScreen({ navigation }) {
   });
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SpinnerLoading
         visible={isLoadingScreen}
         content={"Match Loading..."}
@@ -49,7 +51,7 @@ export default function MatchListScreen({ navigation }) {
         path={"MatchCreate"}
         rank={false}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
+    // marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
     backgroundColor: colors.SECONDARY_GRAY,
   },
   flatlist: {
