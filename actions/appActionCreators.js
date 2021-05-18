@@ -100,9 +100,35 @@ const setInitialize = () => async (dispatch) => {
   }
 };
 
+const getTeam = (location, sports) => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const { province, city, district } = location;
+    const res = await fetch(`${API_SERVER}/team?province=${province}&city=${city}&district=${district}&sports=${sports}`, {
+      method: "GET",
+      headers: { "Authorization": token },
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
+    const ranks = data;
+console.log(ranks)
+    dispatch({
+      type: "LOAD_TEAM_SUCCESS",
+      payload: ranks,
+    });
+  } catch (err) {
+    dispatch({ type: "LOAD_TEAM_FAIL" });
+  }
+};
+
 export {
   getMatch,
   getPlayground,
   getMyTeam,
+  getTeam,
   setInitialize,
 };

@@ -15,17 +15,12 @@ import SearchUserModal from "../components/SearchUserModal";
 import * as color from "../constants/colors";
 
 export default function MyTeamScreen({ navigation }) {
-  useEffect(() => {
-    console.log("MyTeam");
-  }, []);
-
   const currentTeam = useSelector((state) => {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const [isModal, setIsModal] = useState(false)
   const handleModal = () => setIsModal(!isModal);
-  console.log(isModal)
 
   return (
     <View style={styles.container}>

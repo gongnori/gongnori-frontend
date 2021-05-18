@@ -17,8 +17,6 @@ export default function SearchUserModal({ visible, setIsModal }) {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  console.log(currentTeam)
-
   const handleChangeText = (value) => setEmail(value);
   const handlePressButton = () => {
     fetchServer(

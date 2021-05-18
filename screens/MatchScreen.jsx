@@ -14,28 +14,26 @@ export default function MatchListScreen({ navigation }) {
   const matches = useSelector((state) => {
     return state.appReducer.matches;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-  const sortedMatches = produce(matches, (draft) => {
-    draft.sort((a, b) => {
-      const milliSecA = new Date(a.playtime.start).getTime();
-      const milliSecB = new Date(b.playtime.start).getTime();
 
-      return milliSecA - milliSecB;
-    });
+  const _matches = _.cloneDeep(matches);
+
+  const sortedMatches = _matches.sort((a, b) => {
+    const milliSecA = new Date(a.playtime.start).getTime();
+    const milliSecB = new Date(b.playtime.start).getTime();
+    return milliSecA - milliSecB;
   });
 
-  console.log(StatusBar.currentHeight)
   return (
     <View style={styles.container}>
       <MatchHeader />
-      <View style={styles.body}>
         <FlatList
-          style={{ width: "90%" }}
+          style={styles.flatlist}
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
           keyExtractor={(item) => item.id}
           data={sortedMatches}
           renderItem={({ item }) => <MatchItem item={item} navigation={navigation} />}
         />
-      </View>
+
       <SideButton
         navigation={navigation}
         route={"MatchCreate"}
@@ -48,11 +46,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
+    alignItems: "center",
     marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
     backgroundColor: colors.PRIMARY_GRAY,
   },
-  body: {
+  flatlist: {
     flex: 1,
-    alignItems: "center",
+    width: sizes.DEVICE_WIDTH,
+    marginTop: 30,
   },
 });

@@ -27,14 +27,26 @@ export default function TeamMatch({ team }) {
 
             // const opponent = teams.filter((team) =>  team.name !== team.name)
             return (
-              <View key={match._id} style={styles.match}>
-                <Text style={styles.primary}>{`vs ${teams[0]}`}</Text>
+              <View key={match.id} style={styles.match}>
+                <Text
+                  style={styles.primary}
+                  numberOfLines={1}
+                  ellipsizeMode="head"
+                >
+                  {`vs ${teams[0]}`}
+                </Text>
                 <View style={styles.cell}>
                   <Text style={styles.secondary}>{`${matchMonth}월 ${matchDate}일`}</Text>
                   <Text style={styles.tertiary}>{`${startTime}:00 - ${endTime}:00`}</Text>
                 </View>
                 <View style={styles.cell}>
-                  <Text numberOfLines={1} ellipsizeMode="tail" style={styles.secondary}>{playgroundName}</Text>
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    style={styles.secondary}
+                  >
+                    {playgroundName}
+                  </Text>
                   <Text style={styles.tertiary}>{`${city} ${district}`}</Text>
                 </View>
               </View>
@@ -49,8 +61,8 @@ export default function TeamMatch({ team }) {
 const styles = StyleSheet.create({
   matches: {
     alignItems: "flex-start",
-    width: sizes.MY_TEAM_MATCH_WIDTH,
-    height: sizes.MY_TEAM_MATCH_HEIGHT,
+    width: 0.9 * sizes.DEVICE_WIDTH,
+    height: 0.25 * sizes.DEVICE_HEIGHT,
     marginTop: 15,
   },
   title: {

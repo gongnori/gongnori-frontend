@@ -19,7 +19,13 @@ export default function TeamMember({ team }) {
           members.map((member) => {
             return (
               <View key={member._id} style={styles.member}>
-                <Text style={styles.name}>{member.name}</Text>
+                <Text
+                  style={styles.name}
+                  numberOfLines={1}
+                  ellipsizeMode="head"
+                >
+                  {member.name}
+                </Text>
                 <View style={styles.detail}>
                   {/* <Icon
                     name="chatbubble-ellipses-outline"
@@ -45,8 +51,8 @@ const styles = StyleSheet.create({
   members: {
     justifyContent: "space-between",
     alignItems: "flex-start",
-    width: sizes.MY_TEAM_MEMBER_WIDTH,
-    height: sizes.MY_TEAM_MEMBER_HEIGHT,
+    width: 0.9 * sizes.DEVICE_WIDTH,
+    height: 0.25 * sizes.DEVICE_HEIGHT,
     marginTop: 15,
   },
 
@@ -85,7 +91,8 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
   detail: {
-    flex: 5,
+    flex: 1,
+    justifyContent: "flex-end",
     flexDirection: "row",
   },
   icon: {
