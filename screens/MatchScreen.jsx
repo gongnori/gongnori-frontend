@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
-    backgroundColor: colors.PRIMARY_GRAY,
+    backgroundColor: colors.SECONDARY_GRAY,
   },
   flatlist: {
     flex: 1,

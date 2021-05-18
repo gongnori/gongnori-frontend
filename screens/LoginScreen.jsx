@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: color.PRIMARY_GRAY,
+    backgroundColor: color.SECONDARY_GRAY,
   },
   image: {
     height: "50%",

@@ -1,30 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableWithoutFeedback, ScrollView, Modal } from "react-native";
 import { API_SERVER } from "@env"
-import { useSelector } from "react-redux";
-import Icon from "react-native-vector-icons/Ionicons";
+import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+import { updateMyData } from "../actions/userActionCreators";
 import fetchServer from "../utils/fetchServer";
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "./CustomButton";
 
-export default function SearchUserModal({ visible, setIsModal }) {
+export default function RegisterUserModal({ visible, setIsModal }) {
   const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
   const currentTeam = useSelector((state) => {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const handleChangeText = (value) => setEmail(value);
-  const handlePressButton = () => {
-    fetchServer(
+  const handleChangeText = useCallback((value) => setEmail(value), []);
+  const handlePressButton = async () => {
+    await fetchServer(
       "PATCH",
       `${API_SERVER}/team/members`,
       { email, teamId: currentTeam.id },
     );
-  }
+
+    dispatch(updateMyData());
+  };
 
   return (
     <Modal

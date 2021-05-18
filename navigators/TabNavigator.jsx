@@ -2,16 +2,15 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import HomeScreen from "../screens/HomeScreen";
 import MatchScreen from "../screens/MatchScreen";
 import RankScreen from "../screens/RankScreen";
 import MyTeamScreen from "../screens/MyTeamScreen";
 import MessageScreen from "../screens/MessageScreen";
 import SettingScreen from "../screens/SettingScreen";
 
-import * as color from "../constants/colors";
-import * as font from "../constants/fonts";
-import * as size from "../constants/sizes";
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,9 +21,6 @@ export default function TabNavigator() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           switch (route.name) {
-            case "Home":
-              iconName = "home-sharp";
-              break;
             case "Match":
               iconName = "football";
               break;
@@ -48,28 +44,28 @@ export default function TabNavigator() {
         unmountOnBlur: true,
       })}
       tabBarOptions={{
-        activeTintColor: color.SECONDARY_BLUE,
-        inactiveTintColor: "#B0BEC5",
+        activeTintColor: colors.SECONDARY_BLUE,
+        inactiveTintColor: colors.PRIMARY_GRAY,
         style: {
-          backgroundColor: color.PRIMARY_WHITE,
-          height: size.TAB_NAVIGATOR_HEIGTH,
+          backgroundColor: colors.SECONDARY_WHITE,
+          height: 0.08 * sizes.DEVICE_HEIGHT,
         },
         labelStyle: {
-          fontSize: size.TAB_NAVIGATOR_LABEL_FONT_SIZE,
-          marginBottom: size.TAB_NAVIGATOR_LABEL_MARGIN_BOTTOM,
-          fontFamily: font.NANUM_GOTHIC_CODING_700_BOLD,
+          padding: 0,
+          marginTop: -5,
+          marginBottom: 5,
+          textAlign: "left",
+          textAlignVertical: "center",
+          fontSize: sizes.QUINARY_FONT_SIZE,
+          fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
+          includeFontPadding: false,
         },
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Match" component={MatchScreen} />
       <Tab.Screen name="Rank" component={RankScreen} />
       <Tab.Screen name="MyTeam" component={MyTeamScreen} />
-      <Tab.Screen
-        name="Message"
-        component={MessageScreen}
-        // options={{ unmountOnBlur: true }}
-      />
+      <Tab.Screen name="Message" component={MessageScreen} />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
   );

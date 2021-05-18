@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.PRIMARY_GRAY,
+    backgroundColor: colors.SECONDARY_GRAY,
   },
   title: {
     width: 200,

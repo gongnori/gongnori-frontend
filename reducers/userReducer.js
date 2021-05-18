@@ -44,6 +44,12 @@ const userReducer = (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.teams = action.payload.teams;
         draft.messages = action.payload.messages;
+
+        const _currentTeam = draft.teams.find((team) => {
+          return team.id === draft.currentTeam.id;
+        });
+
+        draft.currentTeam = _currentTeam;
       });
     case "UPDATE_MY_DATA_FAIL":
       return state;
@@ -52,9 +58,9 @@ const userReducer = (state = initialState, action) => {
         draft.currentTeam = action.payload;
       });
     case "SET_CURRENT_LOCATION":
-        return produce(state, (draft) => {
-          draft.currentLocation = action.payload;
-        });
+      return produce(state, (draft) => {
+        draft.currentLocation = action.payload;
+      });
     case "SET_CURRENT_SPORTS":
       return produce(state, (draft) => {
         draft.currentSports = action.payload;

@@ -6,7 +6,7 @@ import _ from "lodash";
 
 import ModalButton from "../components/ModalButton";
 import MyTeamHeader from "../components/MyTeamHeader";
-import SearchUserModal from "../components/SearchUserModal";
+import RegisterUserModal from "../components/RegisterUserModal";
 import SideButton from "../components/SideButton";
 import TeamMatch from "../components/TeamMatch";
 import TeamMember from "../components/TeamMember";
@@ -40,7 +40,7 @@ export default function MyTeamScreen({ navigation }) {
         path="TeamCreate"
       />
       <ModalButton setIsModal={handleModal} />
-      <SearchUserModal
+      <RegisterUserModal
         visible={isModal}
         setIsModal={handleModal}
       />
@@ -56,11 +56,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: color.PRIMARY_GRAY,
+    backgroundColor: color.SECONDARY_GRAY,
   },
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: color.PRIMARY_GRAY,
+    backgroundColor: color.SECONDARY_GRAY,
   },
 });

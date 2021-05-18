@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     includeFontPadding: false,
-    backgroundColor: colors.PRIMARY_GRAY,
+    backgroundColor: colors.SECONDARY_GRAY,
   },
   team: {
     flex: 4,
