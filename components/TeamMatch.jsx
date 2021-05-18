@@ -17,7 +17,7 @@ export default function TeamMatch({ team }) {
         contentContainerStyle={{ alignItems: "center" }}
       >
         {
-          matches.map((match) => { // matches -> fixedMathes로 바꿀것.
+          fixedMatches.map((match) => { // matches -> fixedMathes로 바꿀것.
             const { playgroundName, city, district, start, end, teams } = match;
 
             const matchMonth = new Date(start).getMonth() + 1;
@@ -25,7 +25,8 @@ export default function TeamMatch({ team }) {
             const startTime = new Date(start).getHours();
             const endTime = new Date(end).getHours();
 
-            // const opponent = teams.filter((team) =>  team.name !== team.name)
+            const opponent = teams.filter((item) => item.name !== team.name);
+
             return (
               <View key={match.id} style={styles.match}>
                 <Text
@@ -33,7 +34,7 @@ export default function TeamMatch({ team }) {
                   numberOfLines={1}
                   ellipsizeMode="head"
                 >
-                  {`vs ${teams[0]}`}
+                  {`vs ${opponent}`}
                 </Text>
                 <View style={styles.cell}>
                   <Text style={styles.secondary}>{`${matchMonth}월 ${matchDate}일`}</Text>

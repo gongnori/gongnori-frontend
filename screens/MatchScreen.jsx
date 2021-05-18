@@ -36,7 +36,8 @@ export default function MatchListScreen({ navigation }) {
 
       <SideButton
         navigation={navigation}
-        route={"MatchCreate"}
+        path={"MatchCreate"}
+        rank={false}
       />
     </View>
   );

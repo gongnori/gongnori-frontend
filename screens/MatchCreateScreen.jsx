@@ -13,7 +13,9 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
-export default function MatchCreateScreen({ navigation }) {
+export default function MatchCreateScreen({ navigation, route }) {
+  const { rank } = route.params
+
   const currentLocation = useSelector((state) => {
     return state.userReducer.currentLocation;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -70,6 +72,7 @@ export default function MatchCreateScreen({ navigation }) {
     sports: { id: currentSports.id, name: currentSports.sports },
     team: { id: currentTeam.id, name: currentTeam.id },
     location: { id: currentLocation.id },
+    rank,
   };
 
   useHeaderRight(navigation, "만들기", "POST", "match", _match); // 입력 validation 넣기 및 입력하세요 모달 띄우기

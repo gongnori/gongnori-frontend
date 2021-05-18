@@ -2,6 +2,7 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as color from "../constants/colors";
 // import * as device from "../constants/device";
+import getDateFromIso from "../utils/getDateFromIso";
 import * as size from  "../constants/sizes";
 import * as font from "../constants/fonts";
 
@@ -18,55 +19,69 @@ export default function MessageItem({ item, navigation }) {
     navigation.navigate("Chat", { message: item });
   };
 
+  const { guest, host, playground, playtime, sports, type } = item
+
+  const [startYear, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
+  const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
+
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       style={styles.container}
       onPress={handlePressMessage}
     >
-      <View style={styles.team}>
-        <Text style={styles.title}>신청팀</Text>
-        <Text style={styles.content}>신청팀 이름</Text>
-      </View>
-      <View style={styles.match}>
-        <Text style={styles.title}>신청경기</Text>
-        <Text style={styles.content}>경기장</Text>
-        <Text style={styles.content}>시간</Text>
-      </View>
+      {/* <View style={styles.team}> */}
+        <Text style={styles.sports}>{`${sports} ${type}`}</Text>
+        <Text style={styles.team}>{`${host.team} vs ${guest.team}`}</Text>
+        <Text style={styles.plyaground}>{`${playground.city} ${playground.district}`}</Text>
+        <Text style={styles.playgroundName}>{playground.name}</Text>
+        <Text style={styles.playtime}>{`${startMonth}월 ${startDate}일 ${startHour}:00 ~ ${endHour}:00` }</Text>
+      {/* </View> */}
     </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
     width: 0.8 * size.DEVICE_WIDTH,
     height: 0.2 * size.DEVICE_HEIGHT,
-    margin: 0.01 * size.DEVICE_HEIGHT,
+    margin: 15,
+    paddingLeft: 15,
     borderRadius: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: color.PRIMARY_BLUE,
-    backgroundColor: color.SECONDARY_WHITE,
+    backgroundColor: color.PRIMARY_YELLOW,
+    elevation: 5,
+    shadowColor: "rgb(50, 50, 50)",
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowOffset: {
+      height: -1,
+      width: 0,
+    },
   },
-  team: {
-    flex: 2,
-    justifyContent: "center",
-    width: "90%",
-  },
-  match: {
-    flex: 3,
-    justifyContent: "center",
-    width: "90%",
-  },
-  title: {
-    fontSize: size.QUATERNARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
-    textAlign: "left",
-    textAlignVertical: "center",
+  sports: {
+    fontSize: size.TERTIARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
     includeFontPadding: false,
   },
-  content: {
+  team: {
+    fontSize: size.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    includeFontPadding: false,
+  },
+  playgroundName: {
     fontSize: size.QUATERNARY_FONT_SIZE,
     fontFamily: font.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
-  }
+  },
+  plyaground: {
+    fontSize: size.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+    includeFontPadding: false,
+  },
+  playtime: {
+    fontSize: size.QUATERNARY_FONT_SIZE,
+    fontFamily: font.NOTO_SANS_KR_300_LIGHT,
+    includeFontPadding: false,
+  },
 });

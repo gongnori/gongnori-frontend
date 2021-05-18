@@ -1,5 +1,5 @@
 import produce from "immer";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, Text, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { API_SERVER } from "@env";
@@ -14,6 +14,8 @@ import * as size from "../constants/sizes";
 const socket = socketio(API_SERVER);
 
 export default function ChatScreen({ navigation, route }) {
+  const flatListRef = useRef(null);
+
   const userName = useSelector((state) => state.userReducer.name);
   const [content, setContent] = useState("");
   const [conversation, setConverSation] = useState([]);
@@ -28,11 +30,16 @@ export default function ChatScreen({ navigation, route }) {
     socket.on("load-message", (data) => setConverSation(data));
 
     return () => {
-      socket.emit("leave-chat-room", message.id);
+      console.log(conversation)
+      socket.emit("leave-chat-room", message.id, conversation);
       socket.off("send-message");
       socket.off("load-message");
     };
   }, []);
+
+  useEffect(() => {
+    // flatListRef.current.scrollToEnd()
+  },[conversation])
 
   const handlePressSendBtn = _.throttle(() => {
     socket.emit("send-message", { name: userName, content });
@@ -40,24 +47,19 @@ export default function ChatScreen({ navigation, route }) {
   }, 100);
 
   const handleChangeText = (value) => setContent(value);
-
-  const getItemLayout = useCallback((data, index) => ({
-    length: 100,
-    offset: 100 * index,
-    index,
-  }), []);
+  const handleContentSizeChange= (width, height) => flatListRef.current.scrollToEnd();
 
   useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <FlatList //scroll view로 바꾸어야할듯,...
+        ref={flatListRef}
         style={styles.chatting}
         contentContainerStyle={{ justifyContent: "flex-end" }}
         keyExtractor={(item) => item["_id"]}
         data={conversation}
-        getItemLayout={getItemLayout}
-        initialScrollIndex={conversation.length - 1}
+        onContentSizeChange={handleContentSizeChange}
         renderItem={({ item }) => <ChatItem item={item} navigation={navigation} />}
       />
       <View style={styles.textInputBar}>

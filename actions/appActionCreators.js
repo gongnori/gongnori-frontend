@@ -115,7 +115,7 @@ const getTeam = (location, sports) => async (dispatch) => {
     if (error) { throw new Error() }
 
     const ranks = data;
-console.log(ranks)
+
     dispatch({
       type: "LOAD_TEAM_SUCCESS",
       payload: ranks,

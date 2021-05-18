@@ -6,11 +6,11 @@ import * as device from "../constants/device";
 const DEVICE_WIDTH = device.WIDTH;
 const DEVICE_HEIGHT = device.HEIGHT;
 
-export default function SideButton({ navigation, route }) {
+export default function SideButton({ navigation, path, rank }) {
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => navigation.navigate(route)}
+      onPress={() => navigation.navigate(path, { rank })}
     >
       <Icon name="add-circle" size={50} />
     </TouchableOpacity>

@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import _ from "lodash";
 import RankHeader from "../components/RankHeader";
 import RankItem from "../components/RankItem";
+// import RankMatchButton from "../components/RankMatchButton";
+import SideButton from "../components/SideButton";
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
-import { color } from "react-native-reanimated";
 
-export default function RankScreen() {
+export default function RankScreen({ navigation }) {
   const teams = useSelector((state) => {
     return state.appReducer.teams;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -30,6 +31,12 @@ export default function RankScreen() {
         data={sortedTeams}
         renderItem={({ item, index }) => <RankItem item={item} index={index} />}
       />
+      <SideButton
+        navigation={navigation}
+        path={"MatchCreate"}
+        rank={true}
+      />
+      {/* <RankMatchButton /> */}
     </View>
   );
 }
