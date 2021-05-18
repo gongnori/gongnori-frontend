@@ -6,11 +6,16 @@ import _ from "lodash";
 import MatchHeader from "../components/MatchHeader";
 import MatchItem from "../components/MatchItem";
 import SideButton from "../components/SideButton";
+import SpinnerLoading from "../components/SpinnerLoading";
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 import * as device from "../constants/device";
 
 export default function MatchListScreen({ navigation }) {
+  const isMatchScreenLoading = useSelector((state) => {
+    return state.loadingReducer.isMatchScreenLoading;
+})
+
   const matches = useSelector((state) => {
     return state.appReducer.matches;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -25,6 +30,10 @@ export default function MatchListScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <SpinnerLoading
+        visible={isMatchScreenLoading}
+        content={"Match Loading..."}
+      />
       <MatchHeader />
         <FlatList
           style={styles.flatlist}
@@ -56,4 +65,5 @@ const styles = StyleSheet.create({
     width: sizes.DEVICE_WIDTH,
     marginTop: 30,
   },
+
 });

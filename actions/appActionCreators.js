@@ -1,10 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
-import { setInitializeError } from  "../actions/errorActionCreators";
-import * as actionTypes from "../actions/actionTypes";
+import { setInitializeError } from "./errorActionCreators";
+import { hideMatchScreenLoading, viewMatchScreenLoading } from "./loadingActionCreators";
+
+import * as actionTypes from "./actionTypes";
 
 const getMatch = (location, sports, year, month, date) => async (dispatch) => {
   try {
+    dispatch(viewMatchScreenLoading());
     const token = await AsyncStorage.getItem("token");
     const { province, city, district } = location;
     const res = await fetch(`${API_SERVER}/match?province=${province}&city=${city}&district=${district}&sports=${sports}&year=${year}&month=${month}&date=${date}`, {
@@ -23,6 +26,8 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
       type: "LOAD_MATCH_SUCCESS",
       payload: matches,
     });
+
+    dispatch(hideMatchScreenLoading());
   } catch (err) {
     dispatch({ type: "LOAD_MATCH_FAIL" });
   }

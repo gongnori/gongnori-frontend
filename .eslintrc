@@ -45,6 +45,7 @@
     "no-useless-return": "off",
     "camelcase": "warn",
     "no-lonely-if": "off",
+    "no-param-reassign": "off",
     "react/jsx-indent": ["warn", 2],
     "react/style-prop-object": "warn",
     "react/prop-types": "warn",

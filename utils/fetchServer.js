@@ -7,7 +7,6 @@
  */
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { setTeamExistError } from "../actions/errorActionCreators";
 
 const fetchServer = async (method, url, reqBody, isMulter) => {
   const token = await AsyncStorage.getItem("token");
@@ -40,12 +39,12 @@ const fetchServer = async (method, url, reqBody, isMulter) => {
 
   if (error) { throw new Error() }
 
-  switch (message) {
-    case "team exist":
-      dispatch(setTeamExistError());
-      return;
-    default:
-  }
+  // switch (message) {
+  //   case "team exist":
+  //     dispatch(setTeamExistError());
+  //     return;
+  //   default:
+  // }
 
   return data;
 };
