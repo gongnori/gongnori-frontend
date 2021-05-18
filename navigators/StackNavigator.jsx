@@ -18,7 +18,7 @@ const CHAT_TITLE = "채팅";
 
 const headerOption = {
   headerStyle: {
-    backgroundColor: color.PRIMARY_BLUE,
+    backgroundColor: color.SECONDARY_BLUE,
     height: HEADER_HEIGHT,
   },
   headerTintColor: color.PRIMARY_WHITE,

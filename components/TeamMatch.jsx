@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 0.05 * sizes.DEVICE_HEIGHT,
     borderBottomWidth: 0.5,
-    borderBottomColor: colors.PRIMARY_BLUE,
+    borderBottomColor: colors.SECONDARY_BLUE,
   },
   cell: {
     flex: 1,

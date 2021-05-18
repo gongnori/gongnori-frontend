@@ -1,32 +1,35 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, TextInput } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
 import produce from "immer";
 import _ from "lodash";
+
+import DismissKeyboard from "../components/DismissKeyborad";
 import DropDown from "../components/DropDown";
 import CustomButton from "../components/CustomButton";
-import DismissKeyboard from "../components/DismissKeyborad";
-import useHeaderRight from  "../hooks/useHeaderRight";
+import SpinnerLoading from "../components/SpinnerLoading";
+
+import useHeaderRight from "../hooks/useHeaderRight";
 import usePickImage from "../hooks/usePickImage";
-import { updateMyData } from "../actions/userActionCreators"
-import * as colors from  "../constants/colors";
+
+import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
+const defaultEmblem = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png";
+
 export default function MatchCreateScreen({ navigation }) {
+  const isHeaderRightLoading = useSelector((state) => {
+    return state.loadingReducer.isHeaderRightLoading;
+  });
+
   const [team, setTeam] = useState({
     name: "",
     location: "",
     sports: "",
   });
-
-  const currentLocation = useSelector((state) => {
-    return state.userReducer.currentLocation;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const currentSports = useSelector((state) => {
-    return state.userReducer.currentSports;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const locations = useSelector((state) => {
     return state.userReducer.locations;
@@ -42,15 +45,13 @@ export default function MatchCreateScreen({ navigation }) {
 
   const sportsOptions = sports.map((item) => item.koreanName);
 
-  const dispatch = useDispatch();
-
-  const handleSelectSports = (index, value) => {
+  const handleSelectSports = (index) => {
     setTeam(produce(team, (draft) => {
       draft.sports = sports[index];
     }));
   };
 
-  const handleSelectLocation = (index, value) => {
+  const handleSelectLocation = (index) => {
     setTeam(produce(team, (draft) => {
       draft.location = locations[index];
     }));
@@ -62,15 +63,18 @@ export default function MatchCreateScreen({ navigation }) {
     }));
   };
 
-  const [image, imageS3, pickImage] = usePickImage("https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png",);
+  const [image, imageS3, pickImage] = usePickImage(defaultEmblem);
 
   useHeaderRight(navigation, "만들기", "POST", "team", { ...team, imageS3 });
 
   return (
     <DismissKeyboard>
       <View style={styles.container}>
+        <SpinnerLoading
+          visible={isHeaderRightLoading}
+          content={"Team Creating"}
+        />
         <View style={styles.emblem}>
-          {/* <Text style={styles.title}>엠블럼</Text> */}
           <View style={styles.imageBox}>
             <Image
               style={styles.image}
@@ -118,11 +122,14 @@ export default function MatchCreateScreen({ navigation }) {
   );
 }
 
+MatchCreateScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     minHeight: sizes.DEVICE_HEIGHT,
-    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: colors.PRIMARY_GRAY,
   },
@@ -148,7 +155,6 @@ const styles = StyleSheet.create({
     height: 0.1 * sizes.DEVICE_HEIGHT,
   },
   title: {
-    // width: 0.15 * sizes.DEVICE_WIDTH,
     height: 0.05 * sizes.DEVICE_HEIGHT,
     marginHorizontal: 15,
     fontSize: sizes.TERTIARY_FONT_SIZE,
@@ -169,24 +175,23 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
   emblem: {
-    justifyContent: "flex-start",
     alignItems: "center",
     marginTop: 30,
   },
   imageBox: {
     justifyContent: "center",
     alignItems: "center",
-    width: 0.4 * sizes.DEVICE_WIDTH,
-    height: 0.2 * sizes.DEVICE_HEIGHT,
+    width: 0.3 * sizes.DEVICE_WIDTH,
+    height: 0.15 * sizes.DEVICE_HEIGHT,
     marginBottom: 20,
   },
   image: {
-    height: "100%",
     width: "100%",
+    height: "100%",
     resizeMode: "contain",
   },
   button: {
-    width: 0.4 * sizes.DEVICE_WIDTH,
+    width: 0.3 * sizes.DEVICE_WIDTH,
     height: 0.1 * sizes.DEVICE_WIDTH,
     borderRadius: 15,
     backgroundColor: colors.PRIMARY_BLUE,

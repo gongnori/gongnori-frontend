@@ -74,7 +74,7 @@ export default function LocationScreen() {
           title={"등록하기"}
           width={200}
           height={40}
-          backgroundColor={colors.PRIMARY_BLUE}
+          backgroundColor={colors.SECONDARY_BLUE}
           fontSize={sizes.SECONDARY_FONT_SIZE}
           onPress={handlePressButton}
         />

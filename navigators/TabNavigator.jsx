@@ -48,7 +48,7 @@ export default function TabNavigator() {
         unmountOnBlur: true,
       })}
       tabBarOptions={{
-        activeTintColor: color.PRIMARY_BLUE,
+        activeTintColor: color.SECONDARY_BLUE,
         inactiveTintColor: "#B0BEC5",
         style: {
           backgroundColor: color.PRIMARY_WHITE,

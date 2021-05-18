@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+
 import DropDown from "./DropDown";
+
 import { setCurrentTeam } from "../actions/userActionCreators";
 import * as color from "../constants/colors";
 import * as size from "../constants/sizes";
@@ -30,20 +32,11 @@ export default function MyTeamHeader() {
         <DropDown
           value={currentTeam?.name ?? "팀"}
           options={teamOptions}
-          style={styles.dropDown}
           onSelect={handleSelectTeam}
+          style={styles.dropDown}
         />
       </View>
       <View style={styles.blank} />
-      <View style={styles.sports}>
-        {/* <DropDown
-          value="football"
-          options={sportsOptions}
-          width={size.MY_TEAM_HEADER_DROPDOWN_WIDTH}
-          height={size.MY_TEAM_HEADER_DROPDOWN_HEIGHT}
-          fontSize={15}
-        /> */}
-      </View>
     </View>
   );
 }
@@ -54,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "stretch",
     height: size.MY_TEAM_HEADER_HEIGHT,
-    backgroundColor: color.PRIMARY_BLUE,
+    backgroundColor: color.SECONDARY_BLUE,
   },
   team: {
     flex: 1,
@@ -62,12 +55,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   blank: {
-    flex: 3,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  sports: {
-    flex: 1,
+    flex: 4,
     justifyContent: "center",
     alignItems: "center",
   },

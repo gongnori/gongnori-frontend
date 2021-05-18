@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 30,
     borderBottomWidth: 0.5,
-    borderBottomColor: colors.PRIMARY_BLUE,
+    borderBottomColor: colors.SECONDARY_BLUE,
   },
 
   name: {

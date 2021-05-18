@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: 0.2 * sizes.DEVICE_WIDTH,
     height: 0.05 * sizes.DEVICE_HEIGHT,
     borderRadius: 5,
-    backgroundColor: colors.PRIMARY_BLUE,
+    backgroundColor: colors.SECONDARY_BLUE,
     color: colors.SECONDARY_WHITE,
     fontSize: sizes.TERTIARY_FONT_SIZE,
   },

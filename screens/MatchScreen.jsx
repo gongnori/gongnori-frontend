@@ -37,14 +37,13 @@ export default function MatchListScreen({ navigation }) {
         content={"Match Loading..."}
       />
       <MatchHeader />
-        <FlatList
-          style={styles.flatlist}
-          contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
-          keyExtractor={(item) => item.id}
-          data={sortedMatches}
-          renderItem={({ item }) => <MatchItem item={item} navigation={navigation} />}
-        />
-
+      <FlatList
+        style={styles.flatlist}
+        contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
+        keyExtractor={(item) => item.id}
+        data={sortedMatches}
+        renderItem={({ item }) => <MatchItem item={item} navigation={navigation} />}
+      />
       <SideButton
         navigation={navigation}
         path={"MatchCreate"}
@@ -67,5 +66,4 @@ const styles = StyleSheet.create({
     width: sizes.DEVICE_WIDTH,
     marginTop: 30,
   },
-
 });

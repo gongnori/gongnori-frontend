@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "stretch",
     height: 0.1 * size.DEVICE_HEIGHT,
-    backgroundColor: color.PRIMARY_BLUE,
+    backgroundColor: color.SECONDARY_BLUE,
   },
   location: {
     flex: 1,

@@ -16,8 +16,8 @@ import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
 export default function MatchJoinScreen({ navigation, route }) {
-  const isLoadingScreen = useSelector((state) => {
-    return state.loadingReducer.isLoadingScreen;
+  const isHeaderRightLoading = useSelector((state) => {
+    return state.loadingReducer.isHeaderRightLoading;
   });
 
   const currentTeam = useSelector((state) => {
@@ -43,8 +43,8 @@ export default function MatchJoinScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <SpinnerLoading
-        visible={isLoadingScreen}
-        content={"???"}
+        visible={isHeaderRightLoading}
+        content={"Message Sending"}
       />
       <TeamOverview team={host} />
       <View style={styles.textContainer}>

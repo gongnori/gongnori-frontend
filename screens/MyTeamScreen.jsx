@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Image, Modal } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import _ from "lodash";
 
-import MyTeamHeader from "../components/MyTeamHeader";
-import TeamOverview from "../components/TeamOverview";
-import TeamMember from "../components/TeamMember";
-import TeamMatch from "../components/TeamMatch";
-import SideButton from "../components/SideButton";
-import CustomButton from "../components/CustomButton";
 import ModalButton from "../components/ModalButton";
+import MyTeamHeader from "../components/MyTeamHeader";
 import SearchUserModal from "../components/SearchUserModal";
+import SideButton from "../components/SideButton";
+import TeamMatch from "../components/TeamMatch";
+import TeamMember from "../components/TeamMember";
+import TeamOverview from "../components/TeamOverview";
 
 import * as color from "../constants/colors";
 
 export default function MyTeamScreen({ navigation }) {
+  const [isModal, setIsModal] = useState(false);
+
   const currentTeam = useSelector((state) => {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const [isModal, setIsModal] = useState(false)
   const handleModal = () => setIsModal(!isModal);
 
   return (
@@ -46,6 +47,10 @@ export default function MyTeamScreen({ navigation }) {
     </View>
   );
 }
+
+MyTeamScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {

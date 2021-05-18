@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: size.DEVICE_WIDTH,
     height: 0.07 * size.DEVICE_HEIGHT,
-    backgroundColor: color.PRIMARY_BLUE,
+    backgroundColor: color.SECONDARY_BLUE,
   },
   textInput: {
     width: 0.75 * size.DEVICE_WIDTH,

@@ -15,6 +15,14 @@ const loadingReducer = (state = initialState, action) => {
       return produce(state, ((draft) => {
         draft.isLoadingScreen = false;
       }));
+    case "VIEW_HEADER_RIGHT_LOADING":
+      return produce(state, ((draft) => {
+        draft.isHeaderRightLoading = true;
+      }));
+    case "HIDE_HEADER_RIGHT_LOADING":
+      return produce(state, ((draft) => {
+        draft.isHeaderRightLoading = false;
+      }));
     default:
       return state;
   }

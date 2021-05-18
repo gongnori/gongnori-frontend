@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 import { API_SERVER } from "@env";
 import { updateMyData } from "../actions/userActionCreators";
 import fetchServer from "../utils/fetchServer";
-import { hideLoadingScreen, viewLoadingScreen } from "../actions/loadingActionCreators";
+import { hideHeaderRightLoading, viewHeaderRightLoading } from "../actions/loadingActionCreators";
 
 const useHeaderRight = (navigation, title, method, path, data) => {
   const dispatch = useDispatch();
   const handlePressHeaderRight = async () => {
-    dispatch(viewLoadingScreen());
+    dispatch(viewHeaderRightLoading());
 
     const res = await fetchServer(
       method,
@@ -18,7 +18,7 @@ const useHeaderRight = (navigation, title, method, path, data) => {
     );
 
     dispatch(updateMyData());
-    dispatch(hideLoadingScreen());
+    dispatch(hideHeaderRightLoading());
   };
 
   useEffect(() => {
