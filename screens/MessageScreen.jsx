@@ -1,17 +1,14 @@
-import produce from "immer";
 import React, { useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { API_SERVER } from "@env";
-import _ from "lodash"
+import PropTypes from "prop-types";
+import _ from "lodash";
+
 import NormalHeader from "../components/NormalHeader";
 import MessageItem from "../components/MessageItem";
-import SideButton from "../components/SideButton";
+
 import { updateMyData } from "../actions/userActionCreators";
-import fetchServer from "../utils/fetchServer";
-import * as color from "../constants/colors";
-import * as size from  "../constants/sizes"
 
 export default function MessageScreen({ navigation }) {
   const messages = useSelector((state) => {
@@ -39,6 +36,10 @@ export default function MessageScreen({ navigation }) {
     </SafeAreaView>
   );
 }
+
+MessageScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {

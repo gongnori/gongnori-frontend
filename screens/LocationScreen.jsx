@@ -19,8 +19,6 @@ export default function LocationScreen() {
     return state.appReducer.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const email = useSelector((state) => state.userReducer.email);
-
   const dispatch = useDispatch();
 
   const locationOptions = locations.map((location) => {
@@ -42,7 +40,7 @@ export default function LocationScreen() {
     }));
   };
 
-  const handlePressButton = () => dispatch(saveMyLocation(email, myLocations));
+  const handlePressButton = () => dispatch(saveMyLocation(myLocations));
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,7 +49,7 @@ export default function LocationScreen() {
       </Text>
       <View style={styles.dropDownContainer}>
         <DropDown
-          value={"동네 1"}
+          defaultValue={"동네 1"}
           options={locationOptions}
           width={200}
           height={40}
@@ -62,7 +60,7 @@ export default function LocationScreen() {
       </View>
       <View style={styles.dropDownContainer}>
         <DropDown
-          value={"동네 2"}
+          defaultValue={"동네 2"}
           options={locationOptions}
           width={200}
           height={40}

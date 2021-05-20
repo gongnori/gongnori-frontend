@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { color } from "react-native-reanimated";
+import PropTypes from "prop-types";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 export default function SpinnerLoading({ visible, content }) {
-  console.log(content)
   return (
     <Spinner
       visible={visible}
@@ -20,6 +20,11 @@ export default function SpinnerLoading({ visible, content }) {
     />
   );
 }
+
+SpinnerLoading.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  content: PropTypes.string.isRequired,
+};
 
 const styles = StyleSheet.create({
   textStyle: {

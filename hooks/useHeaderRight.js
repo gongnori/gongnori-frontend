@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { API_SERVER } from "@env";
+
 import { updateMyData } from "../actions/userActionCreators";
-import fetchServer from "../utils/fetchServer";
 import { hideHeaderRightLoading, viewHeaderRightLoading } from "../actions/loadingActionCreators";
+import fetchServer from "../utils/fetchServer";
 
 const useHeaderRight = (navigation, title, method, path, data) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const useHeaderRight = (navigation, title, method, path, data) => {
 
     const res = await fetchServer(
       method,
-      `${API_SERVER}/${path}`,
+      path,
       data,
     );
 

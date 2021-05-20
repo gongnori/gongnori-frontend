@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+
 import DropDown from "./DropDown";
 import DateController from "./DateController";
+
 import useDateController from "../hooks/useDateController";
 import { setCurrentSports, setCurrentLocation } from "../actions/userActionCreators";
 import { getMatch } from "../actions/appActionCreators";
+
 import * as colors from "../constants/colors";
-import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 export default function MatchHeader() {
@@ -51,7 +53,7 @@ export default function MatchHeader() {
     <View style={styles.container}>
       <View style={styles.location}>
         <DropDown
-          value={currentLocation.district}
+          defaultValue={currentLocation.district}
           options={locationOptions}
           style={styles.dropDown}
           onSelect={handleSelectLocation}
@@ -67,7 +69,7 @@ export default function MatchHeader() {
       </View>
       <View style={styles.sports}>
         <DropDown
-          value={currentSports.koreanName}
+          defaultValue={currentSports.koreanName}
           options={sportsOptions}
           style={styles.dropDown}
           onSelect={handleSelectSports}

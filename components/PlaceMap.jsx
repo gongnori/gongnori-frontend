@@ -14,7 +14,7 @@ export default function PlaceMap({
   places = [],
   onPlacePress,
 }) {
-  const filterdPlaces = places.filter(place => {
+  const filterdPlaces = places.filter((place) => {
     return (
       place.province === location.province
       && place.city === location.city

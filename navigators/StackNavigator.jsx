@@ -1,12 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import TabNavigator from "./TabNavigator";
 import MatchCreateScreen from "../screens/MatchCreateScreen";
 import MatchJoinScreen from "../screens/MatchJoinScreen";
 import TeamCreateScreen from "../screens/TeamCreateScreen";
 import ChatScreen from "../screens/ChatScreen";
+
 import * as colors from "../constants/colors";
-import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 const Stack = createStackNavigator();
@@ -22,9 +23,6 @@ const headerOption = {
   },
   headerTitleAlign: "center",
 };
-
-//fontFamily: font.NOTO_SANS_KR_400_REGULAR,
-//fontSize: sizes.SECONDARY_FONT_SIZE,
 
 export default function MatchNavigator() {
   return (

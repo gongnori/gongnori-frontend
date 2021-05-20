@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
+
 import StackNavigator from "./StackNavigator";
 import LoginScreen from "../screens/LoginScreen";
 import LocationScreen from "../screens/LocationScreen";

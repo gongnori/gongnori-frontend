@@ -1,5 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import PropTypes from "prop-types";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
@@ -24,11 +26,18 @@ export default function CustomTextInput({
   );
 }
 
+CustomTextInput.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  onChangeText: PropTypes.func,
+};
+
 const styles = StyleSheet.create({
   textInputContainer: {
     flexDirection: "row",
-    height: 60,
-    width: 200,
+    width: 0.2 * sizes.DEVICE_WIDTH,
+    height: 0.1 * sizes.DEVICE_HEIGHT,
   },
   title: {
     height: "50%",

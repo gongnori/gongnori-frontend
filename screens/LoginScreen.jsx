@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
+
 import CustomButton from "../components/CustomButton";
-import { authLogin } from "../actions/userActionCreators";
 import useAuthGoogle from "../hooks/useAuthGoogle";
+import { authLogin } from "../actions/userActionCreators";
+
 import * as color from "../constants/colors";
 
 export default function LoginScreen() {
@@ -16,6 +18,7 @@ export default function LoginScreen() {
       const userInfo = await getGoogleUserInfo();
 
       if (!userInfo) { return }
+
       dispatch(authLogin(userInfo));
     })();
   }, [getGoogleUserInfo]);

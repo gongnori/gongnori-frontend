@@ -1,23 +1,24 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import ModalDropdown from "react-native-modal-dropdown";
-import * as device from "../constants/device";
+import PropTypes from "prop-types";
+
 import * as fonts from "../constants/fonts";
 
 const TEXT_VERTICAL_MARGIN = 5;
 
 export default function DropDown({
-  value,
+  defaultValue,
   options = [],
   style = {},
-  onSelect = () => console.log("Declare Event Function")
+  onSelect,
 }) {
   const total = options.length;
   const { width, height, borderRadius, backgroundColor, color, fontSize } = style;
 
   return (
     <ModalDropdown
-      defaultValue={value}
+      defaultValue={defaultValue}
       options={[...options]}
       style={{
         ...styles.button,
@@ -37,7 +38,7 @@ export default function DropDown({
         width: 1.0 * width,
         height: Math.min(
           5 * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize),
-          total * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize)
+          total * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize),
         ),
       }}
       dropdownTextStyle={{
@@ -46,13 +47,6 @@ export default function DropDown({
         fontSize,
       }}
       adjustFrame={(style) => {
-        // if (device.OS === "Android") {
-        //   style.top -= 20;
-        // }
-        // if (device.OS === "iOS") {
-        //   style.top += 10;
-        // }
-
         style.height += 0;
 
         return style;
@@ -61,6 +55,13 @@ export default function DropDown({
     />
   );
 }
+
+DropDown.propTypes = {
+  defaultValue: PropTypes.string,
+  options: PropTypes.array,
+  style: PropTypes.object,
+  onSelect: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -77,10 +78,8 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     textAlignVertical: "center",
-    marginBottom: TEXT_VERTICAL_MARGIN,
-    marginTop: TEXT_VERTICAL_MARGIN,
-    paddingTop: 0,
-    paddingBottom: 0,
+    marginVertical: TEXT_VERTICAL_MARGIN,
+    paddingVertical: TEXT_VERTICAL_MARGIN,
     fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
   },

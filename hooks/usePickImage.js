@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { API_SERVER } from "@env";
 import fetchServer from "../utils/fetchServer";
 import * as device from "../constants/device";
 
@@ -27,7 +26,7 @@ const usePickImage = (defaultImage) => {
       quality: 1,
     });
 
-    const uri = pickResult.uri; //.replace("file://", "");//ios처리하기
+    const uri = pickResult.uri;
     const fileName = uri.split("/").pop();
     const match = /\.(\w+)$/.exec(fileName);
     const type = match ? `image/${match[1]}` : "image";
@@ -42,7 +41,7 @@ const usePickImage = (defaultImage) => {
     if (!pickResult.cancelled) {
       setImage(pickResult.uri);
 
-      const data = await fetchServer("POST", `${API_SERVER}/team/emblem`, formData, true);
+      const data = await fetchServer("POST", "team/emblem", formData, true);
       setImageS3(data);
     }
   }, []);

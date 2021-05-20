@@ -1,9 +1,8 @@
-import produce from "immer";
-import React, { useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React from "react";
+import { StyleSheet, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
-
+import PropTypes from "prop-types";
 import _ from "lodash";
 
 import MatchHeader from "../components/MatchHeader";
@@ -13,11 +12,10 @@ import SpinnerLoading from "../components/SpinnerLoading";
 
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
-import * as device from "../constants/device";
 
 export default function MatchListScreen({ navigation }) {
-  const isLoadingScreen = useSelector((state) => {
-    return state.loadingReducer.isLoadingScreen;
+  const isMatchLoading = useSelector((state) => {
+    return state.loadingReducer.isMatchLoading;
   });
 
   const matches = useSelector((state) => {
@@ -35,7 +33,7 @@ export default function MatchListScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <SpinnerLoading
-        visible={isLoadingScreen}
+        visible={isMatchLoading}
         content={"Match Loading..."}
       />
       <MatchHeader />
@@ -49,18 +47,21 @@ export default function MatchListScreen({ navigation }) {
       <SideButton
         navigation={navigation}
         path={"MatchCreate"}
-        rank={false}
+        isRank={false}
       />
     </SafeAreaView>
   );
 }
+
+MatchListScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    // marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
     backgroundColor: colors.SECONDARY_GRAY,
   },
   flatlist: {

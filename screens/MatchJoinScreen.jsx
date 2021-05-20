@@ -43,9 +43,8 @@ export default function MatchJoinScreen({ navigation, route }) {
   );
 
   return (
-    <SafeAreaView
-    // forceInset={{ top: 'never', horizontal: 'never', bottom: 'never' }}
-    style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      {/* <StatusBar backgroundColor="white" barStyle="light-content" /> */}
       <SpinnerLoading
         visible={isHeaderRightLoading}
         content={"Message Sending"}

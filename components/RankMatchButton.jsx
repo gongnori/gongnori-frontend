@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
 import _ from "lodash";
 import { API_SERVER } from "@env";
+
 import fetchServer from "../utils/fetchServer";
 import * as sizes from "../constants/sizes";
 
-export default function RankMatchButton({ navigation }) {
+export default function RankMatchButton() {
   const currentTeam = useSelector((state) => {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));

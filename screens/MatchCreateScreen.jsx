@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
@@ -19,7 +19,7 @@ import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 export default function MatchCreateScreen({ navigation, route }) {
-  const { rank } = route.params;
+  const { isRank } = route.params;
 
   const teams = useSelector((state) => {
     return state.userReducer.teams;
@@ -69,10 +69,11 @@ export default function MatchCreateScreen({ navigation, route }) {
     sports: { id: currentSports.id, name: currentSports.sports },
     team: { id: currentTeam.id, name: currentTeam.id },
     location: { id: currentLocation.id },
-    rank,
+    isRank,
   };
 
-  useHeaderRight(navigation, "만들기", "POST", "match", _match); // 입력 validation 넣기 및 입력하세요 모달 띄우기
+  const path = isRank ? "match/rank" : "match";
+  useHeaderRight(navigation, "만들기", "POST", path, _match);
 
   useEffect(() => {
     if (!location) {
@@ -93,7 +94,7 @@ export default function MatchCreateScreen({ navigation, route }) {
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 방식</Text>
           <DropDown
-            value={"경기방식"}
+            defaultValue={"경기방식"}
             options={sportsOptions}
             style={{...styles.dropDown, width: 100}}
             onSelect={handleSelectType}
@@ -102,14 +103,14 @@ export default function MatchCreateScreen({ navigation, route }) {
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 날짜</Text>
           <DropDown
-            value={match.month}
+            defaultValue={match.month}
             options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
             style={styles.dropDown}
             onSelect={handleSelectMonth}
           />
           <Text style={styles.separator}>월</Text>
           <DropDown
-            value={match.date}
+            defaultValue={match.date}
             options={getDateFromMonth(match.year, match.month)}
             style={styles.dropDown}
             onSelect={handleSelectDate}
@@ -119,21 +120,21 @@ export default function MatchCreateScreen({ navigation, route }) {
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 시간</Text>
           <DropDown
-            value={match.meridiem}
+            defaultValue={match.meridiem}
             options={["AM", "PM"]}
             style={styles.dropDown}
             onSelect={handleSelectMeridiem}
           />
           <Text style={styles.separator} />
           <DropDown
-            value={match.start}
+            defaultValue={match.start}
             options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00"]}
             style={styles.dropDown}
             onSelect={handleSelectStart}
           />
           <Text style={styles.separator}>~</Text>
           <DropDown
-            value={match.end}
+            defaultValue={match.end}
             options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "1:00"]}
             style={styles.dropDown}
             onSelect={handleSelectEnd}
@@ -157,13 +158,17 @@ export default function MatchCreateScreen({ navigation, route }) {
   );
 }
 
+MatchCreateScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: colors.SECONDARY_GRAY,
-    // marginTop: device.OS === "androind" ? StatusBar.currentHeight : 0,
   },
   inputContainer: {
     justifyContent: "space-around",
@@ -186,10 +191,7 @@ const styles = StyleSheet.create({
     height: 0.1 * sizes.DEVICE_HEIGHT,
   },
   title: {
-    // width: 0.2 * sizes.DEVICE_WIDTH,
     height: 0.05 * sizes.DEVICE_HEIGHT,
-    // marginLeft: 15,
-    // marginRight: 15,
     marginHorizontal: 15,
     fontSize: sizes.TERTIARY_FONT_SIZE,
     fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
@@ -206,11 +208,6 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     includeFontPadding: false,
   },
-  // map: {
-  //   justifyContent: "space-around",
-  //   width: 0.9 * sizes.DEVICE_WIDTH,
-  //   height: 0.5 * sizes.DEVICE_HEIGHT,
-  // },
   dropDown: {
     width: 0.13 * sizes.DEVICE_WIDTH,
     height: 0.04 * sizes.DEVICE_HEIGHT,
@@ -219,8 +216,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.SECONDARY_WHITE,
   },
 });
-
-MatchCreateScreen.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
-};

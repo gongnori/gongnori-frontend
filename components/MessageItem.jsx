@@ -1,25 +1,19 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import * as color from "../constants/colors";
-// import * as device from "../constants/device";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import PropTypes from "prop-types";
+
 import getDateFromIso from "../utils/getDateFromIso";
-import * as size from  "../constants/sizes";
-import * as font from "../constants/fonts";
+
+import * as colors from "../constants/colors";
+import * as fonts from "../constants/fonts";
+import * as sizes from "../constants/sizes";
 
 export default function MessageItem({ item, navigation }) {
-  // const { id, type, playground, host, playtime } = item
-  // const { province, city, district } = playground;
-  // const { start, end } = playtime;
-  // const { name, emblem } = host;
-
-  // const startTime = new Date(start).getHours();
-  // const endTime = new Date(end).getHours();
-
   const handlePressMessage = () => {
     navigation.navigate("Chat", { message: item });
   };
 
-  const { guest, host, playground, playtime, sports, type } = item
+  const { guest, host, playground, playtime, sports, type } = item;
 
   const [startYear, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
   const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
@@ -30,28 +24,32 @@ export default function MessageItem({ item, navigation }) {
       style={styles.container}
       onPress={handlePressMessage}
     >
-      {/* <View style={styles.team}> */}
-        <Text style={styles.sports}>{`${sports} ${type}`}</Text>
-        <Text style={styles.team}>{`${host.team} vs ${guest.team}`}</Text>
-        <Text style={styles.plyaground}>{`${playground.city} ${playground.district}`}</Text>
-        <Text style={styles.playgroundName}>{playground.name}</Text>
-        <Text style={styles.playtime}>{`${startMonth}월 ${startDate}일 ${startHour}:00 ~ ${endHour}:00` }</Text>
-      {/* </View> */}
+      <Text style={styles.sports}>{`${sports} ${type}`}</Text>
+      <Text style={styles.team}>{`${host.team} vs ${guest.team}`}</Text>
+      <Text style={styles.plyaground}>{`${playground.city} ${playground.district}`}</Text>
+      <Text style={styles.playgroundName}>{playground.name}</Text>
+      <Text style={styles.playtime}>{`${startMonth}월 ${startDate}일 ${startHour}:00 ~ ${endHour}:00` }</Text>
     </TouchableOpacity>
   );
 }
+
+MessageItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: "space-around",
     alignItems: "flex-start",
-    width: 0.8 * size.DEVICE_WIDTH,
-    height: 0.2 * size.DEVICE_HEIGHT,
+    width: 0.8 * sizes.DEVICE_WIDTH,
+    height: 0.2 * sizes.DEVICE_HEIGHT,
     margin: 15,
     paddingLeft: 15,
     borderRadius: 10,
-    backgroundColor: color.PRIMARY_YELLOW,
+    backgroundColor: colors.PRIMARY_YELLOW,
     elevation: 5,
-    shadowColor: "rgb(50, 50, 50)",
+    shadowColor: colors.PRIMARY_SHADOW,
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowOffset: {
@@ -60,28 +58,28 @@ const styles = StyleSheet.create({
     },
   },
   sports: {
-    fontSize: size.TERTIARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    fontSize: sizes.TERTIARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
     includeFontPadding: false,
   },
   team: {
-    fontSize: size.QUATERNARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_500_MEDIUM,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
     includeFontPadding: false,
   },
   playgroundName: {
-    fontSize: size.QUATERNARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_300_LIGHT,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
   },
   plyaground: {
-    fontSize: size.QUATERNARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_400_REGULAR,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
     includeFontPadding: false,
   },
   playtime: {
-    fontSize: size.QUATERNARY_FONT_SIZE,
-    fontFamily: font.NOTO_SANS_KR_300_LIGHT,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
   },
 });

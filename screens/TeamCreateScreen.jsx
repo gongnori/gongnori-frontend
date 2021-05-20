@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -19,7 +20,7 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
-const defaultEmblem = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png";
+const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png";
 
 export default function MatchCreateScreen({ navigation }) {
   const isHeaderRightLoading = useSelector((state) => {
@@ -64,64 +65,63 @@ export default function MatchCreateScreen({ navigation }) {
     }));
   };
 
-  const [image, imageS3, pickImage] = usePickImage(defaultEmblem);
+  const [image, imageS3, pickImage] = usePickImage(DEFAULT_EMBLEM);
 
   useHeaderRight(navigation, "만들기", "POST", "team", { ...team, imageS3 });
 
   return (
-    <SafeAreaView>
-      <DismissKeyboard>
-        <View style={styles.container}>
-          <SpinnerLoading
-            visible={isHeaderRightLoading}
-            content={"Team Creating"}
-          />
-          <View style={styles.emblem}>
-            <View style={styles.imageBox}>
-              <Image
-                style={styles.image}
-                source={{ uri: image }}
-              />
-            </View>
-            <CustomButton
-              title={"앨범에서 선택"}
-              style={styles.button}
-              onPress={pickImage}
+    <DismissKeyboard>
+      <SafeAreaView style={styles.container}>
+        <StatusBar backgroundColor="white" barStyle="light-content" />
+        <SpinnerLoading
+          visible={isHeaderRightLoading}
+          content={"Team Creating"}
+        />
+        <View style={styles.emblem}>
+          <View style={styles.imageBox}>
+            <Image
+              style={styles.image}
+              source={{ uri: image }}
             />
           </View>
-          <View style={styles.inputContainer}>
-            <View style={styles.input}>
-              <Text style={styles.title}>{"팀명"}</Text>
-              <TextInput
-                value={team.name}
-                style={styles.field}
-                placeholder={"팀 이름을 입력하세요."}
-                autoCompleteType="off"
-                onChangeText={handleChangeName}
-              />
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.title}>종목</Text>
-              <DropDown
-                value={"종목을 선택하세요."}
-                options={sportsOptions}
-                style={styles.field}
-                onSelect={handleSelectSports}
-              />
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.title}>지역</Text>
-              <DropDown
-                value={"동네를 선택하세요."}
-                options={locationOptions}
-                style={styles.field}
-                onSelect={handleSelectLocation}
-              />
-            </View>
+          <CustomButton
+            title={"앨범에서 선택"}
+            style={styles.button}
+            onPress={pickImage}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <View style={styles.input}>
+            <Text style={styles.title}>{"팀명"}</Text>
+            <TextInput
+              value={team.name}
+              style={styles.field}
+              placeholder={"팀 이름을 입력하세요."}
+              autoCompleteType="off"
+              onChangeText={handleChangeName}
+            />
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.title}>종목</Text>
+            <DropDown
+              defaultValue={"종목을 선택하세요."}
+              options={sportsOptions}
+              style={styles.field}
+              onSelect={handleSelectSports}
+            />
+          </View>
+          <View style={styles.input}>
+            <Text style={styles.title}>지역</Text>
+            <DropDown
+              defaultValue={"동네를 선택하세요."}
+              options={locationOptions}
+              style={styles.field}
+              onSelect={handleSelectLocation}
+            />
           </View>
         </View>
-      </DismissKeyboard>
-    </SafeAreaView>
+      </SafeAreaView>
+    </DismissKeyboard>
   );
 }
 

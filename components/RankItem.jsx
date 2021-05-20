@@ -1,9 +1,9 @@
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
+import { Image, StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
+
 import * as colors from "../constants/colors";
-// import * as device from "../constants/device";
-import * as sizes from  "../constants/sizes";
+import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
 
 export default function RankItem({ item, index }) {
@@ -23,8 +23,13 @@ export default function RankItem({ item, index }) {
       </View>
       <Text style={styles.point}>{rank}</Text>
     </View>
-  )
+  );
 }
+
+RankItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number,
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
   point: {
-    flex:2,
+    flex: 2,
     fontSize: sizes.QUATERNARY_FONT_SIZE,
     fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
     textAlign: "center",

@@ -23,7 +23,7 @@ const userReducer = (state = initialState, action) => {
         draft.locations = action.payload.locations;
         draft.teams = action.payload.teams;
         // draft.messages = action.payload.messages;
-        draft.currentLocation = action.payload.locations[0]; // db에 current 저장해야할듯, setting scrrent -> save
+        draft.currentLocation = action.payload.locations[0];
         draft.currentTeam = action.payload.teams[0];
         // draft.currentMessage = action.payload.messages[0];
         draft.currentSports = action.payload.sports[0];

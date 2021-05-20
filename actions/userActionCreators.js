@@ -42,13 +42,13 @@ const authLogin = (userInfo) => async (dispatch) => {
   }
 };
 
-const saveMyLocation = (email, locations) => async (dispatch) => {
+const saveMyLocation = (locations) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch(`${API_SERVER}/auth/location`, {
+    const res = await fetch(`${API_SERVER}/user/location`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, locations }),
+      body: JSON.stringify({ locations }),
     });
 
     const result = await res.json();

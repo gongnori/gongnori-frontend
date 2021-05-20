@@ -1,13 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
 import { setInitializeError } from "./errorActionCreators";
-import { hideLoadingScreen, viewLoadingScreen } from "./loadingActionCreators";
+import {
+  hideMatchLoading,
+  viewMatchLoading,
+  hideRankLoading,
+  viewRankLoading,
+} from "./loadingActionCreators";
 
 import * as actionTypes from "./actionTypes";
 
 const getMatch = (location, sports, year, month, date) => async (dispatch) => {
   try {
-    dispatch(viewLoadingScreen());
+    dispatch(viewMatchLoading());
 
     const token = await AsyncStorage.getItem("token");
     const { province, city, district } = location;
@@ -28,7 +33,7 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
       payload: matches,
     });
 
-    dispatch(hideLoadingScreen());
+    dispatch(hideMatchLoading());
   } catch (err) {
     dispatch({ type: "LOAD_MATCH_FAIL" });
   }
@@ -108,6 +113,8 @@ const setInitialize = () => async (dispatch) => {
 
 const getTeam = (location, sports) => async (dispatch) => {
   try {
+    dispatch(viewRankLoading());
+
     const token = await AsyncStorage.getItem("token");
     const { province, city, district } = location;
     const res = await fetch(`${API_SERVER}/team?province=${province}&city=${city}&district=${district}&sports=${sports}`, {
@@ -126,6 +133,8 @@ const getTeam = (location, sports) => async (dispatch) => {
       type: "LOAD_TEAM_SUCCESS",
       payload: ranks,
     });
+
+    dispatch(hideRankLoading());
   } catch (err) {
     dispatch({ type: "LOAD_TEAM_FAIL" });
   }

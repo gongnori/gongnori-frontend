@@ -7,10 +7,13 @@
  */
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_SERVER } from "@env";
 
-const fetchServer = async (method, url, reqBody, isMulter) => {
+const fetchServer = async (method, path, reqBody, isMulter) => {
   const token = await AsyncStorage.getItem("token");
   let req;
+
+  const url = `${API_SERVER}/${path}`;
 
   if (method === "GET") {
     req = {
@@ -39,14 +42,7 @@ const fetchServer = async (method, url, reqBody, isMulter) => {
 
   if (error) { throw new Error() }
 
-  // switch (message) {
-  //   case "team exist":
-  //     dispatch(setTeamExistError());
-  //     return;
-  //   default:
-  // }
-
-  return data;
+  return _res;
 };
 
 export default fetchServer;

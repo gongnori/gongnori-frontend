@@ -13,7 +13,8 @@ import TeamMatch from "../components/TeamMatch";
 import TeamMember from "../components/TeamMember";
 import TeamOverview from "../components/TeamOverview";
 
-import * as color from "../constants/colors";
+import * as colors from "../constants/colors";
+import * as sizes from "../constants/sizes";
 
 export default function MyTeamScreen({ navigation }) {
   const [isModal, setIsModal] = useState(false);
@@ -26,6 +27,10 @@ export default function MyTeamScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <RegisterUserModal
+        visible={isModal}
+        setIsModal={handleModal}
+      />
       <MyTeamHeader />
       <View style={styles.body}>
         {currentTeam && (
@@ -40,10 +45,10 @@ export default function MyTeamScreen({ navigation }) {
         navigation={navigation}
         path="TeamCreate"
       />
-      <ModalButton setIsModal={handleModal} />
-      <RegisterUserModal
-        visible={isModal}
+      <ModalButton
         setIsModal={handleModal}
+        icon={"search"}
+        style={styles.modalButton}
       />
     </SafeAreaView>
   );
@@ -57,11 +62,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: color.SECONDARY_GRAY,
+    backgroundColor: colors.SECONDARY_GRAY,
   },
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: color.SECONDARY_GRAY,
+    backgroundColor: colors.SECONDARY_GRAY,
+  },
+  modalButton: {
+    flex: 1,
+    alignItems: "center",
+    bottom: 0.13 * sizes.DEVICE_HEIGHT,
+    right: 0.1 * sizes.DEVICE_WIDTH,
+    backgroundColor: colors.SECONDARY_GRAY,
   },
 });

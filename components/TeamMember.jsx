@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import PropTypes from "prop-types";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
@@ -27,11 +29,6 @@ export default function TeamMember({ team }) {
                   {member.name}
                 </Text>
                 <View style={styles.detail}>
-                  {/* <Icon
-                    name="chatbubble-ellipses-outline"
-                    size={sizes.QUATERNARY_FONT_SIZE}
-                    style={styles.icon}
-                  /> */}
                   <Icon
                     name="person-remove"
                     size={sizes.QUATERNARY_FONT_SIZE}
@@ -46,6 +43,10 @@ export default function TeamMember({ team }) {
     </View>
   );
 }
+
+TeamMember.propTypes = {
+  team: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   members: {

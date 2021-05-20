@@ -1,12 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import PropTypes from "prop-types";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
-
-const DATE_CONTROLLER_WIDTH = 150;
-const DATE_CONTROLLER_HEIGHT = 50;
 
 export default function DateController({ year, month, date, onPressButton }) {
   return (
@@ -31,22 +30,27 @@ export default function DateController({ year, month, date, onPressButton }) {
   );
 }
 
+DateController.propTypes = {
+  year: PropTypes.string,
+  month: PropTypes.string,
+  date: PropTypes.string,
+  onPressButton: PropTypes.func,
+};
+
 const styles = StyleSheet.create({
   container: {
-    width: DATE_CONTROLLER_WIDTH,
-    height: DATE_CONTROLLER_HEIGHT,
+    width: 0.4 * sizes.DEVICE_WIDTH,
+    height: 0.1 * sizes.DEVICE_HEIGHT,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   date: {
-    width: 0.5 * DATE_CONTROLLER_WIDTH,
+    width: 0.1 * sizes.DEVICE_HEIGHT,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   text: {
     textAlign: "left",
     textAlignVertical: "center",

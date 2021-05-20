@@ -1,26 +1,33 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import * as device from "../constants/device";
+import PropTypes from "prop-types";
 
-const DEVICE_WIDTH = device.WIDTH;
-const DEVICE_HEIGHT = device.HEIGHT;
+export default function SideButton({ setIsModal, icon, style }) {
+  const { bottom, right } = style;
 
-export default function SideButton({ setIsModal }) {
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={{
+        ...styles.button,
+        bottom,
+        right,
+      }}
       onPress={() => setIsModal()}
     >
-      <Icon name="search" size={50} />
+      <Icon name={icon} size={50} />
     </TouchableOpacity>
   );
 }
 
+SideButton.propTypes = {
+  setIsModal: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
+  style: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   button: {
     position: "absolute",
-    bottom: 0.13 * DEVICE_HEIGHT,
-    right: 0.1 * DEVICE_WIDTH,
   },
 });

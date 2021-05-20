@@ -1,9 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
-import * as colors from "../constants/colors";
 import * as font from "../constants/fonts";
-import * as sizes from "../constants/sizes";
 
 export default function CustomButton({
   title = "Button",
@@ -13,6 +11,10 @@ export default function CustomButton({
   const {
     width,
     height,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
     borderRadius,
     backgroundColor,
     color,
@@ -25,6 +27,10 @@ export default function CustomButton({
         ...styles.button,
         width,
         height,
+        marginTop,
+        marginRight,
+        marginBottom,
+        marginLeft,
         borderRadius,
         backgroundColor,
       }}
@@ -55,9 +61,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     includeFontPadding: false,
-  }
+  },
 });
 
 CustomButton.propTypes = {
   title: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
+  style: PropTypes.object,
 };

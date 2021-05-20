@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 
 import DropDown from "./DropDown";
-
 import { setCurrentTeam } from "../actions/userActionCreators";
+
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
@@ -30,7 +30,7 @@ export default function MyTeamHeader() {
     <View style={styles.container}>
       <View style={styles.team}>
         <DropDown
-          value={currentTeam?.name ?? "팀"}
+          defaultValue={currentTeam?.name ?? "팀"}
           options={teamOptions}
           onSelect={handleSelectTeam}
           style={styles.dropDown}

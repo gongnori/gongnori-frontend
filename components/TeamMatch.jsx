@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import PropTypes from "prop-types";
+
+import getDateFromIso from "../utils/getDateFromIso";
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
@@ -17,14 +19,10 @@ export default function TeamMatch({ team }) {
         contentContainerStyle={{ alignItems: "center" }}
       >
         {
-          fixedMatches.map((match) => { // matches -> fixedMathes로 바꿀것.
+          fixedMatches.map((match) => {
             const { playgroundName, city, district, start, end, teams } = match;
-
-            const matchMonth = new Date(start).getMonth() + 1;
-            const matchDate = new Date(start).getDate();
-            const startTime = new Date(start).getHours();
-            const endTime = new Date(end).getHours();
-
+            const [startYear, startMonth, startDate, startHour] = getDateFromIso(start);
+            const [endYear, endMont, endDate, endHour] = getDateFromIso(end);
             const opponent = teams.filter((item) => item.name !== team.name);
 
             return (
@@ -37,8 +35,8 @@ export default function TeamMatch({ team }) {
                   {`vs ${opponent}`}
                 </Text>
                 <View style={styles.cell}>
-                  <Text style={styles.secondary}>{`${matchMonth}월 ${matchDate}일`}</Text>
-                  <Text style={styles.tertiary}>{`${startTime}:00 - ${endTime}:00`}</Text>
+                  <Text style={styles.secondary}>{`${startMonth}월 ${startDate}일`}</Text>
+                  <Text style={styles.tertiary}>{`${startHour}:00 - ${endHour}:00`}</Text>
                 </View>
                 <View style={styles.cell}>
                   <Text
@@ -58,6 +56,10 @@ export default function TeamMatch({ team }) {
     </View>
   );
 }
+
+TeamMatch.propTypes = {
+  team: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   matches: {

@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
 import getDateFromIso from "../utils/getDateFromIso";
+
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
 
-export default function ChatItem({ item }) {
+export default function ChatItem({ chat }) {
   const userName = useSelector((state) => state.userReducer.name);
 
-  const isMyMessage = userName === item.name;
+  const isMyMessage = userName === chat.name;
   const layout = isMyMessage ? "flex-end" : "flex-start";
-  const color = isMyMessage ? "#FFE082" : colors.SECONDARY_WHITE;
+  const color = isMyMessage ? colors.PRIMARY_YELLOW : colors.SECONDARY_WHITE;
 
-  const [year, month, date, hour, minute] = getDateFromIso(item.date);
+  const [year, month, date, hour, minute] = getDateFromIso(chat.date);
 
   return (
-    <View
-      style={{ alignSelf: layout }}
-    >
-      {!isMyMessage && <Text style={styles.name}>{`${item.name}`}</Text>}
+    <View style={{ alignSelf: layout }}>
+      {!isMyMessage && <Text style={styles.name}>{`${chat.name}`}</Text>}
       <View style={styles.messageDateBox}>
         {isMyMessage && <Text style={styles.date}>{`${hour}:${minute}`}</Text>}
         <Text style={{ ...styles.message, backgroundColor: color }}>
-          {item.content}
+          {chat.content}
         </Text>
         {!isMyMessage && <Text style={styles.date}>{`${hour}:${minute}`}</Text>}
       </View>
     </View>
-  )
+  );
 }
+
+ChatItem.propTypes = {
+  chat: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   message: {
@@ -58,6 +63,5 @@ const styles = StyleSheet.create({
     fontSize: sizes.QUATERNARY_FONT_SIZE,
     fontFamily: fonts.NOTO_SANS_KR_100_THIN,
     includeFontPadding: false,
-  }
+  },
 });
-

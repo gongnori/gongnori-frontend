@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import PropTypes from "prop-types";
+
 import * as font from "../constants/fonts";
 import * as size from "../constants/sizes";
 
@@ -48,15 +49,15 @@ export default function TeamOverview({ team }) {
 
 const styles = StyleSheet.create({
   overview: {
-    height: 0.15 * size.DEVICE_HEIGHT,
-    width: 0.8 * size.DEVICE_WIDTH,
     flexDirection: "row",
     alignItems: "center",
+    height: 0.15 * size.DEVICE_HEIGHT,
+    width: 0.8 * size.DEVICE_WIDTH,
   },
   emblemContainer: {
-    width: 0.2 * size.DEVICE_WIDTH,
     justifyContent: "center",
     alignItems: "center",
+    width: 0.2 * size.DEVICE_WIDTH,
     height: "100%",
   },
   emblem: {
@@ -65,9 +66,9 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   descripitonContainer: {
-    width: 0.6 * size.DEVICE_WIDTH,
     justifyContent: "space-evenly",
     alignItems: "flex-start",
+    width: 0.6 * size.DEVICE_WIDTH,
     height: "100%",
     paddingLeft: 10,
   },

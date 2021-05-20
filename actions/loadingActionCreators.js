@@ -1,9 +1,17 @@
-const viewLoadingScreen = () => ({
-  type: "VIEW_LOADING_SCREEN",
+const viewMatchLoading = () => ({
+  type: "VIEW_MATCH_LOADING",
 });
 
-const hideLoadingScreen = () => ({
-  type: "HIDE_LOADING_SCREEN",
+const hideMatchLoading = () => ({
+  type: "HIDE_MATCH_LOADING",
+});
+
+const viewRankLoading = () => ({
+  type: "VIEW_RANK_LOADING",
+});
+
+const hideRankLoading = () => ({
+  type: "HIDE_RANK_LOADING",
 });
 
 const viewHeaderRightLoading = () => ({
@@ -15,8 +23,10 @@ const hideHeaderRightLoading = () => ({
 });
 
 export {
-  viewLoadingScreen,
-  hideLoadingScreen,
+  viewMatchLoading,
+  hideMatchLoading,
+  viewRankLoading,
+  hideRankLoading,
   viewHeaderRightLoading,
   hideHeaderRightLoading,
 };

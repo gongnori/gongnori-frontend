@@ -1,17 +1,24 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList, Image } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import _ from "lodash";
+
 import NormalHeader from "../components/NormalHeader";
 import RankItem from "../components/RankItem";
-// import RankMatchButton from "../components/RankMatchButton";
 import SideButton from "../components/SideButton";
+import SpinnerLoading from "../components/SpinnerLoading";
+
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
 
 export default function RankScreen({ navigation }) {
+  const isRankLoading = useSelector((state) => {
+    return state.loadingReducer.isRankLoading;
+  });
+
   const teams = useSelector((state) => {
     return state.appReducer.teams;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -21,6 +28,10 @@ export default function RankScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <SpinnerLoading
+        visible={isRankLoading}
+        content={"Rank Loading..."}
+      />
       <NormalHeader />
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>랭킹</Text>
@@ -35,18 +46,21 @@ export default function RankScreen({ navigation }) {
       <SideButton
         navigation={navigation}
         path={"MatchCreate"}
-        rank={true}
+        isRank={true}
       />
-      {/* <RankMatchButton /> */}
     </SafeAreaView>
   );
 }
+
+RankScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.SECONDARY_GRAY
+    backgroundColor: colors.SECONDARY_GRAY,
   },
 
   tableHeader: {
