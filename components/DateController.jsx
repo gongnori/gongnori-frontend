@@ -31,9 +31,9 @@ export default function DateController({ year, month, date, onPressButton }) {
 }
 
 DateController.propTypes = {
-  year: PropTypes.string,
-  month: PropTypes.string,
-  date: PropTypes.string,
+  year: PropTypes.number,
+  month: PropTypes.number,
+  date: PropTypes.number,
   onPressButton: PropTypes.func,
 };
 

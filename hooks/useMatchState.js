@@ -8,6 +8,7 @@ const useMatchState = () => {
     start: "8",
     end: "10",
     meridiem: "AM",
+    playground: null,
   });
 
   const handleSelectType = (index, value) => {

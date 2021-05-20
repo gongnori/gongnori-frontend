@@ -5,9 +5,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import produce from "immer";
 import _ from "lodash";
+
 import CustomButton from "../components/CustomButton";
 import DropDown from "../components/DropDown";
 import { saveMyLocation } from "../actions/userActionCreators";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";

@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
+import { StatusBar } from "expo-status-bar";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
+import CompletionModal from "../components/CompletionModal";
+import InputAlertModal from "../components/InputAlertModal";
+import SpinnerLoading from "../components/SpinnerLoading";
 import DropDown from "../components/DropDown";
 import PlaceMap from "../components/PlaceMap";
 
@@ -18,9 +22,23 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
+const MONTH_AND_HOURS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+
 export default function MatchCreateScreen({ navigation, route }) {
   const { isRank } = route.params;
 
+  const isHeaderRightLoading = useSelector((state) => {
+    return state.loadingReducer.isHeaderRightLoading;
+  });
+
+  const isInputInvalid = useSelector((state) => {
+    return state.loadingReducer.isInputInvalid;
+  });
+
+  const isCompletionShown = useSelector((state) => {
+    return state.loadingReducer.isCompletionShown;
+  });
+console.log(isInputInvalid, isHeaderRightLoading)
   const teams = useSelector((state) => {
     return state.userReducer.teams;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -90,13 +108,26 @@ export default function MatchCreateScreen({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="white" barStyle="light-content" />
+      <SpinnerLoading
+        visible={isHeaderRightLoading}
+        content={"Match Creating..."}
+      />
+      <InputAlertModal
+        content={"경기 정보를 입력해주세요."}
+        visible={isInputInvalid}
+      />
+      <CompletionModal
+        content={"팀을 만들었습니다."}
+        visible={isCompletionShown}
+      />
       <View style={styles.inputContainer}>
         <View style={styles.titleDropdown}>
           <Text style={styles.title}>경기 방식</Text>
           <DropDown
             defaultValue={"경기방식"}
             options={sportsOptions}
-            style={{...styles.dropDown, width: 100}}
+            style={{ ...styles.dropDown, width: 100 }}
             onSelect={handleSelectType}
           />
         </View>
@@ -104,7 +135,7 @@ export default function MatchCreateScreen({ navigation, route }) {
           <Text style={styles.title}>경기 날짜</Text>
           <DropDown
             defaultValue={match.month}
-            options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
+            options={MONTH_AND_HOURS}
             style={styles.dropDown}
             onSelect={handleSelectMonth}
           />
@@ -128,14 +159,14 @@ export default function MatchCreateScreen({ navigation, route }) {
           <Text style={styles.separator} />
           <DropDown
             defaultValue={match.start}
-            options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00"]}
+            options={MONTH_AND_HOURS}
             style={styles.dropDown}
             onSelect={handleSelectStart}
           />
           <Text style={styles.separator}>~</Text>
           <DropDown
             defaultValue={match.end}
-            options={["12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "1:00"]}
+            options={MONTH_AND_HOURS}
             style={styles.dropDown}
             onSelect={handleSelectEnd}
           />

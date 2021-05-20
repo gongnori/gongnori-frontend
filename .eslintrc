@@ -55,6 +55,7 @@
     "import/prefer-default-export": "warn",
     "prefer-destructuring": "off",
     "dot-notation": "off",
+    "no-restricted-syntax": "off",
     "quote-props": "warn",
     "arrow-body-style": "off",
     "no-case-declarations": "off",

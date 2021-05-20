@@ -43,7 +43,8 @@ export default function MyTeamScreen({ navigation }) {
       </View>
       <SideButton
         navigation={navigation}
-        path="TeamCreate"
+        path={"TeamCreate"}
+        isRank={false}
       />
       <ModalButton
         setIsModal={handleModal}
