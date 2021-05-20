@@ -8,7 +8,7 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
-export default function CompletionModal({ content, visible }) {
+export default function InputAlertModal({ content, visible }) {
   const dispatch = useDispatch();
 
   return (
@@ -27,7 +27,7 @@ export default function CompletionModal({ content, visible }) {
   );
 }
 
-CompletionModal.propTypes = {
+InputAlertModal.propTypes = {
   content: PropTypes.string.isRequired,
   visible: PropTypes.bool.isRequired,
 };

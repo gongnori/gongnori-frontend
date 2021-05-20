@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableWithoutFeedback, ScrollView, Modal } from "react-native";
-import { API_SERVER } from "@env"
+import { StyleSheet, View, TextInput, TouchableWithoutFeedback, Modal } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
