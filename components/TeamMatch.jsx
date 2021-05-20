@@ -23,7 +23,7 @@ export default function TeamMatch({ team }) {
             const { playgroundName, city, district, start, end, teams } = match;
             const [startYear, startMonth, startDate, startHour] = getDateFromIso(start);
             const [endYear, endMont, endDate, endHour] = getDateFromIso(end);
-            const opponent = teams.filter((item) => item.name !== team.name);
+            const opponent = teams.filter((item) => item !== team.name);
 
             return (
               <View key={match.id} style={styles.match}>
@@ -81,6 +81,14 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.SECONDARY_WHITE,
     borderRadius: 10,
+    elevation: 5,
+    shadowColor: colors.PRIMARY_SHADOW,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowOffset: {
+      height: -1,
+      width: 0,
+    },
   },
   match: {
     flexDirection: "row",

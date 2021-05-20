@@ -38,7 +38,7 @@ export default function MatchCreateScreen({ navigation, route }) {
   const isCompletionShown = useSelector((state) => {
     return state.loadingReducer.isCompletionShown;
   });
-console.log(isInputInvalid, isHeaderRightLoading)
+
   const teams = useSelector((state) => {
     return state.userReducer.teams;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -118,7 +118,7 @@ console.log(isInputInvalid, isHeaderRightLoading)
         visible={isInputInvalid}
       />
       <CompletionModal
-        content={"팀을 만들었습니다."}
+        content={"경기를 만들었습니다."}
         visible={isCompletionShown}
       />
       <View style={styles.inputContainer}>

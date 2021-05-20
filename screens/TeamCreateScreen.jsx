@@ -11,6 +11,8 @@ import _ from "lodash";
 import DismissKeyboard from "../components/DismissKeyborad";
 import DropDown from "../components/DropDown";
 import CustomButton from "../components/CustomButton";
+import CompletionModal from "../components/CompletionModal";
+import InputAlertModal from "../components/InputAlertModal";
 import SpinnerLoading from "../components/SpinnerLoading";
 
 import useHeaderRight from "../hooks/useHeaderRight";
@@ -19,6 +21,7 @@ import usePickImage from "../hooks/usePickImage";
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
+import { number } from "prop-types";
 
 const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png";
 
@@ -27,10 +30,18 @@ export default function MatchCreateScreen({ navigation }) {
     return state.loadingReducer.isHeaderRightLoading;
   });
 
+  const isInputInvalid = useSelector((state) => {
+    return state.loadingReducer.isInputInvalid;
+  });
+
+  const isCompletionShown = useSelector((state) => {
+    return state.loadingReducer.isCompletionShown;
+  });
+
   const [team, setTeam] = useState({
-    name: "",
-    location: "",
-    sports: "",
+    name: null,
+    location: null,
+    sports: null,
   });
 
   const locations = useSelector((state) => {
@@ -76,6 +87,14 @@ export default function MatchCreateScreen({ navigation }) {
         <SpinnerLoading
           visible={isHeaderRightLoading}
           content={"Team Creating"}
+        />
+        <InputAlertModal
+          content={"팀 정보를 입력해주세요."}
+          visible={isInputInvalid}
+        />
+        <CompletionModal
+          content={"팀을 만들었습니다."}
+          visible={isCompletionShown}
         />
         <View style={styles.emblem}>
           <View style={styles.imageBox}>

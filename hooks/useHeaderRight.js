@@ -12,7 +12,7 @@ import {
 } from "../actions/loadingActionCreators";
 
 import fetchServer from "../utils/fetchServer";
-import * as params from "../constants/params"
+import * as params from "../constants/params";
 
 const useHeaderRight = (navigation, title, method, path, data) => {
   const dispatch = useDispatch();

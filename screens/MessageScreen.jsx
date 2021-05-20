@@ -7,10 +7,15 @@ import _ from "lodash";
 
 import NormalHeader from "../components/NormalHeader";
 import MessageItem from "../components/MessageItem";
+import SpinnerLoading from "../components/SpinnerLoading";
 
-import { updateMyData } from "../actions/userActionCreators";
+import { getMyMessage } from "../actions/userActionCreators";
 
 export default function MessageScreen({ navigation }) {
+  const isMessageLoading = useSelector((state) => {
+    return state.loadingReducer.isMessageLoading;
+  });
+
   const messages = useSelector((state) => {
     return state.userReducer.messages;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -18,11 +23,15 @@ export default function MessageScreen({ navigation }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateMyData());
+    dispatch(getMyMessage());// getMessage
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
+      <SpinnerLoading
+        visible={isMessageLoading}
+        content={"Message Loading..."}
+      />
       <NormalHeader />
       <View style={styles.body}>
         <FlatList

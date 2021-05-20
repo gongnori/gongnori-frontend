@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
+import { viewMessageLoading, hideMessageLoading} from "../actions/loadingActionCreators";
 
 const setCurrentTeam = (payload) => ({
   type: "SET_CURRENT_TEAM",
@@ -37,17 +38,47 @@ const authLogin = (userInfo) => async (dispatch) => {
 
     dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: { name, email, locations, teams, sports } });
   } catch (err) {
-    console.error(err.message);
     dispatch({ type: "AUTH_LOGIN_FAIL" });
+  }
+};
+
+const getMyMessage = () => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+     
+    dispatch(viewMessageLoading());
+
+    const res = await fetch(`${API_SERVER}/message/my`, {
+      method: "GET",
+      headers: {
+        "Authorization": token,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await res.json();
+    const { message, data, error } = result;
+
+    if (error) { throw new Error() }
+
+    dispatch({ type: "LOAD_MY_MESSAGE_SUCCESS", payload: data });
+    dispatch(hideMessageLoading());
+  } catch (err) {
+    dispatch({ type: "LOAD_MY_MESSAGE_FAIL" });
   }
 };
 
 const saveMyLocation = (locations) => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
+
     const res = await fetch(`${API_SERVER}/user/location`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Authorization": token,
+        "Content-Type": "application/json",
+      },
+
       body: JSON.stringify({ locations }),
     });
 
@@ -68,6 +99,7 @@ const saveMyLocation = (locations) => async (dispatch) => {
 const updateMyData = () => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
+
     const _teams = await fetch(`${API_SERVER}/team/my`, {
       method: "GET",
       headers: { "Authorization": token },
@@ -99,6 +131,7 @@ const updateMyData = () => async (dispatch) => {
 export {
   authLogin,
   saveMyLocation,
+  getMyMessage,
   updateMyData,
   setCurrentTeam,
   setCurrentLocation,

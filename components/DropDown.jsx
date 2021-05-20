@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     marginVertical: TEXT_VERTICAL_MARGIN,
-    paddingVertical: TEXT_VERTICAL_MARGIN,
+    paddingVertical: 0,
     fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
     includeFontPadding: false,
   },

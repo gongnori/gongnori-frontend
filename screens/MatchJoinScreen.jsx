@@ -6,10 +6,12 @@ import { StatusBar } from "expo-status-bar";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
+import SpinnerLoading from "../components/SpinnerLoading";
+import CompletionModal from "../components/CompletionModal";
+
 import PlaceMap from "../components/PlaceMap";
 import TeamOverview from "../components/TeamOverview";
 import TitleContentRow from "../components/TitleContentRow";
-import SpinnerLoading from "../components/SpinnerLoading";
 
 import useHeaderRight from "../hooks/useHeaderRight";
 import getDateFromIso from "../utils/getDateFromIso";
@@ -20,6 +22,10 @@ import * as sizes from "../constants/sizes";
 export default function MatchJoinScreen({ navigation, route }) {
   const isHeaderRightLoading = useSelector((state) => {
     return state.loadingReducer.isHeaderRightLoading;
+  });
+
+  const isCompletionShown = useSelector((state) => {
+    return state.loadingReducer.isCompletionShown;
   });
 
   const currentTeam = useSelector((state) => {
@@ -44,10 +50,14 @@ export default function MatchJoinScreen({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <StatusBar backgroundColor="white" barStyle="light-content" /> */}
+      <StatusBar backgroundColor="white" barStyle="light-content" />
       <SpinnerLoading
         visible={isHeaderRightLoading}
         content={"Message Sending"}
+      />
+      <CompletionModal
+        content={"경기를 신청하였습니다."}
+        visible={isCompletionShown}
       />
       <TeamOverview team={host} />
       <View style={styles.textContainer}>

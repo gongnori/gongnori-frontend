@@ -4,6 +4,7 @@ const initialState = {
   isInputInvalid: false,
   isMatchLoading: false,
   isRankLoading: false,
+  isMessageLoading: false,
   isHeaderRightLoading: false,
   isCompletionShown: false,
 };
@@ -26,6 +27,14 @@ const loadingReducer = (state = initialState, action) => {
     case "HIDE_MATCH_LOADING":
       return produce(state, ((draft) => {
         draft.isMatchLoading = false;
+      }));
+    case "VIEW_MESSAGE_LOADING":
+      return produce(state, ((draft) => {
+        draft.isMessageLoading = true;
+      }));
+    case "HIDE_MESSAGE_LOADING":
+      return produce(state, ((draft) => {
+        draft.isMessageLoading = false;
       }));
     case "VIEW_RANK_LOADING":
       return produce(state, ((draft) => {

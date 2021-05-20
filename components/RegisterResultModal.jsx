@@ -70,8 +70,8 @@ export default function RegisterResultModal({ visible, setIsModal, message }) {
             </View>
             <View style={styles.titleDropdown}>
               <Text style={styles.title}>경기매너</Text>
-              <defaultValue
-                value={"경기매너"}
+              <DropDown
+                defaultValue={"경기매너"}
                 options={["매우 좋음", "좋음", "보통", "나쁨", "매우 나쁨"]}
                 style={styles.dropDown}
                 onSelect={handleSelectManner}

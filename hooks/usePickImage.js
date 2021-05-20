@@ -41,8 +41,8 @@ const usePickImage = (defaultImage) => {
     if (!pickResult.cancelled) {
       setImage(pickResult.uri);
 
-      const data = await fetchServer("POST", "team/emblem", formData, true);
-      setImageS3(data);
+      const res = await fetchServer("POST", "team/emblem", formData, true);
+      setImageS3(res.data);
     }
   }, []);
 

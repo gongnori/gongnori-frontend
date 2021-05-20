@@ -71,6 +71,14 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.SECONDARY_WHITE,
     borderRadius: 10,
+    elevation: 5,
+    shadowColor: colors.PRIMARY_SHADOW,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowOffset: {
+      height: -1,
+      width: 0,
+    },
   },
 
   member: {

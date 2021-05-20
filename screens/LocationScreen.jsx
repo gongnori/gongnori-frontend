@@ -47,16 +47,13 @@ export default function LocationScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
-        동네를 두개를 골라주세요
+        동네 두개를 골라주세요
       </Text>
       <View style={styles.dropDownContainer}>
         <DropDown
           defaultValue={"동네 1"}
           options={locationOptions}
-          width={200}
-          height={40}
-          fontSize={15}
-          backgroundColor={colors.SECONDARY_WHITE}
+          style={styles.field}
           onSelect={handleSelectLocation}
         />
       </View>
@@ -64,20 +61,14 @@ export default function LocationScreen() {
         <DropDown
           defaultValue={"동네 2"}
           options={locationOptions}
-          width={200}
-          height={40}
-          fontSize={15}
-          backgroundColor={colors.SECONDARY_WHITE}
+          style={styles.field}
           onSelect={handleSelectLocation}
         />
       </View>
       <View style={styles.buttonContainer}>
         <CustomButton
           title={"등록하기"}
-          width={200}
-          height={40}
-          backgroundColor={colors.SECONDARY_BLUE}
-          fontSize={sizes.SECONDARY_FONT_SIZE}
+          style={styles.button}
           onPress={handlePressButton}
         />
       </View>
@@ -92,8 +83,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.SECONDARY_GRAY,
   },
   title: {
-    width: 200,
-    height: 100,
+    width: 0.8 * sizes.DEVICE_WIDTH,
+    height: 0.15 * sizes.DEVICE_HEIGHT,
     marginTop: 100,
     textAlign: "center",
     textAlignVertical: "center",
@@ -102,10 +93,30 @@ const styles = StyleSheet.create({
   },
   dropDownContainer: {
     justifyContent: "center",
-    height: 50,
+    height: 0.1 * sizes.DEVICE_HEIGHT,
   },
   buttonContainer: {
     justifyContent: "center",
-    height: 100,
+    height: 0.1 * sizes.DEVICE_HEIGHT,
+  },
+  field: {
+    width: 0.5 * sizes.DEVICE_WIDTH,
+    height: 0.06 * sizes.DEVICE_HEIGHT,
+    borderRadius: 5,
+    backgroundColor: colors.SECONDARY_WHITE,
+    fontSize: sizes.QUATERNARY_FONT_SIZE,
+    fontFamily: fonts.NOTO_SANS_KR_300_LIGHT,
+    textAlignVertical: "center",
+    textAlign: "center",
+    includeFontPadding: false,
+  },
+
+  button: {
+    width: 0.5 * sizes.DEVICE_WIDTH,
+    height: 0.06 * sizes.DEVICE_HEIGHT,
+    borderRadius: 10,
+    backgroundColor: colors.PRIMARY_BLUE,
+    color: colors.SECONDARY_WHITE,
+    fontSize: sizes.SECONDARY_FONT_SIZE,
   },
 });

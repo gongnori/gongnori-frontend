@@ -35,21 +35,30 @@ const userReducer = (state = initialState, action) => {
     case "SAVE_MY_LOCATION_SUCCESS":
       return produce(state, (draft) => {
         draft.locations = action.payload;
+        draft.currentLocation = action.payload[0];
       });
     case "SAVE_MY_LOCATION_FAIL":
       return produce(state, (draft) => {
         draft.locations = [];
       });
+    case "LOAD_MY_MESSAGE_SUCCESS":
+      return produce(state, (draft) => {
+        draft.messages = action.payload;
+      });
+    case "LOAD_MY_MESSAGE_FAIL":
+      return produce(state, (draft) => {
+        draft.messages = [];
+      });
     case "UPDATE_MY_DATA_SUCCESS":
       return produce(state, (draft) => {
-        draft.teams = action.payload.teams;
-        draft.messages = action.payload.messages;
+        const { teams, messages } = action.payload;
 
-        const _currentTeam = draft.teams.find((team) => {
-          return team.id === draft.currentTeam.id;
-        });
+        draft.teams = teams;
+        draft.messages = messages;
 
-        draft.currentTeam = _currentTeam;
+        if (!draft.currentTeam) {
+          draft.currentTeam = teams[0];
+        }
       });
     case "UPDATE_MY_DATA_FAIL":
       return state;

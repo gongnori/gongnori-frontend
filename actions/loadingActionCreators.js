@@ -22,6 +22,14 @@ const hideRankLoading = () => ({
   type: "HIDE_RANK_LOADING",
 });
 
+const viewMessageLoading = () => ({
+  type: "VIEW_MESSAGE_LOADING",
+});
+
+const hideMessageLoading = () => ({
+  type: "HIDE_MESSAGE_LOADING",
+});
+
 const viewHeaderRightLoading = () => ({
   type: "VIEW_HEADER_RIGHT_LOADING",
 });
@@ -45,6 +53,8 @@ export {
   hideMatchLoading,
   viewRankLoading,
   hideRankLoading,
+  viewMessageLoading,
+  hideMessageLoading,
   viewHeaderRightLoading,
   hideHeaderRightLoading,
   viewCompletion,

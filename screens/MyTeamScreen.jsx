@@ -46,11 +46,13 @@ export default function MyTeamScreen({ navigation }) {
         path={"TeamCreate"}
         isRank={false}
       />
-      <ModalButton
-        setIsModal={handleModal}
-        icon={"search"}
-        style={styles.modalButton}
-      />
+      {currentTeam && (
+        <ModalButton
+          setIsModal={handleModal}
+          icon={"search"}
+          style={styles.modalButton}
+        />
+      )}
     </SafeAreaView>
   );
 }
