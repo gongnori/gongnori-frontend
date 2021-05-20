@@ -9,26 +9,31 @@ const initialState = {
   currentLocation: null,
   currentTeam: null,
   currentSports: null,
-  currentMessage: null,
   isLogin: false,
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGIN_SUCCESS":
+      console.log(action.payload.messages)
+      const { name, email, locations, teams, messages, sports } = action.payload;
+
       return produce(state, (draft) => {
         draft.isLogin = true;
-        draft.name = action.payload.name;
-        draft.email = action.payload.email;
-        draft.locations = action.payload.locations;
-        draft.teams = action.payload.teams;
-        // draft.messages = action.payload.messages;
-        draft.currentLocation = action.payload.locations[0];
-        draft.currentTeam = action.payload.teams[0];
-        // draft.currentMessage = action.payload.messages[0];
-        draft.currentSports = action.payload.sports[0];
+        draft.name = name;
+        draft.email = email;
+        draft.locations = locations;
+        draft.teams = teams;
+        draft.messages = messages;
+        draft.currentLocation = locations[0];
+        draft.currentTeam = teams[0];
+        draft.currentSports = sports[0];
       });
     case "AUTH_LOGIN_FAIL":
+      return produce(state, (draft) => {
+        draft.isLogin = false;
+      });
+    case "AUTH_LOGOUT":
       return produce(state, (draft) => {
         draft.isLogin = false;
       });

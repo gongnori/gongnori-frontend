@@ -26,7 +26,7 @@ export default function RegisterUserModal({ visible, setIsModal }) {
   const handlePressButton = async () => {
     await fetchServer(
       "PATCH",
-      `${API_SERVER}/team/members`,
+      "team/members",
       { email, teamId: currentTeam.id },
     );
 

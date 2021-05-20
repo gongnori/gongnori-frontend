@@ -49,7 +49,7 @@ export default function MyTeamScreen({ navigation }) {
       {currentTeam && (
         <ModalButton
           setIsModal={handleModal}
-          icon={"search"}
+          icon={"person-add"}
           style={styles.modalButton}
         />
       )}

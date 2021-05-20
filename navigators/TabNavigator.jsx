@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -6,7 +7,9 @@ import MatchScreen from "../screens/MatchScreen";
 import RankScreen from "../screens/RankScreen";
 import MyTeamScreen from "../screens/MyTeamScreen";
 import MessageScreen from "../screens/MessageScreen";
-import SettingScreen from "../screens/SettingScreen";
+import LogoutScreen from "../screens/LogoutScreen";
+
+import { authLogout } from "../actions/userActionCreators";
 
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
@@ -15,6 +18,8 @@ import * as sizes from "../constants/sizes";
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
+  const dispatch = useDispatch();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -33,8 +38,8 @@ export default function TabNavigator() {
             case "Message":
               iconName = "chatbox-ellipses";
               break;
-            case "Setting":
-              iconName = "settings";
+            case "Logout":
+              iconName = "log-out";
               break;
             default:
               iconName = "alert-circle";
@@ -66,7 +71,15 @@ export default function TabNavigator() {
       <Tab.Screen name="Rank" component={RankScreen} />
       <Tab.Screen name="MyTeam" component={MyTeamScreen} />
       <Tab.Screen name="Message" component={MessageScreen} />
-      <Tab.Screen name="Setting" component={SettingScreen} />
+      <Tab.Screen
+        name="Logout"
+        component={LogoutScreen}
+        listeners={() => ({
+          tabPress: () => {
+            dispatch(authLogout());
+          },
+        })}
+      />
     </Tab.Navigator>
   );
 }

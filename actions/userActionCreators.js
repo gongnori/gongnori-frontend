@@ -2,21 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
 import { viewMessageLoading, hideMessageLoading} from "../actions/loadingActionCreators";
 
-const setCurrentTeam = (payload) => ({
-  type: "SET_CURRENT_TEAM",
-  payload,
-});
-
-const setCurrentLocation = (payload) => ({
-  type: "SET_CURRENT_LOCATION",
-  payload,
-});
-
-const setCurrentSports = (payload) => ({
-  type: "SET_CURRENT_SPORTS",
-  payload,
-});
-
 const authLogin = (userInfo) => async (dispatch) => {
   try {
     const { name, email } = userInfo;
@@ -32,20 +17,44 @@ const authLogin = (userInfo) => async (dispatch) => {
 
     if (error) { throw new Error() }
 
-    const { token, locations, teams, sports } = data;
+    const { token, locations, teams, messages, sports } = data;
 
     await AsyncStorage.setItem("token", token);
 
-    dispatch({ type: "AUTH_LOGIN_SUCCESS", payload: { name, email, locations, teams, sports } });
+    dispatch({
+      type: "AUTH_LOGIN_SUCCESS",
+      payload: { name, email, locations, messages, teams, sports },
+    });
   } catch (err) {
     dispatch({ type: "AUTH_LOGIN_FAIL" });
   }
 };
 
+const authLogout = () => async (dispatch) => {
+  await AsyncStorage.removeItem("token");
+
+  dispatch({ type: "AUTH_LOGOUT" });
+};
+
+const setCurrentTeam = (payload) => ({
+  type: "SET_CURRENT_TEAM",
+  payload,
+});
+
+const setCurrentLocation = (payload) => ({
+  type: "SET_CURRENT_LOCATION",
+  payload,
+});
+
+const setCurrentSports = (payload) => ({
+  type: "SET_CURRENT_SPORTS",
+  payload,
+});
+
 const getMyMessage = () => async (dispatch) => {
   try {
     const token = await AsyncStorage.getItem("token");
-     
+
     dispatch(viewMessageLoading());
 
     const res = await fetch(`${API_SERVER}/message/my`, {
@@ -130,6 +139,7 @@ const updateMyData = () => async (dispatch) => {
 
 export {
   authLogin,
+  authLogout,
   saveMyLocation,
   getMyMessage,
   updateMyData,
