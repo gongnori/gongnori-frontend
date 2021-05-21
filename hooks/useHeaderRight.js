@@ -18,7 +18,11 @@ import * as params from "../constants/params";
 import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
 
-const useHeaderRight = (navigation, title, method, path, data) => {
+const useHeaderRight = (config, req) => {
+  const { navigation, title, disabled } = config;
+  const { method, path, data, socket } = req;
+  // navigation, title, method, path, data, socket
+
   const dispatch = useDispatch();
   const handlePressHeaderRight = _.throttle(async () => {
     if (data) {
@@ -38,7 +42,11 @@ const useHeaderRight = (navigation, title, method, path, data) => {
       path,
       data,
     );
+    
 
+    if (socket) {
+      socket.emit("fix-match");
+    }
     dispatch(updateMyData());
     dispatch(hideHeaderRightLoading());
     dispatch(viewCompletion());
@@ -48,29 +56,31 @@ const useHeaderRight = (navigation, title, method, path, data) => {
     navigation.setOptions({
       headerRight: () => {
         return (
-          <TouchableOpacity
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              width: 0.2 * sizes.DEVICE_WIDTH,
-              height: 0.1 * sizes.DEVICE_HEIGHT,
-              right: 20,
-            }}
-            onPress={handlePressHeaderRight}
-          >
-            <Text style={{
-              width: 0.2 * sizes.DEVICE_WIDTH,
-              color: colors.SECONDARY_WHITE,
-              fontSize: sizes.TERTIARY_FONT_SIZE,
-              fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
-              textAlign: "center",
-              textAlignVertical: "center",
-              includeFontPadding: false,
-            }}
+          !disabled && (
+            <TouchableOpacity
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: 0.2 * sizes.DEVICE_WIDTH,
+                height: 0.1 * sizes.DEVICE_HEIGHT,
+                right: 20,
+              }}
+              onPress={handlePressHeaderRight}
             >
-              {title}
-            </Text>
-          </TouchableOpacity>
+              <Text style={{
+                width: 0.2 * sizes.DEVICE_WIDTH,
+                color: colors.SECONDARY_WHITE,
+                fontSize: sizes.TERTIARY_FONT_SIZE,
+                fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
+                textAlign: "center",
+                textAlignVertical: "center",
+                includeFontPadding: false,
+              }}
+              >
+                {title}
+              </Text>
+            </TouchableOpacity>
+          )
         );
       },
     });

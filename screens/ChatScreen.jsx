@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { StyleSheet, View, TextInput, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import PropTypes from "prop-types";
 
@@ -12,8 +12,11 @@ import { API_SERVER } from "@env";
 import ChatItem from "../components/ChatItem";
 import CustomButton from "../components/CustomButton";
 import RegisterResultModal from "../components/RegisterResultModal";
+import CompletionModal from "../components/CompletionModal";
+import SpinnerLoading from "../components/SpinnerLoading";
 
 import useHeaderRight from "../hooks/useHeaderRight";
+import { viewCompletion } from "../actions/loadingActionCreators";
 
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
@@ -21,6 +24,14 @@ import * as sizes from "../constants/sizes";
 const socket = socketio(API_SERVER);
 
 export default function ChatScreen({ navigation, route }) {
+  const isHeaderRightLoading = useSelector((state) => {
+    return state.loadingReducer.isHeaderRightLoading;
+  });
+
+  const isCompletionShown = useSelector((state) => {
+    return state.loadingReducer.isCompletionShown;
+  });
+
   const scrollRef = useRef(null);
 
   const [isModal, setIsModal] = useState(false);
@@ -28,8 +39,13 @@ export default function ChatScreen({ navigation, route }) {
   const [content, setContent] = useState("");
   const [conversations, setConverSations] = useState([]);
 
-  const { message } = route.params;
+  const dispatch = useDispatch();
 
+  const { message } = route.params;
+  // console.log(message)
+
+  const isHost = userName === message.host.captin;
+// console.log(isHost)
   const handleChangeText = (value) => setContent(value);
 
   const handlePressSendBtn = _.throttle(() => {
@@ -43,6 +59,7 @@ export default function ChatScreen({ navigation, route }) {
     socket.emit("join-chat-room", message.id);
     socket.on("send-message", (data) => setConverSations(data));
     socket.on("load-message", (data) => setConverSations(data));
+    socket.on("fix-match", () => dispatch(viewCompletion()));
 
     return () => {
       socket.emit("leave-chat-room", message.id, conversations);
@@ -55,11 +72,25 @@ export default function ChatScreen({ navigation, route }) {
     scrollRef.current.scrollToEnd({ animated: false });
   }, [conversations]);
 
-  useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
+  // useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
+
+  useHeaderRight(
+    { navigation, title: "진행하기", disabled: !isHost },
+    { method: "PATCH", path: "match", data: message, socket },
+  );
+
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="light-content" />
+      <SpinnerLoading
+        visible={isHeaderRightLoading}
+        content={"Match Fixing..."}
+      />
+      <CompletionModal
+        content={"경기가 확정되었습니다."}
+        visible={isCompletionShown}
+      />
       <RegisterResultModal
         visible={isModal}
         setIsModal={handleModal}

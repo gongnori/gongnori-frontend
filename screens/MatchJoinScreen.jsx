@@ -38,13 +38,17 @@ export default function MatchJoinScreen({ navigation, route }) {
   const { city, district, town, detail, latitude, longitude } = playground;
 
   useHeaderRight(
-    navigation,
-    "신청하기",
-    "POST",
-    "message",
     {
-      matchId: route.params.match.id,
-      teamId: currentTeam.id,
+      navigation,
+      title: "신청하기",
+    },
+    {
+      method: "POST",
+      path: "message",
+      data: {
+        matchId: route.params.match.id,
+        teamId: currentTeam.id,
+      },
     },
   );
 

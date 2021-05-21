@@ -91,7 +91,11 @@ export default function MatchCreateScreen({ navigation, route }) {
   };
 
   const path = isRank ? "match/rank" : "match";
-  useHeaderRight(navigation, "만들기", "POST", path, _match);
+
+  useHeaderRight(
+    { navigation, title: "만들기" },
+    { method: "POST", path, data: _match },
+  );
 
   useEffect(() => {
     if (!location) {

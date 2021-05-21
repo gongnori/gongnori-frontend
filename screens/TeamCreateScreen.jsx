@@ -77,7 +77,10 @@ export default function MatchCreateScreen({ navigation }) {
 
   const [image, imageS3, pickImage] = usePickImage(DEFAULT_EMBLEM);
 
-  useHeaderRight(navigation, "만들기", "POST", "team", { ...team, imageS3 });
+  useHeaderRight(
+    { navigation, title: "만들기" },
+    { method: "POST", path: "team", data: { ...team, imageS3 } },
+  );
 
   return (
     <DismissKeyboard>
