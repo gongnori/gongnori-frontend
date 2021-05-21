@@ -23,7 +23,7 @@ export default function MessageScreen({ navigation }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyMessage());// getMessage
+    dispatch(getMyMessage());
   }, []);
 
   return (

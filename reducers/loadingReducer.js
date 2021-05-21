@@ -1,6 +1,7 @@
 import produce from "immer";
 
 const initialState = {
+  isLoginRequest: false,
   isInputInvalid: false,
   isMatchLoading: false,
   isRankLoading: false,
@@ -12,6 +13,14 @@ const initialState = {
 const loadingReducer = (state = initialState, action) => {
   console.log(action.type)
   switch (action.type) {
+    case "VIEW_LOGIN_REQUEST":
+      return produce(state, ((draft) => {
+        draft.isLoginRequest = true;
+      }));
+    case "HIDE_LOGIN_REQUEST":
+      return produce(state, ((draft) => {
+        draft.isLoginRequest = false;
+      }));
     case "VIEW_INPUT_ALERT":
       return produce(state, ((draft) => {
         draft.isInputInvalid = true;

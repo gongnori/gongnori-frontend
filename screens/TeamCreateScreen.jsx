@@ -21,7 +21,6 @@ import usePickImage from "../hooks/usePickImage";
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
-import { number } from "prop-types";
 
 const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png";
 

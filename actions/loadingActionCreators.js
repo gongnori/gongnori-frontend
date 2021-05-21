@@ -1,3 +1,11 @@
+const viewLoginRequest = () => ({
+  type: "VIEW_LOGIN_REQUEST",
+});
+
+const hideLoginRequest = () => ({
+  type: "HIDE_LOGIN_REQUEST",
+});
+
 const viewInputAlert = () => ({
   type: "VIEW_INPUT_ALERT",
 });
@@ -47,6 +55,8 @@ const hideCompletion = () => ({
 });
 
 export {
+  viewLoginRequest,
+  hideLoginRequest,
   viewInputAlert,
   hideInputAlert,
   viewMatchLoading,

@@ -1,10 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
-import { viewMessageLoading, hideMessageLoading} from "../actions/loadingActionCreators";
+import {
+  viewLoginRequest,
+  hideLoginRequest,
+  viewMessageLoading,
+  hideMessageLoading,
+} from "./loadingActionCreators";
 
 const authLogin = (userInfo) => async (dispatch) => {
   try {
     const { name, email } = userInfo;
+
+    dispatch(viewLoginRequest());
 
     const res = await fetch(`${API_SERVER}/auth/login`, {
       method: "POST",
@@ -25,7 +32,10 @@ const authLogin = (userInfo) => async (dispatch) => {
       type: "AUTH_LOGIN_SUCCESS",
       payload: { name, email, locations, messages, teams, sports },
     });
+
+    dispatch(hideLoginRequest());
   } catch (err) {
+    dispatch(hideLoginRequest());
     dispatch({ type: "AUTH_LOGIN_FAIL" });
   }
 };
