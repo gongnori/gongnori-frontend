@@ -46,8 +46,7 @@ export default function ChatScreen({ navigation, route }) {
   const dispatch = useDispatch();
 
   const isHost = userName.toLowerCase() === message.host.captin.toLowerCase();
-  console.log(userName, message.host.captin)
-// console.log(isHost)
+
   const handleChangeText = (value) => setContent(value);
 
   const handlePressSendBtn = _.throttle(() => {
@@ -77,10 +76,6 @@ export default function ChatScreen({ navigation, route }) {
     scrollRef.current.scrollToEnd({ animated: false });
   }, [conversations]);
 
-  // useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
-console.log(isMatchFixed)
-console.log(isHost)
-
   useHeaderRight(
     { navigation, title: "진행하기", disabled: !isHost || isMatchFixed },
     { method: "PATCH", path: "match", data: message, socket },
@@ -103,7 +98,8 @@ console.log(isHost)
         setIsModal={handleModal}
         message={message}
       />
-      {isMatchFixed
+      {
+        isMatchFixed
         && (
           <CustomButton
             title={"경기결과 입력"}

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
-import NormalHeader from "../components/NormalHeader";
+import MessageHeader from "../components/MessageHeader";
 import MessageItem from "../components/MessageItem";
 import SpinnerLoading from "../components/SpinnerLoading";
 
@@ -20,6 +20,14 @@ export default function MessageScreen({ navigation }) {
     return state.userReducer.messages;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
+  const matchFilterStatus = useSelector((state) => state.appReducer.matchFilterStatus);
+
+console.log(matchFilterStatus)
+
+  const filterMessages = messages.filter((message) => {
+    return message.isMatchFixed === matchFilterStatus;
+  })
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,13 +40,13 @@ export default function MessageScreen({ navigation }) {
         visible={isMessageLoading}
         content={"Message Loading..."}
       />
-      <NormalHeader />
+      <MessageHeader />
       <View style={styles.body}>
         <FlatList
           style={{ width: "100%" }}
           contentContainerStyle={{ justifyContent: "flex-end", alignItems: "center" }}
           keyExtractor={(item) => item.id}
-          data={messages}
+          data={filterMessages}
           renderItem={({ item }) => <MessageItem item={item} navigation={navigation} />}
         />
       </View>

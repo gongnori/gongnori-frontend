@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
-import NormalHeader from "../components/NormalHeader";
+import RankHeader from "../components/RankHeader";
 import RankItem from "../components/RankItem";
 import SideButton from "../components/SideButton";
 import SpinnerLoading from "../components/SpinnerLoading";
@@ -18,6 +18,10 @@ export default function RankScreen({ navigation }) {
   const isRankLoading = useSelector((state) => {
     return state.loadingReducer.isRankLoading;
   });
+
+  const currentTeam = useSelector((state) => {
+    return state.userReducer.currentTeam;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const teams = useSelector((state) => {
     return state.appReducer.teams;
@@ -32,7 +36,7 @@ export default function RankScreen({ navigation }) {
         visible={isRankLoading}
         content={"Rank Loading..."}
       />
-      <NormalHeader />
+      <RankHeader />
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>랭킹</Text>
       </View>
@@ -43,11 +47,14 @@ export default function RankScreen({ navigation }) {
         data={sortedTeams}
         renderItem={({ item, index }) => <RankItem item={item} index={index} />}
       />
-      <SideButton
-        navigation={navigation}
-        path={"MatchCreate"}
-        isRank={true}
-      />
+      {currentTeam
+        && (
+          <SideButton
+            navigation={navigation}
+            path={"MatchCreate"}
+            isRank={true}
+          />
+        )}
     </SafeAreaView>
   );
 }

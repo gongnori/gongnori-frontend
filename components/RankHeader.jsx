@@ -10,7 +10,7 @@ import { getTeam } from "../actions/appActionCreators";
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
-export default function NormalHeader() {
+export default function RankHeader() {
   const myLocations = useSelector((state) => {
     return state.userReducer.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));

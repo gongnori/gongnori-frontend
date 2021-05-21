@@ -6,6 +6,7 @@ const initialState = {
   matches: [],
   playgrounds: [],
   teams: [],
+  matchFilterStatus: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -36,6 +37,10 @@ const appReducer = (state = initialState, action) => {
     case "LOAD_TEAM_FAIL":
       return produce(state, (draft) => {
         draft.teams = [];
+      });
+    case "SET_MESSAGE_FILTER":
+      return produce(state, (draft) => {
+        draft.matchFilterStatus = action.payload;
       });
     default:
       return state;

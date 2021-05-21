@@ -22,7 +22,7 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
-const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/realmadrid_emblem.png";
+const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/blank_profile.png";
 
 export default function MatchCreateScreen({ navigation }) {
   const isHeaderRightLoading = useSelector((state) => {

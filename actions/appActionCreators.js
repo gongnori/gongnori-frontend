@@ -10,6 +10,11 @@ import {
 
 import * as actionTypes from "./actionTypes";
 
+const setMessageFilter = (payload) => ({
+  type: "SET_MESSAGE_FILTER",
+  payload,
+});
+
 const getMatch = (location, sports, year, month, date) => async (dispatch) => {
   try {
     dispatch(viewMatchLoading());
@@ -141,9 +146,10 @@ const getTeam = (location, sports) => async (dispatch) => {
 };
 
 export {
+  setMessageFilter,
+  setInitialize,
   getMatch,
   getPlayground,
   getMyTeam,
   getTeam,
-  setInitialize,
 };
