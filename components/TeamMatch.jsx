@@ -10,7 +10,7 @@ import * as sizes from "../constants/sizes";
 export default function TeamMatch({ team }) {
   const { matches } = team;
   const fixedMatches = matches.filter((match) => match.teams.length === 2);
-
+console.log(matches)
   return (
     <View style={styles.matches}>
       <Text style={styles.title}>경기 일정</Text>

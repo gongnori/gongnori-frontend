@@ -22,8 +22,6 @@ export default function MessageScreen({ navigation }) {
 
   const matchFilterStatus = useSelector((state) => state.appReducer.matchFilterStatus);
 
-console.log(matchFilterStatus)
-
   const filterMessages = messages.filter((message) => {
     return message.isMatchFixed === matchFilterStatus;
   })

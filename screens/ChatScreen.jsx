@@ -17,6 +17,7 @@ import SpinnerLoading from "../components/SpinnerLoading";
 
 import useHeaderRight from "../hooks/useHeaderRight";
 import { viewCompletion } from "../actions/loadingActionCreators";
+import { updateMyData } from "../actions/userActionCreators";
 
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
@@ -25,7 +26,6 @@ const socket = socketio(API_SERVER);
 
 export default function ChatScreen({ navigation, route }) {
   const { message } = route.params;
-
   const [isMatchFixed, setIsMatchFixed] = useState(message.isMatchFixed);
 
   const isHeaderRightLoading = useSelector((state) => {
@@ -40,6 +40,7 @@ export default function ChatScreen({ navigation, route }) {
 
   const [isModal, setIsModal] = useState(false);
   const userName = useSelector((state) => state.userReducer.name);
+
   const [content, setContent] = useState("");
   const [conversations, setConverSations] = useState([]);
 
@@ -62,6 +63,7 @@ export default function ChatScreen({ navigation, route }) {
     socket.on("load-message", (data) => setConverSations(data));
     socket.on("fix-match", () => {
       dispatch(viewCompletion());
+      dispatch(updateMyData());
       setIsMatchFixed(true);
     });
 
@@ -80,7 +82,6 @@ export default function ChatScreen({ navigation, route }) {
     { navigation, title: "진행하기", disabled: !isHost || isMatchFixed },
     { method: "PATCH", path: "match", data: message, socket },
   );
-
 
   return (
     <SafeAreaView style={styles.container}>

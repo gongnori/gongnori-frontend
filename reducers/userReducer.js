@@ -61,6 +61,7 @@ const userReducer = (state = initialState, action) => {
         draft.messages = messages;
 
         const currentTeam = teams.find((team) => {
+          console.log(team.id === draft.currentTeam.id)
           return team.id === draft.currentTeam.id;
         });
 
