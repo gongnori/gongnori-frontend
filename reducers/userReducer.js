@@ -15,7 +15,6 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGIN_SUCCESS":
-      console.log(action.payload.messages)
       const { name, email, locations, teams, messages, sports } = action.payload;
 
       return produce(state, (draft) => {
@@ -60,6 +59,12 @@ const userReducer = (state = initialState, action) => {
 
         draft.teams = teams;
         draft.messages = messages;
+
+        const currentTeam = teams.find((team) => {
+          return team.id === draft.currentTeam.id;
+        });
+
+        draft.currentTeam = currentTeam;
 
         if (!draft.currentTeam) {
           draft.currentTeam = teams[0];

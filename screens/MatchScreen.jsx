@@ -18,6 +18,10 @@ export default function MatchListScreen({ navigation }) {
     return state.loadingReducer.isMatchLoading;
   });
 
+  const currentTeam = useSelector((state) => {
+    return state.userReducer.currentTeam;
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
   const matches = useSelector((state) => {
     return state.appReducer.matches;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
@@ -44,11 +48,14 @@ export default function MatchListScreen({ navigation }) {
         data={sortedMatches}
         renderItem={({ item }) => <MatchItem item={item} navigation={navigation} />}
       />
-      <SideButton
-        navigation={navigation}
-        path={"MatchCreate"}
-        isRank={false}
-      />
+      {currentTeam
+        && (
+          <SideButton
+            navigation={navigation}
+            path={"MatchCreate"}
+            isRank={false}
+          />
+        )}
     </SafeAreaView>
   );
 }

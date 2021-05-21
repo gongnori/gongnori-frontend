@@ -43,12 +43,15 @@ const useHeaderRight = (config, req) => {
       data,
     );
     
+    dispatch(hideHeaderRightLoading());
+    dispatch(updateMyData());
 
     if (socket) {
       socket.emit("fix-match");
+
+      return;
     }
-    dispatch(updateMyData());
-    dispatch(hideHeaderRightLoading());
+
     dispatch(viewCompletion());
   }, params.THROTTLE_TIME);
 

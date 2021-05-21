@@ -24,6 +24,10 @@ import * as sizes from "../constants/sizes";
 const socket = socketio(API_SERVER);
 
 export default function ChatScreen({ navigation, route }) {
+  const { message } = route.params;
+
+  const [isMatchFixed, setIsMatchFixed] = useState(message.isMatchFixed);
+
   const isHeaderRightLoading = useSelector((state) => {
     return state.loadingReducer.isHeaderRightLoading;
   });
@@ -41,10 +45,8 @@ export default function ChatScreen({ navigation, route }) {
 
   const dispatch = useDispatch();
 
-  const { message } = route.params;
-  // console.log(message)
-
-  const isHost = userName === message.host.captin;
+  const isHost = userName.toLowerCase() === message.host.captin.toLowerCase();
+  console.log(userName, message.host.captin)
 // console.log(isHost)
   const handleChangeText = (value) => setContent(value);
 
@@ -59,7 +61,10 @@ export default function ChatScreen({ navigation, route }) {
     socket.emit("join-chat-room", message.id);
     socket.on("send-message", (data) => setConverSations(data));
     socket.on("load-message", (data) => setConverSations(data));
-    socket.on("fix-match", () => dispatch(viewCompletion()));
+    socket.on("fix-match", () => {
+      dispatch(viewCompletion());
+      setIsMatchFixed(true);
+    });
 
     return () => {
       socket.emit("leave-chat-room", message.id, conversations);
@@ -73,9 +78,11 @@ export default function ChatScreen({ navigation, route }) {
   }, [conversations]);
 
   // useHeaderRight(navigation, "수락하기", "PATCH", "match", message);
+console.log(isMatchFixed)
+console.log(isHost)
 
   useHeaderRight(
-    { navigation, title: "진행하기", disabled: !isHost },
+    { navigation, title: "진행하기", disabled: !isHost || isMatchFixed },
     { method: "PATCH", path: "match", data: message, socket },
   );
 
@@ -96,11 +103,15 @@ export default function ChatScreen({ navigation, route }) {
         setIsModal={handleModal}
         message={message}
       />
-      <CustomButton
-        title={"경기결과 입력"}
-        style={styles.resultBtn}
-        onPress={handleModal}
-      />
+      {isMatchFixed
+        && (
+          <CustomButton
+            title={"경기결과 입력"}
+            style={styles.resultBtn}
+            onPress={handleModal}
+          />
+        )
+      }
       <ScrollView
         ref={scrollRef}
         style={styles.chatting}
