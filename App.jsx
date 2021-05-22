@@ -1,5 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { LogBox } from 'react-native';
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import {
@@ -13,6 +14,7 @@ import {
 
 import store from "./store/store";
 import AppNavigtion from "./navigators/AppNavigation";
+LogBox.ignoreAllLogs();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
