@@ -11,7 +11,6 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
-
 const Stack = createStackNavigator();
 
 const headerOption = {
@@ -24,7 +23,7 @@ const headerOption = {
     fontSize: sizes.HEADER_FONT_SIZE,
   },
   hearderTitleStyle: {
-fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
+    fontFamily: fonts.NOTO_SANS_KR_400_REGULAR,
   },
   headerTitleAlign: "center",
 };

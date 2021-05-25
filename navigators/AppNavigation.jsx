@@ -5,7 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import StackNavigator from "./StackNavigator";
 import LoginScreen from "../screens/LoginScreen";
 import LocationScreen from "../screens/LocationScreen";
-import LoginRequest from "../components/LoginRequest"
+import LoginRequest from "../components/LoginRequest";
+
 import { setInitialize } from "../actions/appActionCreators";
 
 export default function AppNavigation() {

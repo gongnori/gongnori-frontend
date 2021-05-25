@@ -10,7 +10,6 @@ const initialState = {
 };
 
 const appReducer = (state = initialState, action) => {
-  console.log(action.type);
   switch (action.type) {
     case "INITIALIZE_APP_SUCCESS":
       const { locations, playgrounds, sports } = action.payload;

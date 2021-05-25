@@ -5,15 +5,7 @@ const NOTO_SANS_KR_500_MEDIUM = "NotoSansKR_500Medium";
 const NOTO_SANS_KR_700_BOLD = "NotoSansKR_700Bold";
 const NOTO_SANS_KR_900_BLACK = "NotoSansKR_900Black";
 
-const PRIMARY_FONT = "NotoSansKR_500Medium";
-const SECONDARY_FONT = "NotoSansKR_400Regular";
-const TERTIARY_FONT = "NotoSansKR_300Light";
-
 export {
-  PRIMARY_FONT,
-  SECONDARY_FONT,
-  TERTIARY_FONT,
-
   NOTO_SANS_KR_100_THIN,
   NOTO_SANS_KR_300_LIGHT,
   NOTO_SANS_KR_400_REGULAR,
