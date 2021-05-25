@@ -10,7 +10,7 @@ import * as sizes from "../constants/sizes";
 import * as fonts from "../constants/fonts";
 
 export default function ChatItem({ chat }) {
-  const userName = useSelector((state) => state.userReducer.name);
+  const userName = useSelector((state) => state.user.name);
 
   const isMyMessage = userName === chat.name;
   const layout = isMyMessage ? "flex-end" : "flex-start";

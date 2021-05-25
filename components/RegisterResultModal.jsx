@@ -19,7 +19,7 @@ export default function RegisterResultModal({ visible, setIsModal, message }) {
   const dispatch = useDispatch();
 
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const { guest, host } = message;

@@ -13,14 +13,14 @@ import { getMyMessage } from "../actions/userActionCreators";
 
 export default function MessageScreen({ navigation }) {
   const isMessageLoading = useSelector((state) => {
-    return state.loadingReducer.isMessageLoading;
+    return state.loading.isMessageLoading;
   });
 
   const messages = useSelector((state) => {
-    return state.userReducer.messages;
+    return state.user.messages;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const matchFilterStatus = useSelector((state) => state.appReducer.matchFilterStatus);
+  const matchFilterStatus = useSelector((state) => state.app.matchFilterStatus);
 
   const filterMessages = messages.filter((message) => {
     return message.isMatchFixed === matchFilterStatus;

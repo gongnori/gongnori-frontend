@@ -29,17 +29,17 @@ export default function ChatScreen({ navigation, route }) {
   const [isMatchFixed, setIsMatchFixed] = useState(message.isMatchFixed);
 
   const isHeaderRightLoading = useSelector((state) => {
-    return state.loadingReducer.isHeaderRightLoading;
+    return state.loading.isHeaderRightLoading;
   });
 
   const isCompletionShown = useSelector((state) => {
-    return state.loadingReducer.isCompletionShown;
+    return state.loading.isCompletionShown;
   });
 
   const scrollRef = useRef(null);
 
   const [isModal, setIsModal] = useState(false);
-  const userName = useSelector((state) => state.userReducer.name);
+  const userName = useSelector((state) => state.user.name);
 
   const [content, setContent] = useState("");
   const [conversations, setConverSations] = useState([]);

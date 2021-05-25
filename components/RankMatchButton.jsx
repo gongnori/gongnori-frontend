@@ -10,7 +10,7 @@ import * as sizes from "../constants/sizes";
 
 export default function RankMatchButton() {
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const handlePressButton = useCallback(() => {

@@ -15,15 +15,15 @@ import * as sizes from "../constants/sizes";
 
 export default function MatchListScreen({ navigation }) {
   const isMatchLoading = useSelector((state) => {
-    return state.loadingReducer.isMatchLoading;
+    return state.loading.isMatchLoading;
   });
 
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const matches = useSelector((state) => {
-    return state.appReducer.matches;
+    return state.app.matches;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const _matches = _.cloneDeep(matches);

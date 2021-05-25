@@ -11,7 +11,6 @@ const initialState = {
 };
 
 const loadingReducer = (state = initialState, action) => {
-  console.log(action.type)
   switch (action.type) {
     case "VIEW_LOGIN_REQUEST":
       return produce(state, ((draft) => {

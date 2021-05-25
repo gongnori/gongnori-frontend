@@ -1,15 +1,15 @@
 import { combineReducers } from "redux";
-import appReducer from "./appReducer";
-import errorReducer from "./errorReducer";
-import loadingReducer from "./loadingReducer";
-import userReducer from "./userReducer";
+import app from "./appReducer";
+import error from "./errorReducer";
+import loading from "./loadingReducer";
+import user from "./userReducer";
 
 const reducer = combineReducers(
   {
-    appReducer,
-    errorReducer,
-    loadingReducer,
-    userReducer,
+    app,
+    error,
+    loading,
+    user,
   },
 );
 

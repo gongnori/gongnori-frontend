@@ -9,7 +9,7 @@ import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
 export default function MessageHeader() {
-  const matchFilterStatus = useSelector((state) => state.appReducer.matchFilterStatus);
+  const matchFilterStatus = useSelector((state) => state.app.matchFilterStatus);
 
   const dispatch = useDispatch();
 

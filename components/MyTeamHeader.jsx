@@ -12,8 +12,8 @@ import * as sizes from "../constants/sizes";
 export default function MyTeamHeader() {
   const myTeamInfo = useSelector((state) => {
     return {
-      myTeams: state.userReducer.teams,
-      currentTeam: state.userReducer.currentTeam,
+      myTeams: state.user.teams,
+      currentTeam: state.user.currentTeam,
     };
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 

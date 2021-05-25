@@ -28,39 +28,39 @@ export default function MatchCreateScreen({ navigation, route }) {
   const { isRank } = route.params;
 
   const isHeaderRightLoading = useSelector((state) => {
-    return state.loadingReducer.isHeaderRightLoading;
+    return state.loading.isHeaderRightLoading;
   });
 
   const isInputInvalid = useSelector((state) => {
-    return state.loadingReducer.isInputInvalid;
+    return state.loading.isInputInvalid;
   });
 
   const isCompletionShown = useSelector((state) => {
-    return state.loadingReducer.isCompletionShown;
+    return state.loading.isCompletionShown;
   });
 
   const teams = useSelector((state) => {
-    return state.userReducer.teams;
+    return state.user.teams;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const sports = useSelector((state) => {
-    return state.appReducer.sports;
+    return state.app.sports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const playgrounds = useSelector((state) => {
-    return state.appReducer.playgrounds;
+    return state.app.playgrounds;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const currentSports = useSelector((state) => {
-    return state.userReducer.currentSports;
+    return state.user.currentSports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const currentLocation = useSelector((state) => {
-    return state.userReducer.currentLocation;
+    return state.user.currentLocation;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const [location, setLocation] = useState(currentLocation);

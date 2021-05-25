@@ -26,15 +26,15 @@ const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/bla
 
 export default function MatchCreateScreen({ navigation }) {
   const isHeaderRightLoading = useSelector((state) => {
-    return state.loadingReducer.isHeaderRightLoading;
+    return state.loading.isHeaderRightLoading;
   });
 
   const isInputInvalid = useSelector((state) => {
-    return state.loadingReducer.isInputInvalid;
+    return state.loading.isInputInvalid;
   });
 
   const isCompletionShown = useSelector((state) => {
-    return state.loadingReducer.isCompletionShown;
+    return state.loading.isCompletionShown;
   });
 
   const [team, setTeam] = useState({
@@ -44,7 +44,7 @@ export default function MatchCreateScreen({ navigation }) {
   });
 
   const locations = useSelector((state) => {
-    return state.userReducer.locations;
+    return state.user.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const locationOptions = locations.map((location) => {
@@ -52,7 +52,7 @@ export default function MatchCreateScreen({ navigation }) {
   });
 
   const sports = useSelector((state) => {
-    return state.appReducer.sports;
+    return state.app.sports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const sportsOptions = sports.map((item) => item.koreanName);

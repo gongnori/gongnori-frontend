@@ -16,14 +16,14 @@ import * as sizes from "../constants/sizes";
 export default function MatchHeader() {
   const userInfo = useSelector((state) => {
     return {
-      myLocations: state.userReducer.locations,
-      currentLocation: state.userReducer.currentLocation,
-      currentSports: state.userReducer.currentSports,
+      myLocations: state.user.locations,
+      currentLocation: state.user.currentLocation,
+      currentSports: state.user.currentSports,
     };
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const sports = useSelector((state) => {
-    return state.appReducer.sports;
+    return state.app.sports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const { myLocations, currentLocation, currentSports } = userInfo;

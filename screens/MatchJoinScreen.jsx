@@ -21,15 +21,15 @@ import * as sizes from "../constants/sizes";
 
 export default function MatchJoinScreen({ navigation, route }) {
   const isHeaderRightLoading = useSelector((state) => {
-    return state.loadingReducer.isHeaderRightLoading;
+    return state.loading.isHeaderRightLoading;
   });
 
   const isCompletionShown = useSelector((state) => {
-    return state.loadingReducer.isCompletionShown;
+    return state.loading.isCompletionShown;
   });
 
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const { playtime, type, playground, host } = route.params.match;

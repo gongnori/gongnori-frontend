@@ -16,15 +16,15 @@ import * as fonts from "../constants/fonts";
 
 export default function RankScreen({ navigation }) {
   const isRankLoading = useSelector((state) => {
-    return state.loadingReducer.isRankLoading;
+    return state.loading.isRankLoading;
   });
 
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const teams = useSelector((state) => {
-    return state.appReducer.teams;
+    return state.app.teams;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const _teams = _.cloneDeep(teams);

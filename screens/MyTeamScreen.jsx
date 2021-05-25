@@ -20,7 +20,7 @@ export default function MyTeamScreen({ navigation }) {
   const [isModal, setIsModal] = useState(false);
 
   const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
+    return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const handleModal = () => setIsModal(!isModal);

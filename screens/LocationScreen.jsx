@@ -18,7 +18,7 @@ export default function LocationScreen() {
   const [myLocations, setMyLocations] = useState([]);
 
   const locations = useSelector((state) => {
-    return state.appReducer.locations;
+    return state.app.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const dispatch = useDispatch();
