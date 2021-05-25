@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
@@ -14,36 +14,39 @@ import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
 export default function MatchHeader() {
-  const myLocations = useSelector((state) => {
-    return state.userReducer.locations;
+  const userInfo = useSelector((state) => {
+    return {
+      myLocations: state.userReducer.locations,
+      currentLocation: state.userReducer.currentLocation,
+      currentSports: state.userReducer.currentSports,
+    };
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const sports = useSelector((state) => {
     return state.appReducer.sports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const currentLocation = useSelector((state) => {
-    return state.userReducer.currentLocation;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const currentSports = useSelector((state) => {
-    return state.userReducer.currentSports;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const [year, month, date, handlePressButton] = useDateController();
+  const { myLocations, currentLocation, currentSports } = userInfo;
 
   const dispatch = useDispatch();
 
-  const locationOptions = myLocations.map((location) => location.district);
-  const sportsOptions = sports.map((item) => item.koreanName);
+  const [year, month, date, handlePressButton] = useDateController();
 
-  const handleSelectLocation = (index) => {
+  const locationOptions = useMemo(() => {
+    return myLocations.map((location) => location.district);
+  }, []);
+
+  const sportsOptions = useMemo(() => {
+    return sports.map((item) => item.koreanName);
+  }, []);
+
+  const handleSelectLocation = useCallback((index) => {
     dispatch(setCurrentLocation(myLocations[index]));
-  };
+  }, []);
 
-  const handleSelectSports = (index) => {
+  const handleSelectSports = useCallback((index) => {
     dispatch(setCurrentSports(sports[index]));
-  };
+  }, []);
 
   useEffect(() => {
     dispatch(getMatch(currentLocation, currentSports.sports, year, month, date));

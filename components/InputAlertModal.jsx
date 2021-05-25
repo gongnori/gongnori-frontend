@@ -16,9 +16,7 @@ export default function InputAlertModal({ content, visible }) {
       transparent={true}
       visible={visible}
     >
-      <TouchableWithoutFeedback
-        onPress={() => dispatch(hideInputAlert())}
-      >
+      <TouchableWithoutFeedback onPress={() => dispatch(hideInputAlert())}>
         <View style={styles.container}>
           <Text style={styles.content}>{content}</Text>
         </View>

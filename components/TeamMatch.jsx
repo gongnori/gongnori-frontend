@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import PropTypes from "prop-types";
 
@@ -9,8 +9,11 @@ import * as sizes from "../constants/sizes";
 
 export default function TeamMatch({ team }) {
   const { matches } = team;
-  const fixedMatches = matches.filter((match) => match.teams.length === 2);
-console.log(matches)
+
+  const fixedMatches = useMemo(() => {
+    return matches.filter((match) => match.teams.length === 2);
+  }, []);
+
   return (
     <View style={styles.matches}>
       <Text style={styles.title}>경기 일정</Text>
@@ -21,8 +24,8 @@ console.log(matches)
         {
           fixedMatches.map((match) => {
             const { playgroundName, city, district, start, end, teams } = match;
-            const [startYear, startMonth, startDate, startHour] = getDateFromIso(start);
-            const [endYear, endMont, endDate, endHour] = getDateFromIso(end);
+            const [, startMonth, startDate, startHour] = getDateFromIso(start);
+            const [, , , endHour] = getDateFromIso(end);
             const opponent = teams.filter((item) => item !== team.name);
 
             return (

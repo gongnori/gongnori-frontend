@@ -16,7 +16,7 @@ export default function ChatItem({ chat }) {
   const layout = isMyMessage ? "flex-end" : "flex-start";
   const color = isMyMessage ? colors.PRIMARY_YELLOW : colors.SECONDARY_WHITE;
 
-  const [year, month, date, hour, minute] = getDateFromIso(chat.date);
+  const [, , , hour, minute] = getDateFromIso(chat.date);
 
   return (
     <View style={{ alignSelf: layout }}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,9 +15,9 @@ export default function MessageHeader() {
 
   const filterCondition = [false, true];
 
-  const handleSelectMatchStatus = (index) => {
+  const handleSelectMatchStatus = useCallback((index) => {
     dispatch(setMessageFilter(filterCondition[index]));
-  };
+  }, []);
 
   return (
     <View style={styles.container}>

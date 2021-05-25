@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     height: 0.25 * sizes.DEVICE_HEIGHT,
     marginTop: 15,
   },
-
   title: {
     textAlign: "left",
     textAlignVertical: "center",
@@ -66,7 +65,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.NOTO_SANS_KR_500_MEDIUM,
     includeFontPadding: false,
   },
-
   scroll: {
     width: "100%",
     backgroundColor: colors.SECONDARY_WHITE,
@@ -80,7 +78,6 @@ const styles = StyleSheet.create({
       width: 0,
     },
   },
-
   member: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -90,7 +87,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: colors.SECONDARY_BLUE,
   },
-
   name: {
     flex: 1,
     textAlign: "left",

@@ -22,6 +22,7 @@ export default function RegisterUserModal({ visible, setIsModal }) {
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const handleChangeText = useCallback((value) => setEmail(value), []);
+
   const handlePressButton = async () => {
     await fetchServer(
       "PATCH",

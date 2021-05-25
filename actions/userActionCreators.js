@@ -20,7 +20,7 @@ const authLogin = (userInfo) => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 
@@ -76,7 +76,7 @@ const getMyMessage = () => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 
@@ -102,7 +102,7 @@ const saveMyLocation = (locations) => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { error } = result;
 
     if (error) { throw new Error() }
 

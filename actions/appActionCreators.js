@@ -27,7 +27,7 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 
@@ -54,7 +54,7 @@ const getPlayground = (province, city, district) => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 
@@ -78,7 +78,7 @@ const getMyTeam = (team) => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 
@@ -100,7 +100,7 @@ const setInitialize = () => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 
@@ -128,7 +128,7 @@ const getTeam = (location, sports) => async (dispatch) => {
     });
 
     const result = await res.json();
-    const { message, data, error } = result;
+    const { data, error } = result;
 
     if (error) { throw new Error() }
 

@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import _ from "lodash";
 
+import CustomButton from "./CustomButton";
+import DropDown from "./DropDown";
+
 import { updateMyData } from "../actions/userActionCreators";
 import fetchServer from "../utils/fetchServer";
+
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
-import CustomButton from "./CustomButton";
-import DropDown from "./DropDown";
 
 export default function RegisterResultModal({ visible, setIsModal, message }) {
   const [result, setResult] = useState({});

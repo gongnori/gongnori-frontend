@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import PropTypes from "prop-types";
 
@@ -15,9 +15,9 @@ export default function MatchItem({ item, navigation }) {
   const startTime = new Date(start).getHours();
   const endTime = new Date(end).getHours();
 
-  const handlePressMatch = () => {
+  const handlePressMatch = useCallback(() => {
     navigation.navigate("MatchJoin", { match: item });
-  };
+  }, []);
 
   return (
     <TouchableOpacity
@@ -122,4 +122,3 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
 });
-

@@ -7,7 +7,7 @@ import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
-export default function DateController({ year, month, date, onPressButton }) {
+export default function DateController({ month, date, onPressButton }) {
   return (
     <View style={styles.container}>
       <Icon
@@ -31,7 +31,6 @@ export default function DateController({ year, month, date, onPressButton }) {
 }
 
 DateController.propTypes = {
-  year: PropTypes.number,
   month: PropTypes.number,
   date: PropTypes.number,
   onPressButton: PropTypes.func,

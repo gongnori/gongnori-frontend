@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
@@ -10,21 +10,22 @@ import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
 export default function MyTeamHeader() {
-  const myTeams = useSelector((state) => {
-    return state.userReducer.teams;
+  const myTeamInfo = useSelector((state) => {
+    return {
+      myTeams: state.userReducer.teams,
+      currentTeam: state.userReducer.currentTeam,
+    };
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const currentTeam = useSelector((state) => {
-    return state.userReducer.currentTeam;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+  const { myTeams, currentTeam } = myTeamInfo;
 
   const dispatch = useDispatch();
 
-  const teamOptions = myTeams.map((team) => team.name);
+  const teamOptions = useMemo(() => myTeams.map((team) => team.name), []);
 
-  const handleSelectTeam = (index) => {
+  const handleSelectTeam = useCallback((index) => {
     dispatch(setCurrentTeam(myTeams[index]));
-  };
+  }, []);
 
   return (
     <View style={styles.container}>

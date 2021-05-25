@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -13,9 +13,9 @@ export default function RankMatchButton() {
     return state.userReducer.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const handlePressButton = () => {
+  const handlePressButton = useCallback(() => {
     fetchServer("POST", `${API_SERVER}/match/rank-match`, currentTeam);
-  };
+  }, []);
 
   return (
     <TouchableOpacity

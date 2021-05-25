@@ -47,6 +47,10 @@ export default function TeamOverview({ team }) {
   );
 }
 
+TeamOverview.propTypes = {
+  team: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   overview: {
     flexDirection: "row",
@@ -94,7 +98,3 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
 });
-
-TeamOverview.propTypes = {
-  team: PropTypes.object.isRequired,
-};

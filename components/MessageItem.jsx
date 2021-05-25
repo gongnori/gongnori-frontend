@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
@@ -9,14 +9,14 @@ import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
 
 export default function MessageItem({ item, navigation }) {
-  const handlePressMessage = () => {
-    navigation.navigate("Chat", { message: item });
-  };
-
   const { guest, host, playground, playtime, sports, type } = item;
 
-  const [startYear, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
-  const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
+  const [, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
+  const [, , , endHour] = getDateFromIso(playtime.end);
+
+  const handlePressMessage = useCallback(() => {
+    navigation.navigate("Chat", { message: item });
+  }, []);
 
   return (
     <TouchableOpacity
