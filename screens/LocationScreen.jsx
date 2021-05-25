@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,6 +13,7 @@ import { saveMyLocation } from "../actions/userActionCreators";
 import * as colors from "../constants/colors";
 import * as fonts from "../constants/fonts";
 import * as sizes from "../constants/sizes";
+import * as params from "../constants/params";
 
 export default function LocationScreen() {
   const [myLocations, setMyLocations] = useState([]);
@@ -42,7 +43,9 @@ export default function LocationScreen() {
     }));
   };
 
-  const handlePressButton = () => dispatch(saveMyLocation(myLocations));
+  const handlePressButton = () => _.throttle(() => {
+    dispatch(saveMyLocation(myLocations));
+  }, params.THROTTLE_TIME);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -110,7 +113,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     includeFontPadding: false,
   },
-
   button: {
     width: 0.5 * sizes.DEVICE_WIDTH,
     height: 0.06 * sizes.DEVICE_HEIGHT,

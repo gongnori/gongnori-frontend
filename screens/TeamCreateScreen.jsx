@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { StyleSheet, View, Text, Image, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -25,17 +25,13 @@ import * as sizes from "../constants/sizes";
 const DEFAULT_EMBLEM = "https://minho-bucket.s3.ap-northeast-2.amazonaws.com/blank_profile.png";
 
 export default function MatchCreateScreen({ navigation }) {
-  const isHeaderRightLoading = useSelector((state) => {
-    return state.loading.isHeaderRightLoading;
-  });
-
-  const isInputInvalid = useSelector((state) => {
-    return state.loading.isInputInvalid;
-  });
-
-  const isCompletionShown = useSelector((state) => {
-    return state.loading.isCompletionShown;
-  });
+  const [isHeaderRightLoading, isCompletionShown, isInputInvalid] = useSelector((state) => {
+    return [
+      state.loading.isHeaderRightLoading,
+      state.loading.isCompletionShown,
+      state.loading.isInputInvalid,
+    ];
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const [team, setTeam] = useState({
     name: null,
@@ -47,15 +43,20 @@ export default function MatchCreateScreen({ navigation }) {
     return state.user.locations;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const locationOptions = locations.map((location) => {
-    return `${location.city} ${location.district}`;
-  });
+  const locationOptions = useMemo(() => {
+    return locations.map((location) => {
+      return `${location.city} ${location.district}`;
+    });
+  }, []);
 
   const sports = useSelector((state) => {
     return state.app.sports;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const sportsOptions = sports.map((item) => item.koreanName);
+  const sportsOptions = useMemo(() => {
+    console.log(sports)
+    return sports.map((item) => item.koreanName);
+  }, []);
 
   const handleSelectSports = (index) => {
     setTeam(produce(team, (draft) => {

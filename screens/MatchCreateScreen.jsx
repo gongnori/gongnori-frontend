@@ -27,44 +27,33 @@ const MONTH_AND_HOURS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"
 export default function MatchCreateScreen({ navigation, route }) {
   const { isRank } = route.params;
 
-  const isHeaderRightLoading = useSelector((state) => {
-    return state.loading.isHeaderRightLoading;
-  });
-
-  const isInputInvalid = useSelector((state) => {
-    return state.loading.isInputInvalid;
-  });
-
-  const isCompletionShown = useSelector((state) => {
-    return state.loading.isCompletionShown;
-  });
-
-  const teams = useSelector((state) => {
-    return state.user.teams;
+  const [isHeaderRightLoading, isCompletionShown, isInputInvalid] = useSelector((state) => {
+    return [
+      state.loading.isHeaderRightLoading,
+      state.loading.isCompletionShown,
+      state.loading.isInputInvalid,
+    ];
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const sports = useSelector((state) => {
-    return state.app.sports;
+  const [teams, currentSports, currentTeam, currentLocation] = useSelector((state) => {
+    return [
+      state.user.teams,
+      state.user.currentSports,
+      state.user.currentTeam,
+      state.user.currentLocation,
+    ];
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const playgrounds = useSelector((state) => {
-    return state.app.playgrounds;
+  const [sports, playgrounds] = useSelector((state) => {
+    return [
+      state.app.sports,
+      state.app.playgrounds,
+    ];
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const currentSports = useSelector((state) => {
-    return state.user.currentSports;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const currentTeam = useSelector((state) => {
-    return state.user.currentTeam;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const currentLocation = useSelector((state) => {
-    return state.user.currentLocation;
-  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
-
-  const [location, setLocation] = useState(currentLocation);
+  const [origin, setOrigin] = useState(null);
   const [forceRefreshKey, setForceRefreshKey] = useState("");
+  const [location] = useState(currentLocation);
 
   const [
     match,
@@ -78,7 +67,6 @@ export default function MatchCreateScreen({ navigation, route }) {
   ] = useMatchState(sports, teams);
 
   const [myLocation] = useMyLocation();
-  const [origin, setOrigin] = useState(null);
 
   const sportsOptions = currentSports.matchTypes;
 

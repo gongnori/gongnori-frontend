@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import { StyleSheet, View, TextInput, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,41 +21,41 @@ import { updateMyData } from "../actions/userActionCreators";
 
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
+import * as params from "../constants/params";
 
 const socket = socketio(API_SERVER);
 
 export default function ChatScreen({ navigation, route }) {
   const { message } = route.params;
-  const [isMatchFixed, setIsMatchFixed] = useState(message.isMatchFixed);
-
-  const isHeaderRightLoading = useSelector((state) => {
-    return state.loading.isHeaderRightLoading;
-  });
-
-  const isCompletionShown = useSelector((state) => {
-    return state.loading.isCompletionShown;
-  });
 
   const scrollRef = useRef(null);
 
-  const [isModal, setIsModal] = useState(false);
-  const userName = useSelector((state) => state.user.name);
-
   const [content, setContent] = useState("");
   const [conversations, setConverSations] = useState([]);
+  const [isModal, setIsModal] = useState(false);
+  const [isMatchFixed, setIsMatchFixed] = useState(message.isMatchFixed);
+
+  const [isHeaderRightLoading, isCompletionShown] = useSelector((state) => {
+    return [
+      state.loading.isHeaderRightLoading,
+      state.loading.isCompletionShown,
+    ];
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
+
+  const userName = useSelector((state) => state.user.name);
 
   const dispatch = useDispatch();
 
   const isHost = userName.toLowerCase() === message.host.captin.toLowerCase();
 
-  const handleChangeText = (value) => setContent(value);
+  const handleChangeText = useCallback((value) => setContent(value), []);
 
   const handlePressSendBtn = _.throttle(() => {
     socket.emit("send-message", { name: userName, content });
     setContent("");
-  }, 100);
+  }, params.THROTTLE_TIME);
 
-  const handleModal = _.throttle(() => setIsModal(!isModal), 100);
+  const handleModal = _.throttle(() => setIsModal(!isModal), params.THROTTLE_TIME);
 
   useEffect(() => {
     socket.emit("join-chat-room", message.id);

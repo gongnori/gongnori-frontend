@@ -8,7 +8,6 @@ import _ from "lodash";
 
 import SpinnerLoading from "../components/SpinnerLoading";
 import CompletionModal from "../components/CompletionModal";
-
 import PlaceMap from "../components/PlaceMap";
 import TeamOverview from "../components/TeamOverview";
 import TitleContentRow from "../components/TitleContentRow";
@@ -20,22 +19,22 @@ import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
 export default function MatchJoinScreen({ navigation, route }) {
-  const isHeaderRightLoading = useSelector((state) => {
-    return state.loading.isHeaderRightLoading;
-  });
+  const { playtime, type, playground, host } = route.params.match;
+  const { city, district, town, detail, latitude, longitude } = playground;
 
-  const isCompletionShown = useSelector((state) => {
-    return state.loading.isCompletionShown;
-  });
+  const [isHeaderRightLoading, isCompletionShown] = useSelector((state) => {
+    return [
+      state.loading.isHeaderRightLoading,
+      state.loading.isCompletionShown,
+    ];
+  }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const currentTeam = useSelector((state) => {
     return state.user.currentTeam;
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
-  const { playtime, type, playground, host } = route.params.match;
-  const [startyear, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
-  const [endYear, endMonth, endDate, endHour] = getDateFromIso(playtime.end);
-  const { city, district, town, detail, latitude, longitude } = playground;
+  const [, startMonth, startDate, startHour] = getDateFromIso(playtime.start);
+  const [, , , endHour] = getDateFromIso(playtime.end);
 
   useHeaderRight(
     {

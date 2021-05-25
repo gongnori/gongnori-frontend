@@ -40,7 +40,7 @@ const fetchServer = async (method, path, reqBody, isMulter) => {
   const _res = await res.json();
   const { message, data, error } = _res;
 
-  //if (error) { throw new Error() }
+  if (error) { throw new Error() }
 
   return _res;
 };

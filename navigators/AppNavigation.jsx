@@ -11,7 +11,7 @@ import { setInitialize } from "../actions/appActionCreators";
 
 export default function AppNavigation() {
   const isLogin = useSelector((state) => state.user.isLogin);
-  const isLoginRequest = useSelector((state) => state.loadingReducer.isLoginRequest);
+  const isLoginRequest = useSelector((state) => state.loading.isLoginRequest);
 
   const hasLocation = useSelector((state) => {
     return !!state.user.locations.length;

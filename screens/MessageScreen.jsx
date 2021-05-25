@@ -24,7 +24,7 @@ export default function MessageScreen({ navigation }) {
 
   const filterMessages = messages.filter((message) => {
     return message.isMatchFixed === matchFilterStatus;
-  })
+  });
 
   const dispatch = useDispatch();
 
