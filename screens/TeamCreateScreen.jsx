@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { StyleSheet, View, Text, Image, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -54,7 +54,6 @@ export default function MatchCreateScreen({ navigation }) {
   }, (prev, next) => _.cloneDeep(prev) === _.cloneDeep(next));
 
   const sportsOptions = useMemo(() => {
-    console.log(sports)
     return sports.map((item) => item.koreanName);
   }, []);
 

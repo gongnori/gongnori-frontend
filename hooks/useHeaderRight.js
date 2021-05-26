@@ -21,7 +21,6 @@ import * as fonts from "../constants/fonts";
 const useHeaderRight = (config, req) => {
   const { navigation, title, disabled } = config;
   const { method, path, data, socket } = req;
-  // navigation, title, method, path, data, socket
 
   const dispatch = useDispatch();
   const handlePressHeaderRight = _.throttle(async () => {
@@ -42,7 +41,7 @@ const useHeaderRight = (config, req) => {
       path,
       data,
     );
-    
+
     dispatch(hideHeaderRightLoading());
     dispatch(updateMyData());
 
