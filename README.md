@@ -1,10 +1,14 @@
 # **⚽️ 우리 동네 공놀이**
 **우리 동네 공놀이**는 동네 주변의 축구, 야구, 농구 경기를 매칭시켜주는 앱입니다.
-깃헙주소
-설명영상
 
-## Install
----
+**📺 데모 영상**
+
+**📺 발표 영상**
+
+**🗃 Github Repository**  
+- [Frontend](https://github.com/minhob38/gongnori-frontend)
+- [Backend](https://github.com/minhob38/gongnori-backend)
+
 <br>
 
 ## **🤔 Background**
@@ -14,6 +18,7 @@
 <br>
 
 ## **🗓 Schedule**
+---
 본 프로젝트는 2020.5.3 ~ 2020.5.21 3주 동안 진행 하였습니다.
 
 `1주차` - 설계 단계
@@ -42,15 +47,71 @@
 
 ## **📝 Manual**
 ---
+### **시작하기**
+<p>구글 로그인으로 앱을 사용할 수 있으며, 우리 동네 두 곳을 설정할 수 있습니다.</p>
+<span>
+  <img src="./README_assets/login.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/town_selection.jpeg" width="20%" alt="login screen" />
+</span>
 
-### 시작하기
-로그인, 동네 설정
-### 경기 만들기
+<br>
+<br>
 
-### 경기 참여하기
+### **경기 신청하기**
+<p>해당 동네 / 종목 / 일자에 맞는 경기를 찾고 신청하기 버튼을 누르면, 상대팀과 채팅을 통해 경기 진행 여부를 결정할 수 있습니다.</p>
+<span>
+  <img src="./README_assets/match_search.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_join.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_message.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_chat.jpeg" width="20%" alt="login screen" />
+</span>
 
-### 경기 협의하기
+<br>
+<br>
 
+### **경기 만들기**
+<p>해당 동네 / 종목 / 일자에 맞는 경기가 없다면, 주변 경기장을 검색하여 경기를 만들 수 있습니다.</p>
+<span>
+  <img src="./README_assets/match_search.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_create.jpeg" width="20%" alt="login screen" />
+</span>
+
+<br>
+<br>
+
+### **팀 관리하기**
+<p>본인이 가입되어 있는 팀 정보를 볼 수 있으며, 또한 새로운 팀을 만들 수 있습니다.</p>
+<span>
+  <img src="./README_assets/team_info.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/team_create.jpeg" width="20%" alt="login screen" />
+</span>
+
+<br>
+<br>
+
+### **랭킹전 참여하기**
+<p>랭킹경기를 만들고 다른 팀과 경쟁하여, 우리팀의 순위를 알 수 있습니다.</p>
+<span>
+  <img src="./README_assets/match_rank.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_create.jpeg" width="20%" alt="login screen" />
+</span>
+
+<br>
+<br>
 <br>
 
 ## **👷🏻 Stack**
@@ -59,10 +120,10 @@
 |Stack|Rationale|
 |:-|:-|
 |React Native|익숙한 React 문법으로, 모바일 애플리케이션 개발할 수 있기에 선정하였습니다.|
-|Expo||
+|Expo| React Native가 처음이기에, 러닝커브가 낮은 Expo를 선정하였습니다.|
 |Redux Thunk|Redux Store의 비동기 작업(서버요청) 관리를 위해 사용하였습니다.|
 |socket.io-client|채팅을 위한 실시간 통신으로 사용하였습니다.|
-|Google Map API||
+|Google Map API|경기장 검색을 위해 사용하였습니다.|
 
 <br>
 
@@ -74,7 +135,7 @@
 |MongoDB|JSON형태의 다큐먼트를 사용하기에, NodeJS 기반 프로젝트와 호환성이 좋아 사용하였습니다. |
 |Mongoose|일반적인 MongoDB ODM이기에 사용하였습니다.|
 |socket|채팅을 위한 실시간 통신으로 사용하였습니다.|
-|Amazon S3||
+|Amazon S3|팀 엠블럼을 전역적으로 접근하기 위해, 이미지 저장소로써 사용하였습니다.|
 
 <br>
 
@@ -102,13 +163,28 @@ React와 유사하지만, Navigator에서 큰 차이점을 느낄 수 있었습�
 <br>
 
 ### **Custom Hook**
-이번 프로젝트를 하며, 컴포넌트 내에서 관심사를 분리하고 코드 재사용을 하고자 Custom Hook을 만들기 위해 노력하였습니다. 예로들어 useHeaderRight는 아래 그림과 같이 Stack Navigator 스크린 헤더 오른쪽에 버튼을 만드는 Custom Hook입니다. 이 버튼을 클릭하면 스크린에 따라 팀 생성, 경기 생성, 경기 신청, 경기 진행의 서버 요청을 하게됩니다. 이는 컴포넌트의 주요한 관심인 렌더링 작업과 거리가 멀고 여러 컴포넌트에서 사용되기 때문에, 별도의 Custom Hook으로 만들었습니다. 이전에는 간단한 Custom Hook을 만들어본 경험만 있었기에 관심사의 분리가 추상적으로 느껴졌지만, 이번 프로젝트에서 복잡한 로직을 담고 있는 Custom Hook을 만들어보니, 컴포넌트 코드가 View와 비동기 부분으로 분리되어 있다는 것을 몸소 느낄 수 있었습니다. 추후 React 기반 애플리케이션을 개발할때, **_항상 Custom Hook을 만들 수 있을지에 대해 생각을 하여 재사용성, 관심사 분리가 되어 있는 코드를 작성하고자 합니다._**
+이번 프로젝트를 하며, 컴포넌트 내에서 관심사를 분리하고 코드 재사용을 하고자 Custom Hook을 만들기 위해 노력하였습니다. **_예로들어 useHeaderRight는 아래 그림과 같이 Stack Navigator 스크린 헤더 오른쪽에 버튼을 만드는 Custom Hook입니다._** 이 버튼을 클릭하면 스크린에 따라 팀 생성, 경기 생성, 경기 신청, 경기 진행의 서버 요청을 하게됩니다. 이는 컴포넌트의 주요한 관심인 렌더링 작업과 거리가 멀고 여러 컴포넌트에서 사용되기 때문에, 별도의 Custom Hook으로 만들었습니다. 이전에는 간단한 Custom Hook을 만들어본 경험만 있었기에 관심사의 분리가 추상적으로 느껴졌지만, 이번 프로젝트에서 복잡한 로직을 담고 있는 Custom Hook을 만들어보니, 컴포넌트 코드가 View와 비동기 부분으로 분리되어 있다는 것을 몸소 느낄 수 있었습니다. 추후 React 기반 애플리케이션을 개발할때, **_항상 Custom Hook을 만들 수 있을지에 대해 생각을 하여 재사용성, 관심사 분리가 되어 있는 코드를 작성하고자 합니다._**
+
+<span>
+  <img src="./README_assets/match_create.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/team_create.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_join.jpeg" width="20%" alt="login screen" />
+</span>
+<span>
+  <img src="./README_assets/match_chat_host.jpeg" width="20%" alt="login screen" />
+</span>
 
 <br>
+<br>
+<br>
 
-## **Conclusion**
+## **✏️ Conclusion**
 ---
+이전에는 Javascript, React, MongoDB 등 단편적인 기술을 단계적으로 학습을 하다, 이번 프로젝트에서 처음으로 기획, 프론트엔드, 백엔드 개발 등 전체적인 과정을 혼자하니 익숙치 않아 많이 헤맸습니다. 하지만 힘들었던 만큼 전체적인 프로세스를 경험하면서 조금이나마 요구사항 정의, 상태관리, 프론트-백엔드 연동 등 애플리케이션 설계에 대해 구체화할 수 있었습니다. 또한 기존에는 새로운 개념을 코드에 반영할 때 시간이 오래 걸렸지만, 이번 프로젝트는 정해진 시간 동안 혼자서 구현해야했기 때문에 새로운 기술의 핵심 개념을 파악하고 빨리 적용할 수 있는 능력을 기를 수 있었습니다.
 
-
-
-
+최종 결과물을 보니 개발자가 되기로 결정한 1년전과 비교하여 많이 성장했다는 것을 느낄 수 있었습니다.
+이처럼 부트캠프는 막연했던 개발자의 길에 조심스럽게 한발 내딛을 수 있게 해준 소중한 시간이었습니다. 옆에서 도움을 많이 준 동기, Ken님, 멘토님께 감사인사를 드립니다.🙂
