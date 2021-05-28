@@ -1,9 +1,13 @@
 # **⚽️ 우리 동네 공놀이**
 **우리 동네 공놀이**는 동네 주변의 축구, 야구, 농구 경기를 매칭시켜주는 앱입니다.
 
-**📺 데모 영상**
+**📺 데모 영상**  
+  <img src="./README_assets/demo.gif" width="30%" alt="demo" />
 
-**📺 발표 영상**
+<br>
+
+**📺 발표 영상**  
+[![발표](https://img.youtube.com/vi/F8OHnevCS30/0.jpg)](https://www.youtube.com/watch?v=F8OHnevCS30#t=12m55s)
 
 **🗃 Github Repository**  
 - [Frontend](https://github.com/minhob38/gongnori-frontend)
@@ -12,13 +16,11 @@
 <br>
 
 ## **🤔 Background**
----
 평소 동네 친구들과 축구를 하는게 취미인데, 매번 축구 까페에서 상대팀을 구하는 것이 번거로웠습니다. 이에 편하게 경기를 매칭해주는 서비스가 있으면 좋겠다고 생각하였습니다. 그래서 우리 동네에 있는 경기를 검색하거나 직접 경기를 만듬으로써, 간단히 축구, 야구, 농구 경기를 매칭해주는 모바일 앱을 개발하게 되었습니다.
 
 <br>
 
 ## **🗓 Schedule**
----
 본 프로젝트는 2020.5.3 ~ 2020.5.21 3주 동안 진행 하였습니다.
 
 `1주차` - 설계 단계
@@ -46,14 +48,13 @@
 <br>
 
 ## **📝 Manual**
----
 ### **시작하기**
 <p>구글 로그인으로 앱을 사용할 수 있으며, 우리 동네 두 곳을 설정할 수 있습니다.</p>
 <span>
   <img src="./README_assets/login.jpeg" width="20%" alt="login screen" />
 </span>
 <span>
-  <img src="./README_assets/town_selection.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/town_selection.jpeg" width="20%" alt="town selection" />
 </span>
 
 <br>
@@ -62,16 +63,16 @@
 ### **경기 신청하기**
 <p>해당 동네 / 종목 / 일자에 맞는 경기를 찾고 신청하기 버튼을 누르면, 상대팀과 채팅을 통해 경기 진행 여부를 결정할 수 있습니다.</p>
 <span>
-  <img src="./README_assets/match_search.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_search.jpeg" width="20%" alt="match list" />
 </span>
 <span>
-  <img src="./README_assets/match_join.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_join.jpeg" width="20%" alt="match join" />
 </span>
 <span>
-  <img src="./README_assets/match_message.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_message.jpeg" width="20%" alt="match message" />
 </span>
 <span>
-  <img src="./README_assets/match_chat.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_chat.jpeg" width="20%" alt="match chat" />
 </span>
 
 <br>
@@ -80,10 +81,10 @@
 ### **경기 만들기**
 <p>해당 동네 / 종목 / 일자에 맞는 경기가 없다면, 주변 경기장을 검색하여 경기를 만들 수 있습니다.</p>
 <span>
-  <img src="./README_assets/match_search.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_search.jpeg" width="20%" alt="match list" />
 </span>
 <span>
-  <img src="./README_assets/match_create.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_create.jpeg" width="20%" alt="match create" />
 </span>
 
 <br>
@@ -92,10 +93,10 @@
 ### **팀 관리하기**
 <p>본인이 가입되어 있는 팀 정보를 볼 수 있으며, 또한 새로운 팀을 만들 수 있습니다.</p>
 <span>
-  <img src="./README_assets/team_info.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/team_info.jpeg" width="20%" alt="team information" />
 </span>
 <span>
-  <img src="./README_assets/team_create.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/team_create.jpeg" width="20%" alt="team create" />
 </span>
 
 <br>
@@ -104,10 +105,10 @@
 ### **랭킹전 참여하기**
 <p>랭킹경기를 만들고 다른 팀과 경쟁하여, 우리팀의 순위를 알 수 있습니다.</p>
 <span>
-  <img src="./README_assets/match_rank.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_rank.jpeg" width="20%" alt="rank" />
 </span>
 <span>
-  <img src="./README_assets/match_create.jpeg" width="20%" alt="login screen" />
+  <img src="./README_assets/match_create.jpeg" width="20%" alt="create rank match" />
 </span>
 
 <br>
@@ -115,7 +116,6 @@
 <br>
 
 ## **👷🏻 Stack**
----
 ### **Frontend**
 |Stack|Rationale|
 |:-|:-|
@@ -140,7 +140,6 @@
 <br>
 
 ## **🔎 Lesson**
----
 이번 프로젝트를 기획할때, 우리 동네에 있는 축구, 농구, 야구 경기를 매칭 해주는 서비스를 개발하는 것이외에도,<u>**React Native, customHook, 상태관리**</u>에 대해 학습하는 것을 목표로 하였습니다.
 
 <br>
@@ -183,7 +182,6 @@ React와 유사하지만, Navigator에서 큰 차이점을 느낄 수 있었습�
 <br>
 
 ## **✏️ Conclusion**
----
 이전에는 Javascript, React, MongoDB 등 단편적인 기술을 단계적으로 학습을 하다, 이번 프로젝트에서 처음으로 기획, 프론트엔드, 백엔드 개발 등 전체적인 과정을 혼자하니 익숙치 않아 많이 헤맸습니다. 하지만 힘들었던 만큼 전체적인 프로세스를 경험하면서 조금이나마 요구사항 정의, 상태관리, 프론트-백엔드 연동 등 애플리케이션 설계에 대해 구체화할 수 있었습니다. 또한 기존에는 새로운 개념을 코드에 반영할 때 시간이 오래 걸렸지만, 이번 프로젝트는 정해진 시간 동안 혼자서 구현해야했기 때문에 새로운 기술의 핵심 개념을 파악하고 빨리 적용할 수 있는 능력을 기를 수 있었습니다.
 
 최종 결과물을 보니 개발자가 되기로 결정한 1년전과 비교하여 많이 성장했다는 것을 느낄 수 있었습니다.
