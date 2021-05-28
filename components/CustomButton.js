@@ -35,6 +35,7 @@ export default function CustomButton({
         backgroundColor,
       }}
       onPress={onPress}
+      testID={"custom-button"}
     >
       <Text
         style={{
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 });
 
 CustomButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onPress: PropTypes.func,
   style: PropTypes.object,
 };

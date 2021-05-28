@@ -27,7 +27,7 @@ export default function RegisterResultModal({ visible, setIsModal, message }) {
   let myTeamId = host.teamId;
   let yourTeamId = guest.teamId;
 
-  if (guest.teamId === currentTeam.Id) {
+  if (guest.teamId === currentTeam?.Id) {
     myTeamId = guest.teamId;
     yourTeamId = host.teamId;
   }

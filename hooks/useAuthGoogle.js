@@ -1,4 +1,10 @@
-import React, { useCallback } from "react";
+/**
+ * @function it return google authentication functions
+ * @return {Array} signInGoogle - it invokes google prompt screen
+ * @return {Array} getGoogleUserInfo - it request google user information throught OAuth2.0
+ */
+
+import { useCallback } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import CLIENT_ID from "../config/auth";
 

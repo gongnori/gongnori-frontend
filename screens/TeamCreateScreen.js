@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import produce from "immer";
 import _ from "lodash";
 
-import DismissKeyboard from "../components/DismissKeyborad";
+import DismissKeyboard from "../components/DismissKeyboard";
 import DropDown from "../components/DropDown";
 import CustomButton from "../components/CustomButton";
 import CompletionModal from "../components/CompletionModal";

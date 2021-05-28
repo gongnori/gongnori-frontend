@@ -1,3 +1,8 @@
+/**
+ * @function it return current mobile's position on earth
+ * @return {Array} - current mobile's location and geo code
+ */
+
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 

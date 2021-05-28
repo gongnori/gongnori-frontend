@@ -1,9 +1,11 @@
 /**
  * @function
  * @description it fetches server with request spec and return response
- * @params {String} method
- * @params {String} url
- * @return {Any} reqBody
+ * @params {String} method - http method GET / POST / PATCH / DELETE
+ * @params {String} path - API server's url
+ * @params {Object} reqBody - http request body
+ * @params {Boolean} isMulter - is request require multer package in nodejs
+ * @return {Object} response body of API server
  */
 
 import AsyncStorage from "@react-native-async-storage/async-storage";

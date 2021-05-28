@@ -1,3 +1,8 @@
+/**
+ * @function it return date controller which helps previous or next date selection
+ * @return {Function} - it change current date
+ */
+
 import { useState } from "react";
 
 const useDateController = () => {
