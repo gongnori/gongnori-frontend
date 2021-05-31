@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import PropTypes from "prop-types";
 
-export default function SideButton({ setIsModal, icon, style }) {
+export default function ModalButton({ setIsModal, icon, style }) {
   const { bottom, right } = style;
 
   return (
@@ -14,13 +14,14 @@ export default function SideButton({ setIsModal, icon, style }) {
         right,
       }}
       onPress={() => setIsModal()}
+      testID={"touchable-opactiy"}
     >
       <Icon name={icon} size={50} />
     </TouchableOpacity>
   );
 }
 
-SideButton.propTypes = {
+ModalButton.propTypes = {
   setIsModal: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
   style: PropTypes.object.isRequired,

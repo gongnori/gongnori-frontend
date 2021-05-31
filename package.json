@@ -56,8 +56,6 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@testing-library/react-native": "^7.2.0",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
-    "enzyme": "^3.11.0",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -67,13 +65,18 @@
     "eslint-plugin-react-native": "^3.10.0",
     "jest": "^27.0.1",
     "jest-expo": "^41.0.0",
+    "msw": "^0.29.0",
     "react-test-renderer": "^17.0.2"
   },
   "jest": {
     "preset": "jest-expo",
-    "moduleFileExtensions": ["js", "json", "jsx"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|react-native-vector-icons|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
     ]
   },
   "private": true

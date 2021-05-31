@@ -15,6 +15,7 @@ export default function DateController({ month, date, onPressButton }) {
         size={sizes.PRIMARY_FONT_SIZE}
         color={colors.SECONDARY_WHITE}
         onPress={() => onPressButton("back")}
+        testID={"back-button"}
       />
       <View style={styles.date}>
         <Text style={styles.text}>{`${month}월 `}</Text>
@@ -25,6 +26,7 @@ export default function DateController({ month, date, onPressButton }) {
         size={sizes.PRIMARY_FONT_SIZE}
         color={colors.SECONDARY_WHITE}
         onPress={() => onPressButton("forward")}
+        testID={"forward-button"}
       />
     </View>
   );

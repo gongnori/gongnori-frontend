@@ -44,7 +44,7 @@ export default function RegisterResultModal({ visible, setIsModal, message }) {
     await fetchServer(
       "PATCH",
       "team/rank",
-      { ...result, myTeamId, yourTeamId },
+      { ...result, myTeamId, yourTeamId }
     );
 
     dispatch(updateMyData());
@@ -56,7 +56,10 @@ export default function RegisterResultModal({ visible, setIsModal, message }) {
       visible={visible}
     >
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={setIsModal}>
+        <TouchableWithoutFeedback
+          onPress={setIsModal}
+          testID={"touchable-without-feedback"}
+        >
           <View style={styles.cancleRegion} />
         </TouchableWithoutFeedback>
         <View style={styles.resultBox}>
@@ -84,6 +87,7 @@ export default function RegisterResultModal({ visible, setIsModal, message }) {
             title={"등록"}
             style={styles.button}
             onPress={handlePressButton}
+            testID={"custom-button"}
           />
         </View>
         <TouchableWithoutFeedback onPress={setIsModal}>

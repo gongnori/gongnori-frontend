@@ -88,6 +88,7 @@ exports[`<LocationScreen /> snapshot test 1`] = `
           "width": 375,
         }
       }
+      testID="modal-drop-down"
       textStyle={
         Object {
           "color": undefined,
@@ -219,6 +220,7 @@ exports[`<LocationScreen /> snapshot test 1`] = `
           "width": 375,
         }
       }
+      testID="modal-drop-down"
       textStyle={
         Object {
           "color": undefined,

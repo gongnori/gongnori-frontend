@@ -52,6 +52,7 @@ export default function DropDown({
         return style;
       }}
       onSelect={onSelect}
+      testID={"modal-drop-down"}
     />
   );
 }
