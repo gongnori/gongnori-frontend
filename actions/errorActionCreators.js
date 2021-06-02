@@ -1,9 +1,11 @@
+import * as actionTypes from "./actionTypes";
+
 const setInitializeError = () => ({
-  type: "SET_INITIALIZE_ERROR",
+  type: actionTypes.SET_INITIALIZE_ERROR,
 });
 
 const setTeamExistError = () => ({
-  type: "SET_TEAM_EXIST_ERROR",
+  type: actionTypes.SET_TEAM_EXIST_ERROR,
 });
 
 export {

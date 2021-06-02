@@ -2,8 +2,6 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import SideButton from "../../components/SideButton";
 
-jest.mock("react-native-vector-icons/Ionicons", () => "Icon");
-
 describe("<SideButton />", () => {
   test("event listener should execute with button pressed", () => {
     const mockFn = jest.fn();

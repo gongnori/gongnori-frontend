@@ -1,57 +1,59 @@
+import * as actionTypes from "./actionTypes";
+
 const viewLoginRequest = () => ({
-  type: "VIEW_LOGIN_REQUEST",
+  type: actionTypes.VIEW_LOGIN_REQUEST,
 });
 
 const hideLoginRequest = () => ({
-  type: "HIDE_LOGIN_REQUEST",
+  type: actionTypes.HIDE_LOGIN_REQUEST,
 });
 
 const viewInputAlert = () => ({
-  type: "VIEW_INPUT_ALERT",
+  type: actionTypes.VIEW_INPUT_ALERT,
 });
 
 const hideInputAlert = () => ({
-  type: "HIDE_INPUT_ALERT",
+  type: actionTypes.HIDE_INPUT_ALERT,
 });
 
 const viewMatchLoading = () => ({
-  type: "VIEW_MATCH_LOADING",
+  type: actionTypes.VIEW_MATCH_LOADING,
 });
 
 const hideMatchLoading = () => ({
-  type: "HIDE_MATCH_LOADING",
+  type: actionTypes.HIDE_MATCH_LOADING,
 });
 
 const viewRankLoading = () => ({
-  type: "VIEW_RANK_LOADING",
+  type: actionTypes.VIEW_RANK_LOADING,
 });
 
 const hideRankLoading = () => ({
-  type: "HIDE_RANK_LOADING",
+  type: actionTypes.HIDE_RANK_LOADING,
 });
 
 const viewMessageLoading = () => ({
-  type: "VIEW_MESSAGE_LOADING",
+  type: actionTypes.VIEW_MESSAGE_LOADING,
 });
 
 const hideMessageLoading = () => ({
-  type: "HIDE_MESSAGE_LOADING",
+  type: actionTypes.HIDE_MESSAGE_LOADING,
 });
 
 const viewHeaderRightLoading = () => ({
-  type: "VIEW_HEADER_RIGHT_LOADING",
+  type: actionTypes.VIEW_HEADER_RIGHT_LOADING,
 });
 
 const hideHeaderRightLoading = () => ({
-  type: "HIDE_HEADER_RIGHT_LOADING",
+  type: actionTypes.HIDE_HEADER_RIGHT_LOADING,
 });
 
 const viewCompletion = () => ({
-  type: "VIEW_COMPLETION",
+  type: actionTypes.VIEW_COMPLETION,
 });
 
 const hideCompletion = () => ({
-  type: "HIDE_COMPLETION",
+  type: actionTypes.HIDE_COMPLETION,
 });
 
 export {
