@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
 import { setInitializeError } from "./errorActionCreators";
+import * as actionTypes from "./actionTypes";
 import {
   hideMatchLoading,
   viewMatchLoading,
@@ -8,10 +9,8 @@ import {
   viewRankLoading,
 } from "./loadingActionCreators";
 
-import * as actionTypes from "./actionTypes";
-
 const setMessageFilter = (payload) => ({
-  type: "SET_MESSAGE_FILTER",
+  type: actionTypes.SET_MESSAGE_FILTER,
   payload,
 });
 
@@ -34,13 +33,13 @@ const getMatch = (location, sports, year, month, date) => async (dispatch) => {
     const matches = data;
 
     dispatch({
-      type: "LOAD_MATCH_SUCCESS",
+      type: actionTypes.LOAD_MATCH_SUCCESS,
       payload: matches,
     });
 
     dispatch(hideMatchLoading());
   } catch (err) {
-    dispatch({ type: "LOAD_MATCH_FAIL" });
+    dispatch({ type: actionTypes.LOAD_MATCH_FAIL });
   }
 };
 
@@ -61,11 +60,11 @@ const getPlayground = (province, city, district) => async (dispatch) => {
     const playgrounds = data;
 
     dispatch({
-      type: "LOAD_PLAYGROUNDS_SUCCESS",
+      type: actionTypes.LOAD_PLAYGROUNDS_SUCCESS,
       payload: playgrounds,
     });
   } catch (err) {
-    dispatch({ type: "LOAD_PLAYGROUNDS_FAIL" });
+    dispatch({ type: actionTypes.LOAD_PLAYGROUNDS_FAIL });
   }
 };
 
@@ -85,11 +84,11 @@ const getMyTeam = (team) => async (dispatch) => {
     const myTeam = data;
 
     dispatch({
-      type: "LOAD_MY_TEAM_SUCCESS",
+      type: actionTypes.LOAD_MY_TEAM_SUCCESS,
       payload: myTeam,
     });
   } catch (err) {
-    dispatch({ type: "LOAD_MY_TEAM_FAIL" });
+    dispatch({ type: actionTypes.LOAD_MY_TEAM_FAIL });
   }
 };
 
@@ -135,13 +134,13 @@ const getTeam = (location, sports) => async (dispatch) => {
     const ranks = data;
 
     dispatch({
-      type: "LOAD_TEAM_SUCCESS",
+      type: actionTypes.LOAD_TEAM_SUCCESS,
       payload: ranks,
     });
 
     dispatch(hideRankLoading());
   } catch (err) {
-    dispatch({ type: "LOAD_TEAM_FAIL" });
+    dispatch({ type: actionTypes.LOAD_TEAM_FAIL });
   }
 };
 

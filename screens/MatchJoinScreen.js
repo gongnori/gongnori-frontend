@@ -48,7 +48,7 @@ export default function MatchJoinScreen({ navigation, route }) {
         matchId: route.params.match.id,
         teamId: currentTeam.id,
       },
-    },
+    }
   );
 
   return (

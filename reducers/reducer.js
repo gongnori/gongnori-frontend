@@ -10,7 +10,7 @@ const reducer = combineReducers(
     error,
     loading,
     user,
-  },
+  }
 );
 
 export default reducer;

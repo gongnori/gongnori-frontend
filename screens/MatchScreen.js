@@ -13,7 +13,7 @@ import SpinnerLoading from "../components/SpinnerLoading";
 import * as colors from "../constants/colors";
 import * as sizes from "../constants/sizes";
 
-export default function MatchListScreen({ navigation }) {
+export default function MatchScreen({ navigation }) {
   const isMatchLoading = useSelector((state) => {
     return state.loading.isMatchLoading;
   });
@@ -60,7 +60,7 @@ export default function MatchListScreen({ navigation }) {
   );
 }
 
-MatchListScreen.propTypes = {
+MatchScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 

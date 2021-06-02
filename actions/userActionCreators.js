@@ -1,11 +1,27 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_SERVER } from "@env";
+import * as actionTypes from "./actionTypes";
 import {
   viewLoginRequest,
   hideLoginRequest,
   viewMessageLoading,
   hideMessageLoading,
 } from "./loadingActionCreators";
+
+const setCurrentTeam = (payload) => ({
+  type: actionTypes.SET_CURRENT_TEAM,
+  payload,
+});
+
+const setCurrentLocation = (payload) => ({
+  type: actionTypes.SET_CURRENT_LOCATION,
+  payload,
+});
+
+const setCurrentSports = (payload) => ({
+  type: actionTypes.SET_CURRENT_SPORTS,
+  payload,
+});
 
 const authLogin = (userInfo) => async (dispatch) => {
   try {
@@ -29,37 +45,22 @@ const authLogin = (userInfo) => async (dispatch) => {
     await AsyncStorage.setItem("token", token);
 
     dispatch({
-      type: "AUTH_LOGIN_SUCCESS",
+      type: actionTypes.AUTH_LOGIN_SUCCESS,
       payload: { name, email, locations, messages, teams, sports },
     });
 
     dispatch(hideLoginRequest());
   } catch (err) {
     dispatch(hideLoginRequest());
-    dispatch({ type: "AUTH_LOGIN_FAIL" });
+    dispatch({ type: actionTypes.AUTH_LOGIN_FAIL });
   }
 };
 
 const authLogout = () => async (dispatch) => {
   await AsyncStorage.removeItem("token");
 
-  dispatch({ type: "AUTH_LOGOUT" });
+  dispatch({ type: actionTypes.AUTH_LOGOUT });
 };
-
-const setCurrentTeam = (payload) => ({
-  type: "SET_CURRENT_TEAM",
-  payload,
-});
-
-const setCurrentLocation = (payload) => ({
-  type: "SET_CURRENT_LOCATION",
-  payload,
-});
-
-const setCurrentSports = (payload) => ({
-  type: "SET_CURRENT_SPORTS",
-  payload,
-});
 
 const getMyMessage = () => async (dispatch) => {
   try {
@@ -80,10 +81,10 @@ const getMyMessage = () => async (dispatch) => {
 
     if (error) { throw new Error() }
 
-    dispatch({ type: "LOAD_MY_MESSAGE_SUCCESS", payload: data });
+    dispatch({ type: actionTypes.LOAD_MY_MESSAGE_SUCCESS, payload: data });
     dispatch(hideMessageLoading());
   } catch (err) {
-    dispatch({ type: "LOAD_MY_MESSAGE_FAIL" });
+    dispatch({ type: actionTypes.LOAD_MY_MESSAGE_FAIL });
   }
 };
 
@@ -107,11 +108,11 @@ const saveMyLocation = (locations) => async (dispatch) => {
     if (error) { throw new Error() }
 
     dispatch({
-      type: "SAVE_MY_LOCATION_SUCCESS",
+      type: actionTypes.SAVE_MY_LOCATION_SUCCESS,
       payload: locations,
     });
   } catch (err) {
-    dispatch({ type: "UPDATE_MY_DATA_FAIL" });
+    dispatch({ type: actionTypes.UPDATE_MY_DATA_FAIL });
   }
 };
 
@@ -139,11 +140,11 @@ const updateMyData = () => async (dispatch) => {
     if (myMessage.error) { throw new Error() }
 
     dispatch({
-      type: "UPDATE_MY_DATA_SUCCESS",
+      type: actionTypes.UPDATE_MY_DATA_SUCCESS,
       payload: { teams, messages },
     });
   } catch (err) {
-    dispatch({ type: "UPDATE_MY_DATA_FAIL" });
+    dispatch({ type: actionTypes.UPDATE_MY_DATA_FAIL });
   }
 };
 

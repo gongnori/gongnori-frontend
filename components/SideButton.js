@@ -10,6 +10,7 @@ export default function SideButton({ navigation, path, isRank }) {
     <TouchableOpacity
       style={styles.button}
       onPress={() => navigation.navigate(path, { isRank })}
+      testID={"touchable-opactiy"}
     >
       <Icon name="add-circle" size={50} />
     </TouchableOpacity>

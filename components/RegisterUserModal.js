@@ -27,7 +27,7 @@ export default function RegisterUserModal({ visible, setIsModal }) {
     await fetchServer(
       "PATCH",
       "team/members",
-      { email, teamId: currentTeam.id },
+      { email, teamId: currentTeam.id }
     );
 
     dispatch(updateMyData());
@@ -39,7 +39,10 @@ export default function RegisterUserModal({ visible, setIsModal }) {
       visible={visible}
     >
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={setIsModal}>
+        <TouchableWithoutFeedback
+          onPress={setIsModal}
+          testID={"touchable-without-feedback"}
+        >
           <View style={styles.cancleRegion} />
         </TouchableWithoutFeedback>
         <View style={styles.searchBox}>
@@ -53,6 +56,7 @@ export default function RegisterUserModal({ visible, setIsModal }) {
             title={"추가"}
             style={styles.button}
             onPress={handlePressButton}
+            testID={"custom-button"}
           />
         </View>
         <TouchableWithoutFeedback onPress={setIsModal}>

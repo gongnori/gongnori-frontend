@@ -38,7 +38,7 @@ export default function DropDown({
         width: 1.0 * width,
         height: Math.min(
           5 * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize),
-          total * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize),
+          total * (2 * TEXT_VERTICAL_MARGIN + 2 * TEXT_VERTICAL_MARGIN + fontSize)
         ),
       }}
       dropdownTextStyle={{
@@ -52,6 +52,7 @@ export default function DropDown({
         return style;
       }}
       onSelect={onSelect}
+      testID={"modal-drop-down"}
     />
   );
 }

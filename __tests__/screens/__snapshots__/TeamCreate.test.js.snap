@@ -166,6 +166,7 @@ exports[`<TeamCreateScreen /> snapshot test 1`] = `
   </Modal>
   <Modal
     hardwareAccelerated={false}
+    testID="modal"
     transparent={true}
     visible={false}
   >
@@ -187,6 +188,7 @@ exports[`<TeamCreateScreen /> snapshot test 1`] = `
           "justifyContent": "center",
         }
       }
+      testID="touchable-without-feedback"
     >
       <Text
         style={
@@ -434,6 +436,7 @@ exports[`<TeamCreateScreen /> snapshot test 1`] = `
             "width": 300,
           }
         }
+        testID="modal-drop-down"
         textStyle={
           Object {
             "color": undefined,
@@ -581,6 +584,7 @@ exports[`<TeamCreateScreen /> snapshot test 1`] = `
             "width": 300,
           }
         }
+        testID="modal-drop-down"
         textStyle={
           Object {
             "color": undefined,

@@ -79,7 +79,7 @@ export default function MatchCreateScreen({ navigation }) {
 
   useHeaderRight(
     { navigation, title: "만들기" },
-    { method: "POST", path: "team", data: { ...team, imageS3 } },
+    { method: "POST", path: "team", data: { ...team, imageS3 } }
   );
 
   return (

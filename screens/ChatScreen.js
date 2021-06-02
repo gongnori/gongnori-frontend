@@ -80,7 +80,7 @@ export default function ChatScreen({ navigation, route }) {
 
   useHeaderRight(
     { navigation, title: "진행하기", disabled: !isHost || isMatchFixed },
-    { method: "PATCH", path: "match", data: message, socket },
+    { method: "PATCH", path: "match", data: message, socket }
   );
 
   return (

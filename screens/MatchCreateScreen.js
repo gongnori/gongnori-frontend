@@ -82,7 +82,7 @@ export default function MatchCreateScreen({ navigation, route }) {
 
   useHeaderRight(
     { navigation, title: "만들기" },
-    { method: "POST", path, data: _match },
+    { method: "POST", path, data: _match }
   );
 
   useEffect(() => {

@@ -15,9 +15,11 @@ export default function CompletionModal({ content, visible }) {
     <Modal
       transparent={true}
       visible={visible}
+      testID={"modal"}
     >
       <TouchableWithoutFeedback
         onPress={() => dispatch(hideCompletion())}
+        testID={"touchable-without-feedback"}
       >
         <View style={styles.container}>
           <Text style={styles.content}>{content}</Text>
