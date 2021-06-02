@@ -1,3 +1,8 @@
+/**
+ * @function it handles state and handler relevant with match
+ * @return {Array} - match state and match state handler
+ */
+
 import { useState } from "react";
 import produce from "immer";
 

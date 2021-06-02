@@ -1,3 +1,9 @@
+/**
+ * @function it makes header right button and send request to API server
+ * @params {Object} config - header right's configuration
+ * @params {Object} req - http request information
+ */
+
 import React, { useEffect } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";

@@ -1,3 +1,9 @@
+/**
+ * @function it pick image on mobile and uploads image to AWS S3
+ * @params {String} defaultImage - default image's url
+ * @return {Array} - image state and image pick function
+ */
+
 import { useCallback, useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import fetchServer from "../utils/fetchServer";

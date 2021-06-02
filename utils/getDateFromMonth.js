@@ -1,6 +1,5 @@
 /**
- * @function
- * @description it returns date list from specific year and month
+ * @function it returns date list from specific year and month
  * @params {String} year
  * @params {String} month
  * @return {Array} date list
