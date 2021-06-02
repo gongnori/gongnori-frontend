@@ -27,7 +27,7 @@ export default function RegisterUserModal({ visible, setIsModal }) {
     await fetchServer(
       "PATCH",
       "team/members",
-      { email, teamId: currentTeam.id },
+      { email, teamId: currentTeam.id }
     );
 
     dispatch(updateMyData());

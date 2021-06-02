@@ -45,7 +45,7 @@ const useHeaderRight = (config, req) => {
     const res = await fetchServer(
       method,
       path,
-      data,
+      data
     );
 
     dispatch(hideHeaderRightLoading());
