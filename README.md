@@ -124,6 +124,9 @@
 |Redux Thunk|Redux Store의 비동기 작업(서버요청) 관리를 위해 사용하였습니다.|
 |socket.io-client|채팅을 위한 실시간 통신으로 사용하였습니다.|
 |Google Map API|경기장 검색을 위해 사용하였습니다.|
+|jest|컴포넌트 및 함수 테스트를 위해 사용하였습니다.|
+|testing-libirary|컴포넌트 테스트(사용자 이벤트 / 렌더링)를 위해 사용하였습니다.|
+|mock service worker|서버 요청 테스트를 위해 사용하였습니다.|
 
 <br>
 
@@ -136,11 +139,14 @@
 |Mongoose|일반적인 MongoDB ODM이기에 사용하였습니다.|
 |socket|채팅을 위한 실시간 통신으로 사용하였습니다.|
 |Amazon S3|팀 엠블럼을 전역적으로 접근하기 위해, 이미지 저장소로써 사용하였습니다.|
+|supertest|end point test(서버요청 모사)를 위해 사용하였습니다.|
+|chai|end point test(assertion)를 위해 사용하였습니다.|
 
 <br>
 
 ## **🔎 Lesson**
-이번 프로젝트를 기획할때, 우리 동네에 있는 축구, 농구, 야구 경기를 매칭 해주는 서비스를 개발하는 것이외에도,<u>**React Native, customHook, 상태관리**</u>에 대해 학습하는 것을 목표로 하였습니다.
+이번 프로젝트를 기획할때, 우리 동네에 있는 축구, 농구, 야구 경기를 매칭 해주는 서비스를 개발하는 것이외에도,<u>**React Native, customHook, 상태관리**</u>에 대해 학습하는 것을 목표로 하였습니다.  
+목표 이외에도 프로젝트를 하며 겪은 경험을 통해, TDD의 중요성, OAuth에 대한 이해, 유저기반 서비스의 목생성, 로우레벨에 대한 중요성을 Test
 
 <br>
 
@@ -178,6 +184,16 @@ React와 유사하지만, Navigator에서 큰 차이점을 느낄 수 있었습�
 </span>
 
 <br>
+<br>
+<br>
+
+
+### **Test**
+요구사항대로 코드가 작동하는지 Test하면서 개발하는 TDD(Test Driven Development)의 중요성에 대해 인지하고 있었지만, 처음 접하는 React Native에 대한 부담감과 TDD가 익숙치 않았기 때문에 Test를 후순위로 두고 개발을 시작하였습니다. 1차적인 개발을 마친 후, Frontend는 Testing Library와 Jest를 기반으로, Backend는 super test와 mocha를 기반으로 각각 Test를 하였습니다.  
+Test를 하며 느낀점은 컴포넌트가 컴포넌트 단위의 요구사항이 아닌, 애플리케이션 단위의 요구사항에 맞추어 코드가 작성되어 있다는 점이였습니다. 따라서 하나의 컴포넌트가 애플리케이션이 작동하는데는 문제가 없지만 기능이 모호하여 다른 컴포넌트와 결합이 되는 경우가 더러 있었습니다. 예로들어 A 컴포넌트에서 버튼을 클릭하여 상태를 바꾸면 B 컴포넌트에 바뀐 상태가 렌더링되는 경우였습니다. 하지만 A, B를 감싸는 C 컴포넌트의 크기가 컸기에 테스트하기 어려웠습니다.  
+이러한 점으로부터 **_Test가 만든 코드가 정상적으로 작동하는지에 대해 단순히 검증하는 것이 아닌, Test를 할 수 있는 컴포넌트를 설계함으로써 컴포넌트의 요구도, 독립성, 크기의 성숙도를 높인다는 것을 배울 수 있었습니다._**  
+본 프로젝트를 통해 [Testing Library](https://minhob38.github.io/programming/testing-library-post/), [Redux Test](https://minhob38.github.io/programming/redux-test-post/) 등의 Test 기법에 대해 배울 수 있었으며, 항상 Test를 염두하고 개발을 하여, 단순히 실행되는 애플리케이션을 만드는 것이 아닌 유지, 보수가 용이한 애플리케이션을 만들어야 한다는 것을 느낄 수 있었습니다.
+
 <br>
 <br>
 
