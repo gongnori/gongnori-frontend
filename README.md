@@ -122,11 +122,11 @@
 |React Native|익숙한 React 문법으로, 모바일 애플리케이션 개발할 수 있기에 선정하였습니다.|
 |Expo| React Native가 처음이기에, 러닝커브가 낮은 Expo를 선정하였습니다.|
 |Redux Thunk|Redux Store의 비동기 작업(서버요청) 관리를 위해 사용하였습니다.|
-|socket.io-client|채팅을 위한 실시간 통신으로 사용하였습니다.|
+|Socket.io-client|채팅을 위한 실시간 통신으로 사용하였습니다.|
 |Google Map API|경기장 검색을 위해 사용하였습니다.|
-|jest|컴포넌트 및 함수 테스트를 위해 사용하였습니다.|
-|testing-libirary|컴포넌트 테스트(사용자 이벤트 / 렌더링)를 위해 사용하였습니다.|
-|mock service worker|서버 요청 테스트를 위해 사용하였습니다.|
+|Jest|컴포넌트 및 함수 테스트를 위해 사용하였습니다.|
+|Testing-libirary|컴포넌트 테스트(사용자 이벤트 / 렌더링)를 위해 사용하였습니다.|
+|Mock service worker|서버 요청 테스트를 위해 사용하였습니다.|
 
 <br>
 
@@ -137,16 +137,17 @@
 |Express|일반적인 Nodejs 서버 애플리케이션이기에 사용하였습니다.|
 |MongoDB|JSON형태의 다큐먼트를 사용하기에, NodeJS 기반 프로젝트와 호환성이 좋아 사용하였습니다. |
 |Mongoose|일반적인 MongoDB ODM이기에 사용하였습니다.|
-|socket|채팅을 위한 실시간 통신으로 사용하였습니다.|
+|Socket|채팅을 위한 실시간 통신으로 사용하였습니다.|
+|Multer|S3에 이미지를 업로드하기 위해 사용하였습니다.|
 |Amazon S3|팀 엠블럼을 전역적으로 접근하기 위해, 이미지 저장소로써 사용하였습니다.|
-|supertest|end point test(서버요청 모사)를 위해 사용하였습니다.|
-|chai|end point test(assertion)를 위해 사용하였습니다.|
+|Supertest|end point test(서버요청 모사)를 위해 사용하였습니다.|
+|Chai|end point test(assertion)를 위해 사용하였습니다.|
 
 <br>
 
 ## **🔎 Lesson**
 이번 프로젝트를 기획할때, 우리 동네에 있는 축구, 농구, 야구 경기를 매칭 해주는 서비스를 개발하는 것이외에도,<u>**React Native, customHook, 상태관리**</u>에 대해 학습하는 것을 목표로 하였습니다.  
-목표 이외에도 프로젝트를 하며 겪은 경험을 통해, TDD의 중요성, OAuth에 대한 이해, 유저기반 서비스의 목생성, 로우레벨에 대한 중요성을 Test
+목표 이외에도 프로젝트를 하며 겪은 경험을 통해, TDD의 중요성을 경험할 수 있었습니다.
 
 <br>
 
