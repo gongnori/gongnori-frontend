@@ -125,7 +125,7 @@
 |Socket.io-client|채팅을 위한 실시간 통신으로 사용하였습니다.|
 |Google Map API|경기장 검색을 위해 사용하였습니다.|
 |Jest|컴포넌트 및 함수 테스트를 위해 사용하였습니다.|
-|Testing-libirary|컴포넌트 테스트(사용자 이벤트 / 렌더링)를 위해 사용하였습니다.|
+|Testing-library|컴포넌트 테스트(사용자 이벤트 / 렌더링)를 위해 사용하였습니다.|
 |Mock service worker|서버 요청 테스트를 위해 사용하였습니다.|
 
 <br>
